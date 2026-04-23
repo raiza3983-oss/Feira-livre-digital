@@ -1,0 +1,162 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "Stores user profile information and roles.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Unique identifier for the user." },
+        "displayName": { "type": "string", "description": "User's display name." },
+        "email": { "type": "string", "format": "email", "description": "User's email address." },
+        "photoURL": { "type": "string", "format": "uri", "description": "URL to the user's profile photo." },
+        "role": { "type": "string", "enum": ["client", "vendor", "admin", "state_admin"], "description": "User's role in the system." },
+        "isApprovedAdmin": { "type": "boolean", "description": "Whether the admin/state_admin is approved by a super admin." },
+        "address": { "type": "string", "description": "User's address (optional)." },
+        "phone": { "type": "string", "description": "User's phone number (optional)." }
+      },
+      "required": ["uid", "displayName", "email", "role"]
+    },
+    "Shop": {
+      "title": "Shop",
+      "description": "Stores shop details and ownership.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "photoURL": { "type": "string", "format": "uri" },
+        "ownerUid": { "type": "string" },
+        "address": { "type": "string" },
+        "openingHours": { "type": "string" },
+        "closingHours": { "type": "string" },
+        "acceptsDelivery": { "type": "boolean" },
+        "isApproved": { "type": "boolean" },
+        "isPromoted": { "type": "boolean" },
+        "state": { "type": "string" },
+        "paymentMethods": { "type": "array", "items": { "type": "string" } },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "ownerUid", "address"]
+    },
+    "Product": {
+      "title": "Product",
+      "description": "Stores product details within a shop.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "price": { "type": "number" },
+        "unit": { "type": "string" },
+        "stock": { "type": "number" },
+        "photoURL": { "type": "string", "format": "uri" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "price", "unit"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Stores customer orders.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "shopId": { "type": "string" },
+        "shopName": { "type": "string" },
+        "shopOwnerUid": { "type": "string" },
+        "buyerUid": { "type": "string" },
+        "buyerName": { "type": "string" },
+        "buyerPhone": { "type": "string" },
+        "items": { "type": "array", "items": { "type": "object" } },
+        "totalValue": { "type": "number" },
+        "status": { "type": "string", "enum": ["pending_payment", "accepted", "processing", "shipped", "delivered", "completed", "cancelled"] },
+        "paymentMethod": { "type": "string" },
+        "deliveryType": { "type": "string", "enum": ["delivery", "pickup"] },
+        "deliveryAddress": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["shopId", "buyerUid", "items", "totalValue", "status"]
+    },
+    "ChatMessage": {
+      "title": "Chat Message",
+      "description": "Stores messages between users.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "senderUid": { "type": "string" },
+        "receiverUid": { "type": "string" },
+        "text": { "type": "string" },
+        "image": { "type": "string", "format": "uri" },
+        "shopName": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["senderUid", "receiverUid", "text", "createdAt"]
+    },
+    "JobOpening": {
+      "title": "Job Opening",
+      "description": "Stores job postings.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "position": { "type": "string" },
+        "description": { "type": "string" },
+        "requirements": { "type": "string" },
+        "salary": { "type": "string" },
+        "hours": { "type": "string" },
+        "ageRequirement": { "type": "string" },
+        "shopType": { "type": "string", "enum": ["feira", "mercado", "barraca", "atacado"] },
+        "shopId": { "type": "string" },
+        "shopName": { "type": "string" },
+        "ownerUid": { "type": "string" },
+        "state": { "type": "string" },
+        "address": { "type": "string" },
+        "isApproved": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["position", "shopId", "ownerUid", "isApproved"]
+    },
+    "JobApplication": {
+      "title": "Job Application",
+      "description": "Stores job applications (resumes).",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "applicantUid": { "type": "string" },
+        "applicantName": { "type": "string" },
+        "applicantEmail": { "type": "string", "format": "email" },
+        "applicantAge": { "type": "string" },
+        "message": { "type": "string" },
+        "fileData": { "type": "string", "description": "Base64 or URL of the resume file." },
+        "fileName": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["applicantUid", "applicantName", "fileData", "createdAt"]
+    },
+    "Notification": {
+      "title": "Notification",
+      "description": "Stores global notifications.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "body": { "type": "string" },
+        "type": { "type": "string", "enum": ["info", "success", "warning"] },
+        "authorId": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "body", "type", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": { "schema": "UserProfile", "description": "User profiles." },
+    "/shops/{shopId}": { "schema": "Shop", "description": "Shop details." },
+    "/shops/{shopId}/products/{productId}": { "schema": "Product", "description": "Shop products." },
+    "/orders/{orderId}": { "schema": "Order", "description": "Customer orders." },
+    "/chatMessages/{messageId}": { "schema": "ChatMessage", "description": "Chat messages." },
+    "/jobOpenings/{jobId}": { "schema": "JobOpening", "description": "Job postings." },
+    "/jobApplications/{appId}": { "schema": "JobApplication", "description": "Job applications." },
+    "/notifications/{notifId}": { "schema": "Notification", "description": "Global notifications." },
+    "/quickMessages/{msgId}": { "schema": { "title": "Quick Message", "type": "object", "properties": { "title": { "type": "string" }, "content": { "type": "string" }, "createdAt": { "type": "string", "format": "date-time" } } }, "description": "Quick message library." },
+    "/appConfig/global": { "schema": { "title": "App Config", "type": "object", "properties": { "splashScreen": { "type": "object" }, "pages": { "type": "object" } } }, "description": "Global app configuration." }
+  }
+}

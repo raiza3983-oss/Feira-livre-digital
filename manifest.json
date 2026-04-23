@@ -1,0 +1,15 @@
+{
+  "name": "Feira Livre Digital",
+  "short_name": "Feira Livre",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#10b981",
+  "icons": [
+    {
+      "src": "/src/components/logo-feiralivre.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

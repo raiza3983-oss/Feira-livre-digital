@@ -1,0 +1,8 @@
+{
+  "name": "Feira Livre Digital",
+  "description": "Uma plataforma completa para conectar produtores, feirantes e consumidores, com gestão de vendas, calculadora de preços e criação de lojas.",
+  "requestFramePermissions": [
+    "camera",
+    "geolocation"
+  ]
+}
