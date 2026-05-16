@@ -1,3 +1,4 @@
+import ModernOrdersPage from "./components/ModernOrdersPage";
 import React, { useState, useEffect, useRef, Component } from 'react';
 import { Logo as LogoSVG } from './components/Logo';
 import { motion, AnimatePresence } from 'motion/react';
