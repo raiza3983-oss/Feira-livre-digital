@@ -211,8 +211,9 @@ const ProductCard = React.memo(({
 
   const inCart = cart?.items.find((i: any) => i.product.id === product.id);
   const qtyInCart = inCart ? inCart.quantity : 0;
-
-  return (
+return (
+  <ModernOrdersPage />
+);
     <motion.div 
       layout
       initial={{ opacity: 0, x: -20 }}
