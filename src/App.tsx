@@ -308,10 +308,6 @@ return (
     </motion.div>
   );
 });
-</motion.div>
-);
-});
-
 const BRAZIL_STATES = [
   { id: 'AC', name: 'Acre' },
   { id: 'AL', name: 'Alagoas' },
