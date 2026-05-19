@@ -307,7 +307,7 @@ return (
       </div>
     </motion.div>
   );
-},
+});
                                    </motion.div>
   );
 });
