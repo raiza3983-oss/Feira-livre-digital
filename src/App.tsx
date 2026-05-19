@@ -248,62 +248,48 @@ const ProductCard = React.memo(({
              <div className="w-1 h-1 rounded-full bg-slate-200" />
              <span className="text-[9px] font-black text-slate-400 uppercase tracking-[0.3em] font-sans">Estoque: {product.stock}</span>
              {product.weightPerUnit > 0 && (
-               <>
-                 <div className="w-1 h-1 rounded-full bg-slate-200" />
-                 <span className="text-[9px] font-black text-slate-400 uppercase tracking-[0.3em] font-sans">{translateUnit(product.unit)}: {product.weightPerUnit}{product.unit === 'kg' ? 'kg' : product.unit === 'gram' ? 'g' : ''}</span>
-               </>
-             )}
-          </div>
-        </div>
-        
-        <div className="mt-4 flex items-center justify-between gap-6">
-          <div className="space-y-0.5">
-            <p className="text-[4xl] font-serif italic text-slate-900 tabular-nums lowercase leading-none">
-              <span className="text-sm mr-1 font-sans font-black tracking-widest uppercase opacity-20">R$</span>
-              {product.price.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
-            </p>
-            <p className="text-[8px] font-black uppercase tracking-widest text-slate-300">por {(translateUnit(product.unit) || '').toLowerCase()}</p>
-          </div>
+const ProductCard = React.memo(({
+  product,
+  user,
+  shop,
+  cart,
+  addToCart,
+  removeFromCart,
+  onNavigate,
+  showNotification
+}: {
+  product: Product,
+  user: UserProfile | null,
+  shop: Shop,
+  cart: any,
+  addToCart: (p: Product) => void,
+  removeFromCart: (p: Product) => void,
+  onNavigate: (s: Screen) => void,
+  showNotification: (m: string, t?: 'success' | 'error') => void
+}) => {
 
-          <div className="flex items-center gap-2 p-1.5 bg-slate-100/50 backdrop-blur-md rounded-[28px] border border-slate-100 shadow-inner">
-            <button 
-              onClick={() => removeFromCart(product)}
-              disabled={qtyInCart === 0}
-              className={cn(
-                "w-11 h-11 rounded-[18px] flex items-center justify-center transition-all duration-300",
-                qtyInCart > 0 
-                  ? "bg-white text-slate-900 shadow-lg hover:bg-slate-900 hover:text-white active:scale-95" 
-                  : "text-slate-200 cursor-not-allowed"
-              )}
-            >
-              <Minus size={20} />
-            </button>
-            
-            <div className="w-10 flex flex-col items-center">
-              <span className={cn(
-                "text-xl font-serif italic transition-all",
-                qtyInCart > 0 ? "text-slate-900 scale-110" : "text-slate-300"
-              )}>
-                {qtyInCart}
-              </span>
-              <span className="text-[7px] font-black uppercase text-slate-400 tracking-widest leading-none">Qtd</span>
-            </div>
+  const inCart = cart?.items.find((i: any) => i.product.id === product.id);
+  const qtyInCart = inCart ? inCart.quantity : 0;
 
-            <button 
-              onClick={() => addToCart(product)}
-              disabled={product.stock <= qtyInCart}
-              className={cn(
-                "w-11 h-11 rounded-[18px] flex items-center justify-center transition-all duration-300",
-                product.stock > qtyInCart 
-                  ? "bg-slate-900 text-white shadow-xl shadow-slate-900/20 hover:bg-brand-500 active:scale-95" 
-                  : "bg-white/50 text-slate-200 cursor-not-allowed"
-              )}
-            >
-              <Plus size={20} />
-            </button>
-          </div>
-        </div>
-      </div>
+  return (
+    <motion.div
+      layout
+      initial={{ opacity: 0, x: -20 }}
+      animate={{ opacity: 1, x: 0 }}
+      className="bg-white rounded-3xl p-4"
+    >
+      <h4>{product.name}</h4>
+
+      <button onClick={() => removeFromCart(product)}>
+        -
+      </button>
+
+      <span>{qtyInCart}</span>
+
+      <button onClick={() => addToCart(product)}>
+        +
+      </button>
+
     </motion.div>
   );
 });
