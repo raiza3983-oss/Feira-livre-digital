@@ -1,3 +1,28 @@
+export interface CartItem {
+  product: Product;
+  quantity: number;
+}
+
+export interface Cart {
+  shopId: string;
+  shopName: string;
+  shopOwnerUid: string;
+  shopPhotoURL?: string;
+  shopAddress?: string;
+  shopCity?: string;
+  shopState?: string;
+  shopWhatsapp?: string;
+  items: CartItem[];
+  paymentMethod?: string;
+  deliveryType?: 'delivery' | 'pickup';
+  deliveryAddress?: string;
+  buyerCity?: string;
+  buyerState?: string;
+  buyerPhone?: string;
+  buyerFullName?: string;
+  buyerAge?: string;
+}
+
 export type Screen = 
   | 'landing' 
   | 'sales' 
@@ -23,10 +48,21 @@ export type Screen =
   | 'wholesale-management'
   | 'wholesale-accounting'
   | 'vendor-accounting'
+  | 'inventory'
+  | 'seller'
   | 'shop-detail'
   | 'pending-approval';
 
-export type UserRole = 'client' | 'vendor' | 'admin' | 'state_admin';
+export type UserRole = 'client' | 'vendor' | 'admin' | 'state_admin' | 'municipal_admin';
+
+export enum OperationType {
+  CREATE = 'create',
+  UPDATE = 'update',
+  DELETE = 'delete',
+  LIST = 'list',
+  GET = 'get',
+  WRITE = 'write',
+}
 
 export interface UserProfile {
   uid: string;
@@ -49,14 +85,20 @@ export interface UserProfile {
   favorites?: string[];
   whatsapp?: string;
   isContactRestricted?: boolean;
+  isEmailVerified?: boolean;
+  phoneVerified?: boolean;
+  createdAt?: any;
+  lastLoginAt?: any;
 }
 
 export interface OrderItem {
-  id: string;
+  productId: string;
   name: string;
   price: number;
   quantity: number;
   unit: string;
+  weightPerUnit?: number;
+  photoURL?: string;
 }
 
 export interface Order {
@@ -65,16 +107,17 @@ export interface Order {
   shopId: string;
   shopName: string;
   shopOwnerUid: string;
+  shopPhotoURL?: string;
   buyerName: string;
   buyerPhotoURL?: string;
   items: OrderItem[];
   totalValue: number;
-  status: 'pending_payment' | 'accepted' | 'paid' | 'ready' | 'completed' | 'cancelled';
+  status: 'pending' | 'pending_payment' | 'accepted' | 'paid' | 'preparing' | 'ready' | 'shipped' | 'completed' | 'cancelled';
   paymentMethod?: string;
   deliveryType?: 'delivery' | 'pickup';
   deliveryAddress?: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: any;
+  updatedAt: any;
 }
 
 export interface ChatMessage {
@@ -99,12 +142,26 @@ export interface BusinessType {
 }
 
 export const BUSINESS_TYPES: BusinessType[] = [
-  { id: 'feirante', label: 'Feirante Livre', icon: 'User' },
+  { id: 'feirante', label: 'Feira Livre', icon: 'User' },
   { id: 'barraca', label: 'Barraca Livre', icon: 'Store' },
   { id: 'atacado', label: 'Atacado', icon: 'Truck' },
   { id: 'restaurante', label: 'Restaurante', icon: 'UtensilsCrossed' },
   { id: 'mercado', label: 'Mercado Livre', icon: 'ShoppingBag' },
 ];
+
+export interface DaySchedule {
+  open: string;
+  close: string;
+  active: boolean;
+}
+
+export interface SpecialDate {
+  date: string; // YYYY-MM-DD
+  open: string;
+  close: string;
+  active: boolean;
+  label?: string;
+}
 
 export interface Shop {
   id: string;
@@ -119,7 +176,11 @@ export interface Shop {
   closingHours: string;
   isOpen: boolean;
   workingDays: string[];
-  paymentMethods: string[];
+  schedule?: { [key: string]: DaySchedule }; // Key is '0' to '6' or day name
+  specialDates?: SpecialDate[];
+  deliveryPaymentMethods: string[];
+  pickupPaymentMethods: string[];
+  paymentMethods?: string[]; // Legacy
   acceptsDelivery: boolean;
   acceptsPickup: boolean;
   isApproved?: boolean;
@@ -139,6 +200,7 @@ export interface Product {
   description: string;
   price: number;
   photoURL: string;
+  image?: string; // Aliases photoURL for legacy components
   stock: number;
   weightPerUnit: number;
   unit: 'kg' | 'box' | 'bag' | 'gram' | 'unit';
@@ -154,15 +216,35 @@ export interface Product {
 export interface Sale {
   id: string;
   shopId: string;
-  productId: string;
-  productName: string;
-  quantity: number;
+  productId?: string;
+  productName?: string;
+  quantity?: number;
   totalValue: number;
-  totalCost: number;
+  totalCost?: number;
   buyerUid?: string;
-  createdAt: string;
-  month: number; // 0-11
-  year: number;
+  buyerName?: string;
+  weightPerUnit?: number;
+  unit?: string;
+  paymentMethod?: string;
+  items?: any[];
+  status?: 'paid' | 'pending';
+  shopName?: string;
+  createdAt: any;
+  month?: number; // 0-11
+  year?: number;
+}
+
+export interface Disbursement {
+  id: string;
+  shopId: string;
+  shopName?: string;
+  targetShopId?: string;
+  targetShopName?: string;
+  totalValue: number;
+  items?: any[];
+  paymentMethod?: string;
+  createdAt: any;
+  status?: 'paid' | 'pending';
 }
 
 export interface JobOpening {
@@ -173,6 +255,7 @@ export interface JobOpening {
   ownerUid: string;
   position: string;
   state: string;
+  city?: string;
   address: string;
   ageRequirement: string;
   hours: string;

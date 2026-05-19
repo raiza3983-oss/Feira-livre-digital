@@ -1,0 +1,41 @@
+346:            <p className="text-[8px] font-black uppercase tracking-widest text-slate-300">por {(translateUnit(product.unit) || '').toLowerCase()}</p>
+1264:      const type = (myShop.type || '').toLowerCase();
+1385:      showNotification(`Pedido ${translateStatus(newStatus).toLowerCase()} com sucesso!`);
+1740:                                .filter(p => (p.name || '').toLowerCase().includes((commSearch || '').toLowerCase()))
+1766:                              {products.filter(p => (p.name || '').toLowerCase().includes((commSearch || '').toLowerCase())).length === 0 && (
+1886:                            Resultado da Divulgação: <span className="text-slate-900">Este produto será divulgado como: {commQuantity * commWeight} por {translateUnit(commUnit).toLowerCase()}</span>
+2793:                    {quantity} {translateUnit(unit).toLowerCase()} 
+4229:                        order.id.toLowerCase().includes(orderSearch.toLowerCase()) ||
+4230:                        order.buyerName?.toLowerCase().includes(orderSearch.toLowerCase()) ||
+4231:                        order.shopName?.toLowerCase().includes(orderSearch.toLowerCase());
+4356:                  (shop.name || '').toLowerCase().includes((shopSearch || '').toLowerCase()) ||
+4357:                  (shop.category || '').toLowerCase().includes((shopSearch || '').toLowerCase())
+4899:                    u.displayName.toLowerCase().includes(userSearch.toLowerCase()) || 
+4900:                    u.email.toLowerCase().includes(userSearch.toLowerCase())
+5324:      showNotification(`Pedido ${translateStatus(newStatus).toLowerCase()} com sucesso!`);
+6385:                              `Este produto será divulgado como: ${editingProduct.weightPerUnit}${editingProduct.unit === 'kg' ? 'kg' : editingProduct.unit === 'gram' ? 'g' : ''} por ${(translateUnit(editingProduct.unit || 'unit') || '').toLowerCase()}`
+6471:          return items.some((i: any) => i.name.toLowerCase().includes('tomate') && i.name.toLowerCase().includes('saco'));
+6484:          return items.some((i: any) => i.name.toLowerCase().includes('tomate') && i.name.toLowerCase().includes('saco'));
+6587:    .filter(p => !(((p.name || '').toLowerCase().includes('tomate') && (p.name || '').toLowerCase().includes('saco'))))
+8768:            const isAdminMsg = partnerMessages[0].senderName?.toLowerCase().includes('admin') || 
+8769:                               partnerMessages[0].shopName?.toLowerCase().includes('admin');
+9982:    const shopMatches = (shop.name || '').toLowerCase().includes((searchTerm || '').toLowerCase()) || 
+9983:                       (shop.description || '').toLowerCase().includes((searchTerm || '').toLowerCase()) ||
+9984:                       (shop.type || '').toLowerCase().includes((searchTerm || '').toLowerCase());
+9988:      (p.name || '').toLowerCase().includes((searchTerm || '').toLowerCase()) ||
+9989:      (p.description || '').toLowerCase().includes((searchTerm || '').toLowerCase())
+10006:    const matchesSearch = (p.name || '').toLowerCase().includes((searchTerm || '').toLowerCase()) || 
+10007:                         (p.description || '').toLowerCase().includes((searchTerm || '').toLowerCase()) ||
+10008:                         (shop.name || '').toLowerCase().includes((searchTerm || '').toLowerCase());
+10303:                               {searchTerm && (p.name || '').toLowerCase().includes((searchTerm || '').toLowerCase()) && (
+10316:                        .filter(p => p.shopId === shop.id && (p.name || '').toLowerCase().includes((searchTerm || '').toLowerCase()))
+10421:    const shopMatches = (shop.name || '').toLowerCase().includes((searchTerm || '').toLowerCase()) || 
+10422:                       (shop.description || '').toLowerCase().includes((searchTerm || '').toLowerCase());
+10427:      (p.name || '').toLowerCase().includes((searchTerm || '').toLowerCase()) ||
+10428:      (p.description || '').toLowerCase().includes((searchTerm || '').toLowerCase())
+10442:    const matchesSearch = (p.name || '').toLowerCase().includes((searchTerm || '').toLowerCase()) || 
+10443:                         (p.description || '').toLowerCase().includes((searchTerm || '').toLowerCase()) ||
+10444:                         (shop.name || '').toLowerCase().includes((searchTerm || '').toLowerCase());
+10602:                                  {product.weightPerUnit} {product.unit === 'kg' ? 'kg' : product.unit === 'gram' ? 'g' : (translateUnit(product.unit) || '').toLowerCase()}
+10612:                        <span className="text-sm font-bold text-slate-600">{product.stock - quantityInCart} {(translateUnit(product.unit) || '').toLowerCase()}s</span>
+10739:                             {searchTerm && (p.name || '').toLowerCase().includes((searchTerm || '').toLowerCase()) && (

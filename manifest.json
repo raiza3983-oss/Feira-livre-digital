@@ -7,7 +7,7 @@
   "theme_color": "#10b981",
   "icons": [
     {
-      "src": "/src/components/logo-feiralivre.png",
+      "src": "/src/lib/logo.png",
       "sizes": "512x512",
       "type": "image/png"
     }

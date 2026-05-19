@@ -66,3 +66,30 @@ export async function compressImage(file: File, maxWidth = 800, maxHeight = 800,
     reader.onerror = (err) => reject(err);
   });
 }
+
+/**
+ * Remove recursivamente valores 'undefined' de um objeto.
+ * O Firestore não suporta o valor 'undefined'.
+ */
+export function sanitizeForFirestore(obj: any): any {
+  if (obj === null || typeof obj !== 'object') {
+    return obj;
+  }
+
+  if (Array.isArray(obj)) {
+    return obj.map(v => sanitizeForFirestore(v));
+  }
+
+  // Evita processar instâncias de classes complexas como Timestamp
+  if (obj.constructor && obj.constructor.name !== 'Object') {
+    return obj;
+  }
+
+  const newObj: any = {};
+  Object.entries(obj).forEach(([key, value]) => {
+    if (value !== undefined) {
+      newObj[key] = sanitizeForFirestore(value);
+    }
+  });
+  return newObj;
+}

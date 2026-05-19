@@ -1,0 +1,171 @@
+import React, { useState } from 'react';
+import { motion } from 'motion/react';
+import { Share2, Minus, Plus, Scale } from 'lucide-react';
+import { Product, UserProfile, Shop, Screen } from '../types';
+import { cn } from '../lib/utils';
+import { translateUnit } from '../services/formatService';
+import { SafeImage } from './SafeImage';
+
+interface ProductCardProps {
+  product: Product;
+  user: UserProfile | null;
+  shop: Shop;
+  initialQuantity: number;
+  addToCart: (p: Product) => void;
+  removeFromCart: (p: Product) => void;
+  onNavigate: (s: Screen) => void;
+  showNotification: (m: string, t?: 'success' | 'error') => void;
+  handleShare: (data: { title: string; text: string; url?: string }) => void;
+}
+
+export const ProductCard = React.memo(({ 
+  product, 
+  user, 
+  shop, 
+  initialQuantity, 
+  addToCart, 
+  removeFromCart,
+  onNavigate, 
+  showNotification,
+  handleShare
+}: ProductCardProps) => {
+  const [quantity, setQuantity] = useState(initialQuantity);
+
+  // Sync with initialQuantity only if it changes externally (e.g. cart cleared)
+  React.useEffect(() => {
+    if (initialQuantity !== quantity) {
+      setQuantity(initialQuantity);
+    }
+  }, [initialQuantity]);
+
+  const increment = React.useCallback((e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (product.stock > quantity) {
+      setQuantity(prev => prev + 1);
+      // Sync with global cart
+      addToCart(product);
+    } else {
+      showNotification(`Estoque máximo atingido para ${product.name}.`, 'error');
+    }
+  }, [product, quantity, addToCart, showNotification]);
+
+  const decrement = React.useCallback((e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (quantity > 0) {
+      setQuantity(prev => prev - 1);
+      // Sync with global cart
+      removeFromCart(product);
+    }
+  }, [product, quantity, removeFromCart]);
+
+  const itemSubtotal = (product.price * quantity).toFixed(2);
+
+  return (
+    <motion.div 
+      style={{ transform: 'translateZ(0)', backfaceVisibility: 'hidden', willChange: 'transform' }}
+      className="bg-white group flex flex-col gap-3 p-[14px] rounded-[18px] border border-slate-100 hover:border-brand-100 hover:shadow-xl transition-all duration-200 ease-out mb-[12px]"
+    >
+      <div className="relative h-40 w-full overflow-hidden rounded-[14px] bg-slate-50 flex-shrink-0 transition-transform duration-500 flex items-center justify-center">
+        <SafeImage 
+          src={product.photoURL} 
+          type="product"
+          className="w-full h-full object-cover" 
+          alt={product.name} 
+        />
+        {product.stock <= 0 && (
+          <div className="absolute inset-0 bg-white/90 backdrop-blur-[4px] flex items-center justify-center">
+            <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Esgotado</span>
+          </div>
+        )}
+      </div>
+
+      <div className="flex-1 min-w-0 flex flex-col justify-between">
+        <div className="space-y-1">
+          <div className="flex justify-between items-start">
+            <h4 className="text-lg font-bold text-slate-900 leading-tight truncate flex-1">
+              {product.name}
+            </h4>
+            <div className="flex items-center gap-2">
+              {quantity > 0 && (
+                <div className="px-2 py-1 bg-brand-50 rounded-lg border border-brand-100">
+                  <span className="text-[10px] font-black text-brand-700">Subtotal: R$ {itemSubtotal}</span>
+                </div>
+              )}
+              <button 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  const shareText = `Confira esse produto no Aplicativo Feira Livre:\n\n🍎 *${product.name}*\n💰 R$ ${product.price.toFixed(2)} por ${product.unit}\n\nLoja: ${shop.name}`;
+                  handleShare({ title: product.name, text: shareText, url: window.location.href });
+                }}
+                className="p-2 text-slate-300 hover:text-brand-600 transition-colors"
+              >
+                <Share2 size={16} />
+              </button>
+            </div>
+          </div>
+          
+          <div className="flex flex-wrap items-center gap-2">
+             <span className="text-[10px] font-bold text-brand-600 uppercase">{product.category}</span>
+             <div className="w-1 h-1 rounded-full bg-slate-200" />
+             <span className="text-[10px] font-medium text-slate-400">Estoque: {product.stock - quantity}</span>
+             {(product.weightPerUnit || 0) > 0 && (
+               <>
+                 <div className="w-1 h-1 rounded-full bg-slate-200" />
+                 <div className="flex items-center gap-1 text-[10px] font-black text-brand-600 bg-brand-50 px-2 py-0.5 rounded-lg">
+                   <Scale size={10} />
+                   <span>{product.weightPerUnit}{product.unit === 'kg' ? 'kg' : product.unit === 'gram' ? 'g' : ''}</span>
+                 </div>
+               </>
+             )}
+          </div>
+        </div>
+        
+        <div className="mt-3 flex items-center justify-between">
+          <div>
+            <p className="text-xl font-black text-slate-900 tabular-nums">
+              <span className="text-xs mr-0.5 opacity-50">R$</span>
+              {product.price.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+            </p>
+            <p className="text-[9px] font-bold uppercase text-slate-400">por {translateUnit(product.unit).toLowerCase()}</p>
+          </div>
+
+          <div className="flex items-center gap-1.5 p-1 bg-slate-100 rounded-full">
+            <button 
+              onClick={decrement}
+              disabled={quantity === 0}
+              className={cn(
+                "w-8 h-8 rounded-full flex items-center justify-center transition-all duration-150 active:scale-95",
+                quantity > 0 ? "bg-white text-slate-900 shadow-sm" : "text-slate-300"
+              )}
+            >
+              <Minus size={14} />
+            </button>
+            
+            <span className={cn(
+              "text-sm font-bold w-6 text-center",
+              quantity > 0 ? "text-slate-900" : "text-slate-300"
+            )}>
+              {quantity}
+            </span>
+
+            <button 
+              onClick={increment}
+              disabled={product.stock <= quantity}
+              className={cn(
+                "w-8 h-8 rounded-full flex items-center justify-center transition-all duration-150 active:scale-95",
+                product.stock > quantity ? "bg-brand-600 text-white shadow-md" : "bg-white text-slate-200"
+              )}
+            >
+              <Plus size={14} />
+            </button>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+}, (prev, next) => {
+  return prev.product.id === next.product.id && 
+         prev.product.stock === next.product.stock &&
+         prev.product.price === next.product.price &&
+         prev.initialQuantity === next.initialQuantity;
+});

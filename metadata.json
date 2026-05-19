@@ -1,8 +1,12 @@
 {
-  "name": "Feira Livre Digital",
+  "name": "Feira Livre",
   "description": "Uma plataforma completa para conectar produtores, feirantes e consumidores, com gestão de vendas, calculadora de preços e criação de lojas.",
   "requestFramePermissions": [
     "camera",
+    "microphone",
     "geolocation"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
   ]
 }

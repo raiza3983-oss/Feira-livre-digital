@@ -1,17 +1,19 @@
 import React from 'react';
-import logoImg from '../logo-feiralivredigital.png';
+import logoImg from '../lib/logo.png';
 
 interface LogoProps {
   className?: string;
-  size?: 'sm' | 'md' | 'lg' | 'xl';
+  size?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
 }
 
-export const Logo: React.FC<LogoProps> = ({ className, size = 'md' }) => {
+export const Logo: React.FC<LogoProps> = ({ className = '', size = 'md' }) => {
   const sizes = {
-    sm: 'w-14 h-14',
-    md: 'w-20 h-20',
+    sm: 'w-10 h-10',
+    md: 'w-16 h-16',
     lg: 'w-32 h-32',
-    xl: 'w-80 h-80'
+    xl: 'w-48 h-48',
+    '2xl': 'w-64 h-64',
+    '3xl': 'w-80 h-80'
   };
 
   return (
