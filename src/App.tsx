@@ -248,51 +248,41 @@ const ProductCard = React.memo(({
              <div className="w-1 h-1 rounded-full bg-slate-200" />
              <span className="text-[9px] font-black text-slate-400 uppercase tracking-[0.3em] font-sans">Estoque: {product.stock}</span>
              {product.weightPerUnit > 0 && (
-const ProductCard = React.memo(({
-  product,
-  user,
-  shop,
-  cart,
-  addToCart,
-  removeFromCart,
-  onNavigate,
-  showNotification
-}: {
-  product: Product,
-  user: UserProfile | null,
-  shop: Shop,
-  cart: any,
-  addToCart: (p: Product) => void,
-  removeFromCart: (p: Product) => void,
-  onNavigate: (s: Screen) => void,
-  showNotification: (m: string, t?: 'success' | 'error') => void
-}) => {
 
-  const inCart = cart?.items.find((i: any) => i.product.id === product.id);
+const ProductCard = React.memo(({ product, cart, addToCart, removeFromCart }: any) => {
+
+  const inCart = cart?.items?.find((i: any) => i.product.id === product.id);
   const qtyInCart = inCart ? inCart.quantity : 0;
 
   return (
-    <motion.div
-      layout
-      initial={{ opacity: 0, x: -20 }}
-      animate={{ opacity: 1, x: 0 }}
-      className="bg-white rounded-3xl p-4"
-    >
-      <h4>{product.name}</h4>
+    <motion.div className="bg-white p-4 rounded-3xl">
 
-      <button onClick={() => removeFromCart(product)}>
-        -
-      </button>
+      <h2>{product.name}</h2>
 
-      <span>{qtyInCart}</span>
+      <p>
+        R$ {product.price}
+      </p>
 
-      <button onClick={() => addToCart(product)}>
-        +
-      </button>
+      <div className="flex gap-2 mt-4">
+
+        <button onClick={() => removeFromCart(product)}>
+          -
+        </button>
+
+        <span>
+          {qtyInCart}
+        </span>
+
+        <button onClick={() => addToCart(product)}>
+          +
+        </button>
+
+      </div>
 
     </motion.div>
   );
 });
+   
 const BRAZIL_STATES = [
   { id: 'AC', name: 'Acre' },
   { id: 'AL', name: 'Alagoas' },
