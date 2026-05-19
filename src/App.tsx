@@ -308,8 +308,8 @@ return (
     </motion.div>
   );
 });
-                                   </motion.div>
-  );
+</motion.div>
+);
 });
 
 const BRAZIL_STATES = [
