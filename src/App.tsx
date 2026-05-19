@@ -307,15 +307,10 @@ return (
       </div>
     </motion.div>
   );
-}, ((prev, next) => {
-  const prevQty = prev.cart?.items?.find((i: any) => i.product.id === prev.product.id)?.quantity || 0;
-  const nextQty = next.cart?.items?.find((i: any) => i.product.id === next.product.id)?.quantity || 0;
-  
-  return prev.product.id === next.product.id && 
-         prev.product.stock === next.product.stock &&
-         prev.product.price === next.product.price &&
-         prevQty === nextQty;
-  }));
+},
+                                   </motion.div>
+  );
+});
 
 const BRAZIL_STATES = [
   { id: 'AC', name: 'Acre' },
