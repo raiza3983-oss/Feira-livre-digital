@@ -3994,23 +3994,10 @@ const PrivacyScreen = ({ config }: { config: AppConfig | null }) => (
             </div>
             <div>
               <h2 className="text-4xl font-black text-slate-900 font-display tracking-tight animate-fade-in">Privacidade</h2>
-              <p className="text-slate-400 font-bold text-[10px] uppercase tracking-widest mt-1">Garantia de Segurança & Google Sign-In</p>
             </div>
           </div>
 
           <div className="space-y-12 text-slate-600 leading-relaxed">
-            <div className="p-6 bg-emerald-50 rounded-3xl border border-emerald-100/60 flex items-start gap-4">
-              <div className="w-10 h-10 bg-emerald-500 text-white rounded-xl flex items-center justify-center flex-shrink-0">
-                <CheckCircle size={20} />
-              </div>
-              <div>
-                <h4 className="text-emerald-950 font-black text-xs uppercase tracking-wider mb-1">Ambiente Autenticado de Proteção</h4>
-                <p className="text-emerald-800 text-[11px] font-medium leading-relaxed">
-                  Esta plataforma utiliza mecanismos de alta fidelidade integrados diretamente com o <strong>Google OAuth</strong> e o <strong>Firebase</strong>. Suas credenciais de login e dados de identidade permanecem protegidos por criptografia de dados em trânsito e em repouso.
-                </p>
-              </div>
-            </div>
-
             <section className="space-y-4">
               <h3 className="text-xl font-black text-slate-900 border-b border-slate-100 pb-2 font-display">1. Integração Direta Google OAuth</h3>
               <p className="text-xs font-medium text-slate-500">
@@ -4062,16 +4049,16 @@ const PrivacyScreen = ({ config }: { config: AppConfig | null }) => (
             </section>
 
             <section className="space-y-4">
-              <h3 className="text-xl font-black text-slate-900 border-b border-slate-100 pb-2 font-display">5. Comunicação Integrada e Chat</h3>
+              <h3 className="text-xl font-black text-slate-900 border-b border-slate-100 pb-2 font-display">5. Comunicação Integrada e Bate Papo</h3>
               <p className="text-xs font-medium text-slate-500">
-                As conversações ativas realizadas através do chat interno do aplicativo são protegidas e destinam-se exclusivamente a combinar entregas, detalhes dos frutos e verduras ou transferência de materiais gráficos. As mensagens possuem exclusão periódica programada.
+                As conversações ativas realizadas através do Bate Papo interno do aplicativo são protegidas e destinam-se exclusivamente a combinar entregas, detalhes dos frutos e verduras ou transferência de materiais gráficos. As mensagens possuem exclusão periódica programada.
               </p>
             </section>
 
             <div className="pt-12 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Última atualização: Maio de 2026</p>
-              <p className="text-[10px] font-bold text-brand-500 uppercase tracking-widest flex items-center gap-1">
-                <ShieldCheck size={12} /> Certificado Seguro Firebase & Google
+              <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">
+                Feira Livre • Compromisso de Proteção de Dados
               </p>
             </div>
           </div>
