@@ -34,6 +34,9 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       rollupOptions: {
+        input: {
+          index: path.resolve(__dirname, 'index.dev.html'),
+        },
         output: {
           entryFileNames: 'assets/[name].js',
           chunkFileNames: 'assets/[name].js',

@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "tsx server.ts",
     "start": "tsx server.ts",
-    "build": "vite build && tsx copy-dist-to-root.js && tsx zip-dist.js",
+    "build": "tsx prebuild.ts && vite build && tsx copy-dist-to-root.js && tsx zip-dist.js",
     "preview": "vite preview",
     "clean": "rm -rf dist",
     "lint": "tsc --noEmit"

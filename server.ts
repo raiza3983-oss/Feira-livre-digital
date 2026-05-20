@@ -91,11 +91,12 @@ async function startServer() {
       console.error(`[Server] ERROR: dist directory not found!`);
     }
 
-    // Serve static files from /dist
+    // Serve static files both under the base path '/Feira-livre-digital' and at root /
+    app.use("/Feira-livre-digital", express.static(distPath));
     app.use(express.static(distPath));
     
-    // Hand-crafted route for /
-    app.get("/", (req, res) => {
+    // Serve HTML entrypoint for base path, base path subroutes, and root /
+    app.get(["/", "/Feira-livre-digital", "/Feira-livre-digital/*"], (req, res) => {
       if (fs.existsSync(indexHtmlPath)) {
         res.sendFile(indexHtmlPath);
       } else {
@@ -105,8 +106,6 @@ async function startServer() {
 
     // Fallback for SPA routing - serve index.html for all other non-file routes
     app.get('*', (req, res) => {
-      // If the request is for an asset that doesn't exist, this might catch it.
-      // But for routes like /privacy, it should serve index.html.
       if (fs.existsSync(indexHtmlPath)) {
         res.sendFile(indexHtmlPath);
       } else {
