@@ -1,0 +1,40 @@
+# Dependências e Pacotes
+node_modules/
+/jspm_packages/
+
+# Arquivos de Build e Compilação
+dist/
+dist-ssr/
+build/
+out/
+*.local
+
+# Variáveis de Ambiente Locais (Segredos)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs do NPM e Variados
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Configurações do Firebase locais do ambiente do Applet (Evita upload de credenciais sensíveis)
+firebase-applet-config.json
+
+# Editores de Código / IDEs
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Arquivos de Sistema Operacional
+.DS_Store
+Thumbs.db

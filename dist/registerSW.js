@@ -1,1 +1,0 @@
-if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/Feira-livre-digital/sw.js', { scope: '/Feira-livre-digital/' })})}

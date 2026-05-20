@@ -1,11 +1,7 @@
 import express from "express";
 import { createServer as createViteServer } from "vite";
 import path from "path";
-import { fileURLToPath } from "url";
 import fs from "fs";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 async function startServer() {
   const app = express();
@@ -36,18 +32,6 @@ async function startServer() {
     res.send("pong " + new Date().toISOString());
   });
 
-  // API route to download the zip generated for GitHub Pages
-  app.get("/api/download-zip", (req, res) => {
-    const zipPath = path.resolve(process.cwd(), "dist.zip");
-    if (fs.existsSync(zipPath)) {
-      res.setHeader('Content-Disposition', 'attachment; filename=dist.zip');
-      res.setHeader('Content-Type', 'application/zip');
-      res.download(zipPath, "dist.zip");
-    } else {
-      res.status(404).send("Arquivo dist.zip não encontrado. Por favor, solicite a geração do ZIP novamente.");
-    }
-  });
-
   const distPath = path.resolve(process.cwd(), 'dist');
   const indexHtmlPath = path.join(distPath, 'index.html');
   
@@ -55,31 +39,8 @@ async function startServer() {
     console.log("[Server] Mode: DEVELOPMENT (Vite)");
     const vite = await createViteServer({
       server: { middlewareMode: true },
-      appType: "custom",
+      appType: "spa",
     });
-
-    // SPA routing for development mode using index.dev.html
-    app.get("/", async (req, res, next) => {
-      try {
-        const rawHtml = fs.readFileSync(path.resolve(process.cwd(), "index.dev.html"), "utf-8");
-        const html = await vite.transformIndexHtml(req.originalUrl, rawHtml);
-        res.status(200).set({ "Content-Type": "text/html" }).end(html);
-      } catch (err) {
-        next(err);
-      }
-    });
-
-    // Match all non-static file routes and server them using index.dev.html
-    app.get(/^(?!\/api|\/ping|\/assets|\/src|\/node_modules|\/@vite|\/@id|\/manifest\.json|\/registerSW\.js|\/sw\.js|\/workbox-).*$/, async (req, res, next) => {
-      try {
-        const rawHtml = fs.readFileSync(path.resolve(process.cwd(), "index.dev.html"), "utf-8");
-        const html = await vite.transformIndexHtml(req.originalUrl, rawHtml);
-        res.status(200).set({ "Content-Type": "text/html" }).end(html);
-      } catch (err) {
-        next(err);
-      }
-    });
-
     app.use(vite.middlewares);
   } else {
     console.log("[Server] Mode: PRODUCTION (Static)");
@@ -91,12 +52,11 @@ async function startServer() {
       console.error(`[Server] ERROR: dist directory not found!`);
     }
 
-    // Serve static files both under the base path '/Feira-livre-digital' and at root /
-    app.use("/Feira-livre-digital", express.static(distPath));
+    // Serve static files from /dist
     app.use(express.static(distPath));
     
-    // Serve HTML entrypoint for base path, base path subroutes, and root /
-    app.get(["/", "/Feira-livre-digital", "/Feira-livre-digital/*"], (req, res) => {
+    // Hand-crafted route for /
+    app.get("/", (req, res) => {
       if (fs.existsSync(indexHtmlPath)) {
         res.sendFile(indexHtmlPath);
       } else {
@@ -106,6 +66,8 @@ async function startServer() {
 
     // Fallback for SPA routing - serve index.html for all other non-file routes
     app.get('*', (req, res) => {
+      // If the request is for an asset that doesn't exist, this might catch it.
+      // But for routes like /privacy, it should serve index.html.
       if (fs.existsSync(indexHtmlPath)) {
         res.sendFile(indexHtmlPath);
       } else {
