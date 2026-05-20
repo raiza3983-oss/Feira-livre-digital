@@ -1,7 +1,18 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 import { initializeFirestore } from "firebase/firestore";
-import firebaseConfig from "../firebase-applet-config.json";
+
+// Configuração robusta com fallback automático para variáveis de ambiente (essencial para deploy no Vercel/Netlify/GitHub)
+const firebaseConfig = {
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "AIzaSyDOehbIQMm5Czz1nWEXQyEN1ryICLqnaFU",
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "meuapp-e998a.firebaseapp.com",
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "meuapp-e998a",
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || "meuapp-e998a.firebasestorage.app",
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || "103881183527",
+  appId: import.meta.env.VITE_FIREBASE_APP_ID || "1:103881183527:web:b4fed604e70fce88f89902",
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID || "",
+  firestoreDatabaseId: import.meta.env.VITE_FIREBASE_FIRESTORE_DATABASE_ID || "ai-studio-092a1eb7-e70b-46cb-b920-f325cbdb21bf"
+};
 
 const app = initializeApp(firebaseConfig);
 

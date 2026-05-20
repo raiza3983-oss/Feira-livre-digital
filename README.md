@@ -25,7 +25,15 @@ npm install
 Crie uma conta e um projeto no console do Firebase:
 1. Ative o **Firebase Authentication** com suporte a Login do Google (ou o método desejado).
 2. Ative o **Cloud Firestore** em modo de produção.
-3. Copie as credenciais da web do Firebase e salve em um arquivo chamado `firebase-applet-config.json` na raiz do projeto (este arquivo está ignorado no `.gitignore` por segurança).
+3. No ambiente local, as credenciais já estão configuradas para o banco de dados do Applet. Caso queira usar as suas próprias credenciais no **Vercel** ou **Netlify**, basta cadastrar as seguintes Variáveis de Ambiente nas configurações do seu projeto na plataforma de Hospedagem:
+   - `VITE_FIREBASE_API_KEY`
+   - `VITE_FIREBASE_AUTH_DOMAIN`
+   - `VITE_FIREBASE_PROJECT_ID`
+   - `VITE_FIREBASE_STORAGE_BUCKET`
+   - `VITE_FIREBASE_MESSAGING_SENDER_ID`
+   - `VITE_FIREBASE_APP_ID`
+   - `VITE_FIREBASE_MEASUREMENT_ID`
+   - `VITE_FIREBASE_FIRESTORE_DATABASE_ID` (Opcional, use caso use um banco nomeado)
 
 ### Passo 3: Executar em Modo de Desenvolvimento
 Inicie o servidor local de desenvolvimento (unindo o servidor customizado Node/Express e o compilador rápido do Vite):
