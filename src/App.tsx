@@ -781,7 +781,7 @@ const LandingScreen = ({
               <div>
                 <h4 className="text-[10px] font-black text-brand-600 uppercase tracking-widest mb-1">Feirantes Livres</h4>
                 <p className="text-xs text-slate-600 leading-relaxed">
-                  As barracas livres, os mercados livres, feiras livres são os lugares mais recomendados e onde se encontram mais Feirantes, os vendedores em Feira Livre. Acontecem de pequenos feirantes estarem em outros lugares levando produtos para clientes. A comercialização é a oportunidade de um novo negócio. Na feira Livre, os produtos chegam e são vendidos para Feirantes Livre pra depois nas barracas ou lojas serem vendidos por quilos ou unidades.
+                  As barracas livres, os mercados livres, feiras livres são os lugares mais recomendados e onde se encontram mais Feirantes, os vendedores em Feira Livre. Acontecem de pequenos feirantes estarem in outros lugares levando produtos para clientes. A comercialização é a oportunidade de um novo negócio. Na feira Livre, os produtos chegam e são vendidos para Feirantes Livre pra depois nas barracas ou lojas serem vendidos por quilos ou unidades.
                 </p>
               </div>
               <div>
@@ -794,21 +794,6 @@ const LandingScreen = ({
                 <h4 className="text-[10px] font-black text-brand-600 uppercase tracking-widest mb-1">O feirante, a Feira Livre aplicativo</h4>
                 <p className="text-xs text-slate-600 leading-relaxed">
                   Feirante Livre ou Atacado tem um espaço pra Buscar e Atacado onde se encontra todas as lojas com o Catálogo de produtos a serem comercializados. Você vai poder Feirante Livre ou Atacado, adicionar fotos ao vivo, da barraca ou loja, sua foto, nome, cidade, estado, país ("Brasil" que tá sempre Possível no aplicativo por ser um aplicativo Brasileiro) e até mesmo o número de celular para completar o pedido ou adicionar novos clientes a sua lista de contatos. Conserte o Horário de Funcionamento, veja faturamento, pedidos ativos. Endereço da loja, preços de produtos, promoções, promover sua loja conversando com a Administração.
-                </p>
-              </div>
-            </div>
-          </section>
-
-          <section className="bg-white/40 backdrop-blur-sm rounded-[32px] p-8 border border-white/50 shadow-sm">
-            <h3 className="text-sm font-black text-slate-900 uppercase tracking-[0.2em] mb-4 border-b border-slate-100 pb-2">ADMINISTRAÇÃO</h3>
-            <div className="space-y-4">
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Administração no aplicativo Feira Livre: O aplicativo permite que as Feiras Livres, Barracas Livres, Mercados Livres, Atacados Livres possam ter uma administração ativa do estado.
-              </p>
-              <div>
-                <h4 className="text-[10px] font-black text-brand-600 uppercase tracking-widest mb-1">ADMINISTRAÇÃO NO APLICATIVO FEIRA LIVRE</h4>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  O Aplicativo permite que as lojas de Atacados Livres possam ter uma administração ativa do estado.
                 </p>
               </div>
             </div>
@@ -848,6 +833,21 @@ const LandingScreen = ({
               <p className="text-xs text-slate-600 leading-relaxed italic">
                 Compre produtos da Feira Livre esses são livres, com preços justos, aceitando vários métodos de pagamentos. Abra o Aplicativo Feira Livre. Adicione produtos no Pedido, depois Pedido Concluído!
               </p>
+            </div>
+          </section>
+
+          <section className="bg-white/40 backdrop-blur-sm rounded-[32px] p-8 border border-white/50 shadow-sm">
+            <h3 className="text-sm font-black text-slate-900 uppercase tracking-[0.2em] mb-4 border-b border-slate-100 pb-2">ADMINISTRAÇÃO</h3>
+            <div className="space-y-4">
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Administração no aplicativo Feira Livre: O aplicativo permite que as Feiras Livres, Barracas Livres, Mercados Livres, Atacados Livres possam ter uma administração ativa do estado.
+              </p>
+              <div>
+                <h4 className="text-[10px] font-black text-brand-600 uppercase tracking-widest mb-1">ADMINISTRAÇÃO NO APLICATIVO FEIRA LIVRE</h4>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  O Aplicativo permite que as lojas de Atacados Livres possam ter uma administração ativa do estado.
+                </p>
+              </div>
             </div>
           </section>
 
@@ -3993,60 +3993,86 @@ const PrivacyScreen = ({ config }: { config: AppConfig | null }) => (
               <ShieldCheck size={32} />
             </div>
             <div>
-              <h2 className="text-4xl font-black text-slate-900 font-display tracking-tight">Privacidade</h2>
-              <p className="text-slate-400 font-bold text-[10px] uppercase tracking-widest mt-1">Política de Proteção de Dados</p>
+              <h2 className="text-4xl font-black text-slate-900 font-display tracking-tight animate-fade-in">Privacidade</h2>
+              <p className="text-slate-400 font-bold text-[10px] uppercase tracking-widest mt-1">Garantia de Segurança & Google Sign-In</p>
             </div>
           </div>
 
           <div className="space-y-12 text-slate-600 leading-relaxed">
-            <section>
-              <h3 className="text-xl font-black text-slate-900 mb-4 font-display">1. Coleta de Informações</h3>
-              <p className="mb-4">
-                No Aplicativo Feira Livre, coletamos informações essenciais para proporcionar a melhor experiência de conexão entre produtores e consumidores:
+            <div className="p-6 bg-emerald-50 rounded-3xl border border-emerald-100/60 flex items-start gap-4">
+              <div className="w-10 h-10 bg-emerald-500 text-white rounded-xl flex items-center justify-center flex-shrink-0">
+                <CheckCircle size={20} />
+              </div>
+              <div>
+                <h4 className="text-emerald-950 font-black text-xs uppercase tracking-wider mb-1">Ambiente Autenticado de Proteção</h4>
+                <p className="text-emerald-800 text-[11px] font-medium leading-relaxed">
+                  Esta plataforma utiliza mecanismos de alta fidelidade integrados diretamente com o <strong>Google OAuth</strong> e o <strong>Firebase</strong>. Suas credenciais de login e dados de identidade permanecem protegidos por criptografia de dados em trânsito e em repouso.
+                </p>
+              </div>
+            </div>
+
+            <section className="space-y-4">
+              <h3 className="text-xl font-black text-slate-900 border-b border-slate-100 pb-2 font-display">1. Integração Direta Google OAuth</h3>
+              <p className="text-xs font-medium text-slate-500">
+                Para consolidar o ambiente seguro e impedir a proliferação de perfis falsos ou fraudulentos na plataforma, utilizamos o método oficial de autenticação por meio do <strong className="text-slate-800">Google OAuth</strong>.
               </p>
-              <ul className="list-disc pl-6 space-y-2 font-medium">
-                <li>Dados de Identificação: Nome e número de telefone via Login por Celular.</li>
-                <li>Localização: Para mostrar as feiras e barracas mais próximas de você.</li>
-                <li>Dados de Negócio: Informações sobre sua barraca, produtos e vendas (para feirantes).</li>
+              <ul className="list-disc pl-6 space-y-2 text-xs font-semibold text-slate-600">
+                <li>Coletamos estritamente seu identificador único do Google, nome completo, endereço de e-mail associado à conta e foto de avatar oficial.</li>
+                <li>Nenhum dado pessoal extra de senhas é exigido ou de alguma forma armazenado no banco de dados local. Toda a interface de autenticação é operada diretamente pelos servidores integrados do Google, blindando seu acesso.</li>
               </ul>
             </section>
 
-            <section>
-              <h3 className="text-xl font-black text-slate-900 mb-4 font-display">2. Uso dos Dados</h3>
-              <p className="mb-4">
-                Seus dados são utilizados exclusivamente para as seguintes finalidades:
+            <section className="space-y-4">
+              <h3 className="text-xl font-black text-slate-900 border-b border-slate-100 pb-2 font-display">2. Verificação Avançada para Vendedores (Foto Física)</h3>
+              <p className="text-xs font-medium text-slate-500">
+                No intuito de estabelecer total legitimidade perante o catálogo ofertado, a política de privacidade exige que todos os candidatos à categoria de Vendedores (Feira Livre, Ambulantes, Atacado ou Parcerias) forneçam e atualizem:
               </p>
-              <ul className="list-disc pl-6 space-y-2 font-medium">
-                <li>Facilitar a comunicação entre clientes e feirantes.</li>
-                <li>Processar pedidos e gerenciar o histórico de vendas.</li>
-                <li>Melhorar as funcionalidades do aplicativo com base no uso.</li>
-                <li>Garantir a segurança e integridade da plataforma.</li>
+              <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100 text-xs flex flex-col gap-3 font-semibold text-slate-600">
+                <p className="flex items-start gap-2">
+                  <span className="text-brand-500">✔</span>
+                  <span><strong>Foto do Vendedor junto de sua Loja/Barraca Física:</strong> Coletamos e registramos uma fotografia real do vendedor ao lado do seu comércio físico cadastrado. Essa imagem serve como controle biométrico e verificação presencial obrigatória conduzida pelos administradores do aplicativo.</span>
+                </p>
+                <p className="flex items-start gap-2">
+                  <span className="text-brand-500">✔</span>
+                  <span><strong>Uso da Imagem:</strong> A foto em questão ficará disponível aos clientes reais somente para fins informativos de identificação e segurança de ambas as partes (fidelização da legitimidade comercial), impossibilitando o anonimato nocivo.</span>
+                </p>
+              </div>
+            </section>
+
+            <section className="space-y-4">
+              <h3 className="text-xl font-black text-slate-900 border-b border-slate-100 pb-2 font-display">3. Taxas Administrativas e Registro Financeiro</h3>
+              <p className="text-xs font-medium text-slate-500">
+                O provisionamento contábil e as transações de serviços seguem rígidos parâmetros de privacidade:
+              </p>
+              <ul className="list-disc pl-6 space-y-2 text-xs font-semibold text-slate-600">
+                <li>Os vendedores cadastrados concordam com o repasse da <strong>taxa de R$ 20,00 única</strong> para catalogação definitiva e hospedagem de portfólio, <strong>promovendo e projetando a meta de faturamento de R$ 250,00 mensais aos Vendedores</strong> cadastrados na plataforma.</li>
+                <li>Os dados gerados pelo recolhimento da taxa única de R$ 20,00 são armazenados e tratados unicamente para controle fiscal e contabilidade interna da administração do aplicativo, garantindo total privacidade, segurança e sigilo interno.</li>
               </ul>
             </section>
 
-            <section>
-              <h3 className="text-xl font-black text-slate-900 mb-4 font-display">3. Compartilhamento de Informações</h3>
-              <p>
-                Não vendemos seus dados para terceiros. O compartilhamento ocorre apenas quando necessário para a operação do serviço, como mostrar o nome do feirante para o cliente ou vice-versa durante um pedido.
+            <section className="space-y-4">
+              <h3 className="text-xl font-black text-slate-900 border-b border-slate-100 pb-2 font-display">4. Rastreabilidade das Transações</h3>
+              <p className="text-xs font-medium text-slate-500">
+                Alinhados com a garantia de anonimato parcial e segurança no ecossistema logístico da aplicação, os métodos de pagamento têm a seguinte finalidade de tratamento de dados de acordo com as modalidades:
+              </p>
+              <ul className="list-disc pl-6 space-y-2 text-xs font-semibold text-slate-600">
+                <li><strong>Modalidade de Entrega:</strong> Para a proteção física dos entregadores cadastrados e preservação da privacidade contra roubos ou extravios, requer-se exclusivamente <strong>métodos de pagamentos virtuais</strong> (tais como Pix antecipado com envio de foto de comprovante por chat criptografado).</li>
+                <li><strong>Modalidade de Retirada:</strong> Em retiradas diretas do produto na feira ou comércio parceiro, o cliente mantém direito a transacionar sob <strong>todos os demais meios de pagamento convencionais</strong> (físicos, cartões locais ou Pix na hora).</li>
+              </ul>
+            </section>
+
+            <section className="space-y-4">
+              <h3 className="text-xl font-black text-slate-900 border-b border-slate-100 pb-2 font-display">5. Comunicação Integrada e Chat</h3>
+              <p className="text-xs font-medium text-slate-500">
+                As conversações ativas realizadas através do chat interno do aplicativo são protegidas e destinam-se exclusivamente a combinar entregas, detalhes dos frutos e verduras ou transferência de materiais gráficos. As mensagens possuem exclusão periódica programada.
               </p>
             </section>
 
-            <section>
-              <h3 className="text-xl font-black text-slate-900 mb-4 font-display">4. Segurança</h3>
-              <p>
-                Implementamos medidas rigorosas de segurança, incluindo criptografia e autenticação segura via Firebase, para proteger suas informações contra acesso não autorizado ou vazamentos.
+            <div className="pt-12 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Última atualização: Maio de 2026</p>
+              <p className="text-[10px] font-bold text-brand-500 uppercase tracking-widest flex items-center gap-1">
+                <ShieldCheck size={12} /> Certificado Seguro Firebase & Google
               </p>
-            </section>
-
-            <section>
-              <h3 className="text-xl font-black text-slate-900 mb-4 font-display">5. Seus Direitos</h3>
-              <p>
-                Você tem o direito de acessar, corrigir ou solicitar a exclusão de seus dados a qualquer momento através das configurações do seu perfil ou entrando em contato com nosso suporte.
-              </p>
-            </section>
-
-            <div className="pt-12 border-t border-slate-100">
-              <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Última atualização: Abril de 2026</p>
             </div>
           </div>
         </div>
@@ -4065,62 +4091,83 @@ const TermsScreen = ({ config }: { config: AppConfig | null }) => (
               <FileText size={32} />
             </div>
             <div>
-              <h2 className="text-4xl font-black text-slate-900 font-display tracking-tight">Termos de Uso</h2>
-              <p className="text-slate-400 font-bold text-[10px] uppercase tracking-widest mt-1">Regras e Condições da Plataforma</p>
+              <h2 className="text-4xl font-black text-slate-900 font-display tracking-tight">Termos de Usos</h2>
+              <p className="text-slate-400 font-bold text-[10px] uppercase tracking-widest mt-1">Condições Gerais de Utilização</p>
             </div>
           </div>
 
-          <div className="space-y-12 text-slate-600 leading-relaxed">
-            <section>
-              <h3 className="text-xl font-black text-slate-900 mb-4 font-display">1. Aceitação dos Termos</h3>
-              <p>
-                Ao utilizar o Aplicativo Feira Livre, você concorda integralmente com estes termos. Se você não concordar com qualquer parte, não deverá utilizar a plataforma.
+          <div className="space-y-12 text-slate-600 leading-relaxed max-w-full">
+            <section className="space-y-3">
+              <h3 className="text-xl font-black text-slate-900 mb-4 border-b border-slate-100 pb-2 font-display">1. Elegibilidade de Cadastro</h3>
+              <p className="text-xs font-medium leading-relaxed">
+                Ao cadastrar-se no aplicativo <strong>Feira Livre</strong>, o usuário aceita plenamente as seguintes regras de acesso integrado:
               </p>
-            </section>
-
-            <section>
-              <h3 className="text-xl font-black text-slate-900 mb-4 font-display">2. Descrição do Serviço</h3>
-              <p>
-                A Feira Livre é uma plataforma de intermediação que conecta consumidores a feirantes e atacadistas. Não somos proprietários dos produtos vendidos e não garantimos a disponibilidade imediata de todos os itens listados.
-              </p>
-            </section>
-
-            <section>
-              <h3 className="text-xl font-black text-slate-900 mb-4 font-display">3. Responsabilidades do Usuário</h3>
-              <p className="mb-4">Como usuário, você se compromete a:</p>
-              <ul className="list-disc pl-6 space-y-2 font-medium">
-                <li>Fornecer informações verídicas em seu cadastro.</li>
-                <li>Utilizar a plataforma de forma ética e legal.</li>
-                <li>Honrar os compromissos de compra assumidos com os feirantes.</li>
+              <ul className="list-disc pl-6 space-y-2 text-xs font-semibold">
+                <li>O login é feito exclusivamente via autenticação oficial de provedores seguros (Google Sign-In).</li>
+                <li>O usuário compromete-se a ceder dados cadastrais idôneos e responder criminal e civilmente pelas operações efetuadas através do aplicativo.</li>
+                <li>A liberação e ativação total da conta fica sujeita aos processos internos de aprovação por parte da administração independente do aplicativo.</li>
               </ul>
             </section>
 
-            <section>
-              <h3 className="text-xl font-black text-slate-900 mb-4 font-display">4. Responsabilidades do Feirante</h3>
-              <p className="mb-4">Como feirante, você se compromete a:</p>
-              <ul className="list-disc pl-6 space-y-2 font-medium">
-                <li>Manter a qualidade e frescor dos produtos oferecidos.</li>
-                <li>Atualizar preços e disponibilidade de forma honesta.</li>
-                <li>Cumprir os prazos e locais de entrega/retirada acordados.</li>
+            <section className="space-y-3">
+              <h3 className="text-xl font-black text-slate-900 mb-4 border-b border-slate-100 pb-2 font-display">2. Regra da Taxa Única de Cadastro para Vendedores</h3>
+              <p className="text-xs font-medium leading-relaxed">
+                O vendedor (seja de Feiras Livres, Ambulante Autônomo, dono de Barraca ou operor de Atacado Livre) que almejar catalogar e promover seus produtos no aplicativo, aceita e adere expressamente às seguintes cláusulas comerciais:
+              </p>
+              <div className="p-6 bg-amber-50/50 rounded-2xl border border-amber-100 text-xs font-semibold text-slate-600 space-y-2">
+                <p>✔ <strong>Valor da Taxa Única:</strong> Estabelece-se a cobrança compulsória de uma <strong>taxa de R$ 20,00 (vinte reais) paga uma única vez</strong> (isenção total de anuidade, juros ou faturas mensais de hospedagem).</p>
+                <p>✔ <strong>Análise Administrativa:</strong> O catálogo, banners e dados das mercadorias do vendedor somente constarão como ativos e visíveis nas buscas públicas pós-confirmação do pagamento desta taxa de R$ 20,00 e conferência cadastral.</p>
+                <p>✔ <strong>Isenção de Extornos:</strong> Diante do processo de hospedagem e provisionamento de infraestrutura em Cloud, a taxa única de ativação não é reembolsável após iniciada a etapa de liberação administrativa.</p>
+              </div>
+            </section>
+
+            <section className="space-y-3">
+              <h3 className="text-xl font-black text-slate-900 mb-4 border-b border-slate-100 pb-2 font-display">3. Obrigatoriedade de Foto presencial para a Loja</h3>
+              <p className="text-xs font-medium leading-relaxed">
+                Para fins de evitar desvios éticos ou cadastros de lojas inexistentes (fraudes cibernéticas), o vendedor concorda integralmente em:
+              </p>
+              <ul className="list-disc pl-6 space-y-2 text-xs font-semibold">
+                <li>Fornecer uma <strong>foto real contendo o seu próprio rosto posicionado ao lado de sua respectiva loja física ou barraca na feira</strong>.</li>
+                <li>O uso de fotos meramente ilustrativas capturadas de serviços de busca da internet, imagens com marca d'água de bancos públicos ou imagens contendo rostos alheios falsificados implicará na imediata <strong>reprovação cadastral e bloqueio imediato da conta</strong>.</li>
               </ul>
             </section>
 
-            <section>
-              <h3 className="text-xl font-black text-slate-900 mb-4 font-display">5. Propriedade Intelectual</h3>
-              <p>
-                Todo o conteúdo da plataforma, incluindo logotipos, design e software, é de propriedade exclusiva da Feira Livre ou de seus licenciadores.
+            <section className="space-y-3">
+              <h3 className="text-xl font-black text-slate-900 mb-4 border-b border-slate-100 pb-2 font-display">4. Regras Operacionais para Aceitação de Pagamentos</h3>
+              <p className="text-xs font-medium leading-relaxed">
+                Cada pedido concluído é regido de forma estrita de acordo com a logística escolhida na finalização:
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="p-5 bg-slate-50 rounded-2xl border border-slate-100 space-y-2">
+                  <h5 className="font-black text-[10px] text-slate-800 uppercase tracking-widest flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500" /> Modalidade Entrega
+                  </h5>
+                  <p className="text-[11px] font-semibold text-slate-500 leading-relaxed">
+                    O pagamento do pedido deverá ocorrer exclusivamente utilizando <strong>métodos virtuais de transferência</strong> (exemplo: Pix online). O comprovante definitivo de quitação deve ser transmitido pelo chat por foto para fins de conformidade logística e segurança do entregador.
+                  </p>
+                </div>
+
+                <div className="p-5 bg-slate-50 rounded-2xl border border-slate-100 space-y-2">
+                  <h5 className="font-black text-[10px] text-slate-800 uppercase tracking-widest flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> Modalidade Retirada
+                  </h5>
+                  <p className="text-[11px] font-semibold text-slate-500 leading-relaxed">
+                    Faculta-se ao cliente a liquidação da sua fatura utilizando <strong>todos os demais meios de pagamentos presenciais permitidos pelo vendedor</strong>, como dinheiro em espécie no ato da entrega em mãos ou passagem de cartões físicos direto na maquininha da barraca.
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            <section className="space-y-3">
+              <h3 className="text-xl font-black text-slate-900 mb-4 border-b border-slate-100 pb-2 font-display">5. Isenção de Agenciamento Diretor</h3>
+              <p className="text-xs font-medium leading-relaxed">
+                O aplicativo <strong>Feira Livre</strong> atua estritamente como um catálogo interativo, facilitando a divulgação de comércio e centralização de pedidos. As transações financeiras, combinados de entrega, contratação autônoma de motoboys adicionais e a qualidade individual de hortifrutigranjeiros entregues de cada barraca são de responsabilidade única e solidária dos respectivos feirantes e compradores envolvidos.
               </p>
             </section>
 
-            <section>
-              <h3 className="text-xl font-black text-slate-900 mb-4 font-display">6. Limitação de Responsabilidade</h3>
-              <p>
-                Não nos responsabilizamos por danos indiretos, perda de lucros ou problemas decorrentes de negociações diretas entre usuários fora das funcionalidades da plataforma.
-              </p>
-            </section>
-
-            <div className="pt-12 border-t border-slate-100">
-              <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Última atualização: Abril de 2026</p>
+            <div className="pt-12 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Última atualização: Maio de 2026</p>
+              <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Feira Livre • Compromisso de Honestidade e Parcerias</p>
             </div>
           </div>
         </div>
@@ -12331,7 +12378,7 @@ const renderScreen = () => {
           <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 px-6 max-w-full w-full overflow-x-auto pb-4">
             <button onClick={() => setCurrentScreen('contact')} className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-brand-600 transition-colors whitespace-nowrap">Suporte</button>
             <button onClick={() => setCurrentScreen('privacy')} className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-brand-600 transition-colors whitespace-nowrap">Privacidade</button>
-            <button onClick={() => setCurrentScreen('terms')} className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-brand-600 transition-colors whitespace-nowrap">Termos de Uso</button>
+            <button onClick={() => setCurrentScreen('terms')} className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-brand-600 transition-colors whitespace-nowrap">Termos de Usos</button>
             <button onClick={() => setCurrentScreen('careers')} className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-brand-600 transition-colors whitespace-nowrap">Trabalhe Conosco</button>
           </div>
           

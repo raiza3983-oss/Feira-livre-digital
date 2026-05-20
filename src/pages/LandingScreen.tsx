@@ -140,22 +140,7 @@ export const LandingScreen = ({
               <div>
                 <h4 className="text-[10px] font-black text-brand-600 uppercase tracking-widest mb-1">O feirante, a Feira Livre aplicativo</h4>
                 <p className="text-xs text-slate-600 leading-relaxed">
-                  Feirante Livre ou Atacado tem um espaço pra Buscar e Atacado onde se encontra todas as lojas com o Catálogo de produtos a serem comercializados. Você vai poder Feirante Livre ou Atacado, adicionar fotos ao vivo, da barraca ou loja, sua foto, nome, cidade, estado, país ("Brasil" que tá sempre Possível no aplicativo por ser um aplicativo Brasileiro) e até mesmo o número de celular para completar o pedido ou adicionar novos clientes a sua lista de contatos. Conserte o Horário de Funcionamento, veja faturamento, pedidos ativos. Endereço da loja, preços de produtos, promoções, promover sua loja conversando com a Administração.
-                </p>
-              </div>
-            </div>
-          </section>
-
-          <section className="bg-white/40 backdrop-blur-sm rounded-[32px] p-8 border border-white/50 shadow-sm">
-            <h3 className="text-sm font-black text-slate-900 uppercase tracking-[0.2em] mb-4 border-b border-slate-100 pb-2">ADMINISTRAÇÃO</h3>
-            <div className="space-y-4">
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Administração no aplicativo Feira Livre: O aplicativo permite que as Feiras Livres, Barracas Livres, Mercados Livres, Atacados Livres possam ter uma administração ativa do estado.
-              </p>
-              <div>
-                <h4 className="text-[10px] font-black text-brand-600 uppercase tracking-widest mb-1">ADMINISTRAÇÃO NO APLICATIVO FEIRA LIVRE</h4>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  O Aplicativo permite que as lojas de Atacados Livres possam ter uma administração ativa do estado.
+                  Feirante Livre ou Atacado tem um espaço pra Buscar e Atacado onde se encontra todas as lojas com o Catálogo de produtos a serem comercializados. Você vai poder Feirante Livre ou Atacado, adicionar fotos ao vivo, da barraca ou loja, sua foto, nome, cidade, estado, país ("Brasil" que tá sempre Possível no aplicativo por ser um aplicativo Brasileiro) e até mesmo o número de celular para completar o pedido ou adicionar novos clientes a sua lista de contatos. Conserte o Horário de Funcionamento, veja faturamento, pedidos ativos. Endereço da loja, preços de produtos, promoções, promover sua loja conversando com a Administration.
                 </p>
               </div>
             </div>
@@ -195,6 +180,21 @@ export const LandingScreen = ({
               <p className="text-xs text-slate-600 leading-relaxed italic">
                 Compre produtos da Feira Livre esses são livres, com preços justos, aceitando vários métodos de pagamentos. Abra o Aplicativo Feira Livre. Adicione produtos no Pedido, depois Pedido Concluído!
               </p>
+            </div>
+          </section>
+
+          <section className="bg-white/40 backdrop-blur-sm rounded-[32px] p-8 border border-white/50 shadow-sm">
+            <h3 className="text-sm font-black text-slate-900 uppercase tracking-[0.2em] mb-4 border-b border-slate-100 pb-2">ADMINISTRAÇÃO</h3>
+            <div className="space-y-4">
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Administração no aplicativo Feira Livre: O aplicativo permite que as Feiras Livres, Barracas Livres, Mercados Livres, Atacados Livres possam ter uma administração activa do estado.
+              </p>
+              <div>
+                <h4 className="text-[10px] font-black text-brand-600 uppercase tracking-widest mb-1">ADMINISTRAÇÃO NO APLICATIVO FEIRA LIVRE</h4>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  O Aplicativo permite que as lojas de Atacados Livres possam ter uma administração ativa do estado.
+                </p>
+              </div>
             </div>
           </section>
 
