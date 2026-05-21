@@ -505,23 +505,23 @@ export const LandingScreen = ({
 
     <footer className="mt-20 flex flex-col items-center gap-8">
       <div className="flex items-center gap-8 text-slate-400 opacity-60">
-        <button onClick={() => onNavigate('privacy')} className="text-[10px] font-bold uppercase tracking-widest hover:text-brand-600 transition-colors">Privacidade</button>
-        <button onClick={() => onNavigate('terms')} className="text-[10px] font-bold uppercase tracking-widest hover:text-brand-600 transition-colors">Termos</button>
-        <button onClick={() => onNavigate('careers')} className="text-[10px] font-bold uppercase tracking-widest hover:text-brand-600 transition-colors">Trabalhe conosco</button>
+        <a href="/privacidade" onClick={(e) => { e.preventDefault(); onNavigate('privacy'); }} className="text-[10px] font-bold uppercase tracking-widest hover:text-brand-600 transition-colors">Privacidade</a>
+        <a href="/termosdeusos" onClick={(e) => { e.preventDefault(); onNavigate('terms'); }} className="text-[10px] font-bold uppercase tracking-widest hover:text-brand-600 transition-colors">Termos de Usos</a>
+        <a href="/careers" onClick={(e) => { e.preventDefault(); onNavigate('careers'); }} className="text-[10px] font-bold uppercase tracking-widest hover:text-brand-600 transition-colors">Trabalhe conosco</a>
         <button onClick={() => {
           const el = document.getElementById('calc-section');
           el?.scrollIntoView({ behavior: 'smooth' });
-        }} className="text-[10px] font-bold uppercase tracking-widest hover:text-brand-600 transition-colors">Feira Livre Calculadora</button>
+        }} className="text-[10px] font-bold uppercase tracking-widest hover:text-brand-600 transition-colors cursor-pointer">Feira Livre Calculadora</button>
         <button onClick={() => {
           handleShare({
             title: 'Aplicativo Feira Livre',
             text: 'Conecte-se com produtores, feirantes e atacadistas de todo o Brasil no Aplicativo Feira Livre! 🇧🇷🥦🍎',
             url: window.location.href
           });
-        }} className="text-[10px] font-black text-brand-600 uppercase tracking-widest flex items-center gap-1.5 hover:scale-110 transition-all">
+        }} className="text-[10px] font-black text-brand-600 uppercase tracking-widest flex items-center gap-1.5 hover:scale-110 transition-all cursor-pointer">
           <Share2 size={12} /> Compartilhar App
         </button>
-        <button onClick={() => onNavigate('contact')} className="text-[10px] font-bold uppercase tracking-widest hover:text-brand-600 transition-colors">Suporte</button>
+        <a href="/contact" onClick={(e) => { e.preventDefault(); onNavigate('contact'); }} className="text-[10px] font-bold uppercase tracking-widest hover:text-brand-600 transition-colors">Suporte</a>
       </div>
       <p className="text-slate-400 text-[10px] font-medium tracking-wide">
         © 2026 FEIRA LIVRE • TODOS OS DIREITOS RESERVADOS

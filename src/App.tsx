@@ -1149,17 +1149,17 @@ const LandingScreen = ({
 
     <footer className="mt-20 flex flex-col items-center gap-8 w-full max-w-5xl px-6">
       <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 text-slate-400 opacity-60 w-full pb-4">
-        <button onClick={() => onNavigate('privacy')} className="text-[10px] font-bold uppercase tracking-widest hover:text-brand-600 transition-colors whitespace-nowrap">Privacidade</button>
-        <button onClick={() => onNavigate('terms')} className="text-[10px] font-bold uppercase tracking-widest hover:text-brand-600 transition-colors whitespace-nowrap">Termos</button>
-        <button onClick={() => onNavigate('careers')} className="text-[10px] font-bold uppercase tracking-widest hover:text-brand-600 transition-colors whitespace-nowrap">Trabalhe conosco</button>
-        <button onClick={() => onNavigate('contact')} className="text-[10px] font-bold uppercase tracking-widest hover:text-brand-600 transition-colors whitespace-nowrap">Suporte</button>
+        <a href="/privacidade" onClick={(e) => { e.preventDefault(); onNavigate('privacy'); }} className="text-[10px] font-bold uppercase tracking-widest hover:text-brand-600 transition-colors whitespace-nowrap">Privacidade</a>
+        <a href="/termosdeusos" onClick={(e) => { e.preventDefault(); onNavigate('terms'); }} className="text-[10px] font-bold uppercase tracking-widest hover:text-brand-600 transition-colors whitespace-nowrap">Termos de Usos</a>
+        <a href="/careers" onClick={(e) => { e.preventDefault(); onNavigate('careers'); }} className="text-[10px] font-bold uppercase tracking-widest hover:text-brand-600 transition-colors whitespace-nowrap">Trabalhe conosco</a>
+        <a href="/contact" onClick={(e) => { e.preventDefault(); onNavigate('contact'); }} className="text-[10px] font-bold uppercase tracking-widest hover:text-brand-600 transition-colors whitespace-nowrap">Suporte</a>
         <button onClick={() => {
           handleShare({
             title: 'Aplicativo Feira Livre',
             text: 'Conecte-se com produtores, feirantes e atacadistas de todo o Brasil no Aplicativo Feira Livre! 🇧🇷🥦🍎',
             url: window.location.href
           });
-        }} className="text-[10px] font-black text-brand-600 uppercase tracking-widest flex items-center gap-1.5 hover:scale-110 transition-all whitespace-nowrap">
+        }} className="text-[10px] font-black text-brand-600 uppercase tracking-widest flex items-center gap-1.5 hover:scale-110 transition-all whitespace-nowrap cursor-pointer">
           <Share2 size={12} /> Compartilhe o aplicativo, Feira Livre!
         </button>
       </div>
@@ -4838,7 +4838,7 @@ const AdminDashboard = ({
             sales: { columns: 1, visible: true, title: 'Vendas', objective: 'Painel de vendas para produtores e lojistas.' },
             createShop: { columns: 1, visible: true, title: 'Criar Loja', objective: 'Processo de abertura de nova banca ou loja.' },
             privacy: { columns: 1, visible: true, title: 'Privacidade', objective: 'Informações sobre proteção de dados.' },
-            terms: { columns: 1, visible: true, title: 'Termos', objective: 'Regras e condições de uso da plataforma.' },
+            terms: { columns: 1, visible: true, title: 'Termos de Usos', objective: 'Regras e condições de uso da plataforma.' },
             careers: { columns: 1, visible: true, title: 'Trabalhe conosco', objective: 'Oportunidades de trabalho e envio de currículos.' },
             'sales-tips': { columns: 1, visible: false, title: 'Dicas de Vendas', objective: 'Guia de sucesso para novos vendedores.' }
           }
@@ -10808,8 +10808,8 @@ function MainApp() {
     const screenParam = searchParams.get('screen');
     
     // Check if it's a public path or parameter
-    const isPublicPath = path === '/' || path === '/privacy' || path === '/tos' || path === '/terms' || path === '/terms-of-service';
-    const isPublicParam = screenParam === 'privacy' || screenParam === 'terms' || screenParam === 'landing';
+    const isPublicPath = path === '/' || path === '/privacy' || path === '/privacidade' || path === '/tos' || path === '/terms' || path === '/termos-of-service' || path === '/termosdeusos';
+    const isPublicParam = screenParam === 'privacy' || screenParam === 'terms' || screenParam === 'landing' || screenParam === 'privacidade' || screenParam === 'termosdeusos';
     const isPublicMode = isPublicPath || isPublicParam;
 
     if (!hasSeen && !isPublicMode) {
@@ -10817,10 +10817,10 @@ function MainApp() {
     }
 
     // URL path or param detection for OAuth verification
-    if (path === '/privacy' || screenParam === 'privacy') {
+    if (path === '/privacy' || path === '/privacidade' || screenParam === 'privacy' || screenParam === 'privacidade') {
       _setCurrentScreen('privacy');
       setShowPermissionModal(false);
-    } else if (path === '/tos' || path === '/terms' || path === '/terms-of-service' || screenParam === 'terms') {
+    } else if (path === '/tos' || path === '/terms' || path === '/terms-of-service' || path === '/termosdeusos' || screenParam === 'terms' || screenParam === 'termosdeusos') {
       _setCurrentScreen('terms');
       setShowPermissionModal(false);
     }
@@ -12363,10 +12363,10 @@ const renderScreen = () => {
             <Logo size="md" />
           </div>
           <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 px-6 max-w-full w-full overflow-x-auto pb-4">
-            <button onClick={() => setCurrentScreen('contact')} className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-brand-600 transition-colors whitespace-nowrap">Suporte</button>
-            <button onClick={() => setCurrentScreen('privacy')} className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-brand-600 transition-colors whitespace-nowrap">Privacidade</button>
-            <button onClick={() => setCurrentScreen('terms')} className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-brand-600 transition-colors whitespace-nowrap">Termos de Usos</button>
-            <button onClick={() => setCurrentScreen('careers')} className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-brand-600 transition-colors whitespace-nowrap">Trabalhe Conosco</button>
+            <a href="/contact" onClick={(e) => { e.preventDefault(); setCurrentScreen('contact'); }} className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-brand-600 transition-colors whitespace-nowrap">Suporte</a>
+            <a href="/privacidade" onClick={(e) => { e.preventDefault(); setCurrentScreen('privacy'); }} className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-brand-600 transition-colors whitespace-nowrap">Privacidade</a>
+            <a href="/termosdeusos" onClick={(e) => { e.preventDefault(); setCurrentScreen('terms'); }} className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-brand-600 transition-colors whitespace-nowrap">Termos de Usos</a>
+            <a href="/careers" onClick={(e) => { e.preventDefault(); setCurrentScreen('careers'); }} className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-brand-600 transition-colors whitespace-nowrap">Trabalhe Conosco</a>
           </div>
           
           <p className="text-slate-400 text-[10px] font-bold uppercase tracking-[0.3em] text-center px-6">
