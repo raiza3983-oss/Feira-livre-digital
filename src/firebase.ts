@@ -3,6 +3,14 @@ import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/
 import { initializeFirestore } from "firebase/firestore";
 
 // Configuração robusta com fallback automático para variáveis de ambiente (essencial para deploy no Vercel/Netlify/GitHub)
+// Sanitize the database ID to avoid RTDB URL values breaking connections
+const sanitizeDatabaseId = (id: string | undefined): string => {
+  if (!id || id.includes("://") || id.includes("firebaseio.com") || id.includes("firebasestorage")) {
+    return "ai-studio-092a1eb7-e70b-46cb-b920-f325cbdb21bf";
+  }
+  return id;
+};
+
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "AIzaSyDOehbIQMm5Czz1nWEXQyEN1ryICLqnaFU",
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "meuapp-e998a.firebaseapp.com",
@@ -11,7 +19,7 @@ const firebaseConfig = {
   messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || "103881183527",
   appId: import.meta.env.VITE_FIREBASE_APP_ID || "1:103881183527:web:b4fed604e70fce88f89902",
   measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID || "",
-  firestoreDatabaseId: import.meta.env.VITE_FIREBASE_FIRESTORE_DATABASE_ID || "ai-studio-092a1eb7-e70b-46cb-b920-f325cbdb21bf"
+  firestoreDatabaseId: sanitizeDatabaseId(import.meta.env.VITE_FIREBASE_FIRESTORE_DATABASE_ID || "ai-studio-092a1eb7-e70b-46cb-b920-f325cbdb21bf")
 };
 
 const app = initializeApp(firebaseConfig);

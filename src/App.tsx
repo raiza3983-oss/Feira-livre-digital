@@ -163,6 +163,7 @@ import OrdersPage from './pages/OrdersPage';
 import InventoryPage from './pages/InventoryPage';
 import SellerPage from './pages/SellerPage';
 import PainelFinanceiroContabil from './pages/PainelFinanceiroContabil';
+import { FeiraLivreCalculadoraScreen } from './pages/FeiraLivreCalculadoraScreen';
 
 const STEPS_ORDER = ['pending', 'accepted', 'pending_payment', 'paid', 'preparing', 'shipped', 'ready', 'completed'];
 
@@ -741,125 +742,6 @@ const LandingScreen = ({
           A plataforma que conecta você aos melhores produtos frescos da sua região.
         </p>
       </div>
-
-      {/* Novo bloco de texto solicitado */}
-      <div className="max-w-md mx-auto bg-white/40 backdrop-blur-sm rounded-[32px] p-8 border border-white/50 text-left space-y-6 shadow-sm">
-        <div className="space-y-1">
-          <h3 className="text-[10px] font-black text-slate-900 uppercase tracking-[0.2em]">FEIRA LIVRE</h3>
-          <p className="text-xs text-slate-600 font-medium leading-relaxed">
-            O aplicativo Feira Livre é um mais novo e seguro lugar de procurar feiras livres, barracas livres, mercados livres ou atacados livres próximas ou mais distantes. Você escolhe. Tem por todo o país.
-          </p>
-        </div>
-
-        <div className="space-y-1">
-          <h3 className="text-[10px] font-black text-slate-900 uppercase tracking-[0.2em]">CATÁLOGO DE PRODUTOS</h3>
-          <p className="text-xs text-slate-600 font-medium leading-relaxed">
-            Os produtos são vendidos e você escolhe a forma de pagamento, com o vendedor ativo no bate papo poderá mandar comprovante por foto ou marcar de ir buscar produtos. Selecione quantos produtos você deseja, pague e receba. Escolha com paciência, se for pedir um entregador. Isso é um convite em outra plataforma, peço que mantenha contato e ajude ao vendedor entender sua escolha. Registre e mande por foto, os detalhes sobre a sua retirada ou entrega. Boas compras!
-          </p>
-        </div>
-
-        <div className="p-3 bg-emerald-50 rounded-2xl border border-emerald-100">
-          <p className="text-[9px] font-black text-emerald-800 uppercase tracking-widest text-center">
-            Você pode se cadastrar no Aplicativo Feira Livre. Feirantes ou Clientes.
-          </p>
-        </div>
-
-        <div className="space-y-1">
-          <h3 className="text-[10px] font-black text-slate-900 uppercase tracking-[0.2em]">FEIRA LIVRE, O APLICATIVO.</h3>
-          <p className="text-xs text-slate-600 font-medium leading-relaxed">
-            O aplicativo é fácil de acesso, a permissão é rápida. Você poderá ter acesso após o acesso aprovado pela administração.
-          </p>
-        </div>
-      </div>
-
-      {/* DETALHAMENTO ADICIONAL (NOVA COLUNA/GRADE) */}
-      <div className="max-w-5xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8 text-left py-8">
-        <div className="space-y-8">
-          <section className="bg-white/40 backdrop-blur-sm rounded-[32px] p-8 border border-white/50 shadow-sm">
-            <h3 className="text-sm font-black text-slate-900 uppercase tracking-[0.2em] mb-4 border-b border-slate-100 pb-2">FEIRANTES / ATACADISTAS</h3>
-            <div className="space-y-4">
-              <div>
-                <h4 className="text-[10px] font-black text-brand-600 uppercase tracking-widest mb-1">Feirantes Livres</h4>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  As barracas livres, os mercados livres, feiras livres são os lugares mais recomendados e onde se encontram mais Feirantes, os vendedores em Feira Livre. Acontecem de pequenos feirantes estarem in outros lugares levando produtos para clientes. A comercialização é a oportunidade de um novo negócio. Na feira Livre, os produtos chegam e são vendidos para Feirantes Livre pra depois nas barracas ou lojas serem vendidos por quilos ou unidades.
-                </p>
-              </div>
-              <div>
-                <h4 className="text-[10px] font-black text-brand-600 uppercase tracking-widest mb-1">Atacado Livre</h4>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  Atacado Livre é uma loja de produtos para a comercialização, vendidos em grandes quantidades. O Atacado Livre, é onde os feirantes e donos de barracas compram suas mercadorias, para começar a venda de Frutas, Verduras e Legumes e outras Raízes. Os produtos são vendidos em SACOS, CAIXAS, SACOLONAS OU MUITAS UNIDADES. São grandes quantidades, pra loja que alcance vários clientes que compram por quilo ou pequenas quantidades.
-                </p>
-              </div>
-              <div>
-                <h4 className="text-[10px] font-black text-brand-600 uppercase tracking-widest mb-1">O feirante, a Feira Livre aplicativo</h4>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  Feirante Livre ou Atacado tem um espaço pra Buscar e Atacado onde se encontra todas as lojas com o Catálogo de produtos a serem comercializados. Você vai poder Feirante Livre ou Atacado, adicionar fotos ao vivo, da barraca ou loja, sua foto, nome, cidade, estado, país ("Brasil" que tá sempre Possível no aplicativo por ser um aplicativo Brasileiro) e até mesmo o número de celular para completar o pedido ou adicionar novos clientes a sua lista de contatos. Conserte o Horário de Funcionamento, veja faturamento, pedidos ativos. Endereço da loja, preços de produtos, promoções, promover sua loja conversando com a Administração.
-                </p>
-              </div>
-            </div>
-          </section>
-        </div>
-
-        <div className="space-y-8">
-          <section className="bg-white/40 backdrop-blur-sm rounded-[32px] p-8 border border-white/50 shadow-sm">
-            <h3 className="text-sm font-black text-slate-900 uppercase tracking-[0.2em] mb-4 border-b border-slate-100 pb-2">CLIENTES</h3>
-            <div className="space-y-4">
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Cliente, consumidores, cadastrados no aplicativo Feira Livre. Se você precisar ir a Feira Livre o endereço do local estará disponível. Você terá sempre uma Feira Livre disponível. Compre produtos no aplicativo Feira Livre.
-              </p>
-              <div className="p-4 bg-brand-50/50 rounded-2xl space-y-3 border border-brand-100">
-                <div className="flex items-start gap-3">
-                  <div className="w-1.5 h-1.5 rounded-full bg-brand-500 mt-1.5" />
-                  <div>
-                    <h5 className="text-[10px] font-bold text-slate-900 uppercase">Tá em casa?</h5>
-                    <p className="text-[11px] text-slate-500">Aplicativo Feira Livre, você pede e seleciona se vai sair para retirar ou chamar um entregador.</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-1.5 h-1.5 rounded-full bg-brand-500 mt-1.5" />
-                  <div>
-                    <h5 className="text-[10px] font-bold text-slate-900 uppercase">Vai entregar?</h5>
-                    <p className="text-[11px] text-slate-500">Quem for entregar para você, vai ir numa Feira Livre e pegar suas compras. Rápido, sua entrega chegará!</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-1.5 h-1.5 rounded-full bg-brand-500 mt-1.5" />
-                  <div>
-                    <h5 className="text-[10px] font-bold text-slate-900 uppercase">Vai sair?</h5>
-                    <p className="text-[11px] text-slate-500">Guarde o endereço da Feira Livre próxima a você e retire seu pedido. O cliente sempre tem razão.</p>
-                  </div>
-                </div>
-              </div>
-              <p className="text-xs text-slate-600 leading-relaxed italic">
-                Compre produtos da Feira Livre esses são livres, com preços justos, aceitando vários métodos de pagamentos. Abra o Aplicativo Feira Livre. Adicione produtos no Pedido, depois Pedido Concluído!
-              </p>
-            </div>
-          </section>
-
-          <section className="bg-white/40 backdrop-blur-sm rounded-[32px] p-8 border border-white/50 shadow-sm">
-            <h3 className="text-sm font-black text-slate-900 uppercase tracking-[0.2em] mb-4 border-b border-slate-100 pb-2">ADMINISTRAÇÃO</h3>
-            <div className="space-y-4">
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Administração no aplicativo Feira Livre: O aplicativo permite que as Feiras Livres, Barracas Livres, Mercados Livres, Atacados Livres possam ter uma administração ativa do estado.
-              </p>
-              <div>
-                <h4 className="text-[10px] font-black text-brand-600 uppercase tracking-widest mb-1">ADMINISTRAÇÃO NO APLICATIVO FEIRA LIVRE</h4>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  O Aplicativo permite que as lojas de Atacados Livres possam ter uma administração ativa do estado.
-                </p>
-              </div>
-            </div>
-          </section>
-
-          <section className="bg-white/40 backdrop-blur-sm rounded-[32px] p-8 border border-white/50 shadow-sm relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-50 rounded-bl-full -mr-8 -mt-8 opacity-50" />
-            <h3 className="text-sm font-black text-slate-900 uppercase tracking-[0.2em] mb-4 border-b border-slate-100 pb-2">Índice de vendas</h3>
-            <p className="text-xs text-slate-600 leading-relaxed">
-              O índice de vendas quando soube, é pelo simples motivo: boas compras; bons frutos. As compras acompanham os produtos melhores, as Feiras Livres tem um índice alto por serem produtos frescos. A tradicional Feira Livre é uma imagem de lugar otimista ao consumo do campo do trabalhador.
-            </p>
-          </section>
-        </div>
-      </div>
     </motion.div>
 
     <div className="w-full max-w-lg mx-auto px-6 pb-12">
@@ -1146,27 +1028,6 @@ const LandingScreen = ({
         </div>
       </div>
     </motion.div>
-
-    <footer className="mt-20 flex flex-col items-center gap-8 w-full max-w-5xl px-6">
-      <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 text-slate-400 opacity-60 w-full pb-4">
-        <a href="/privacidade" onClick={(e) => { e.preventDefault(); onNavigate('privacy'); }} className="text-[10px] font-bold uppercase tracking-widest hover:text-brand-600 transition-colors whitespace-nowrap">Privacidade</a>
-        <a href="/termosdeusos" onClick={(e) => { e.preventDefault(); onNavigate('terms'); }} className="text-[10px] font-bold uppercase tracking-widest hover:text-brand-600 transition-colors whitespace-nowrap">Termos de Usos</a>
-        <a href="/careers" onClick={(e) => { e.preventDefault(); onNavigate('careers'); }} className="text-[10px] font-bold uppercase tracking-widest hover:text-brand-600 transition-colors whitespace-nowrap">Trabalhe conosco</a>
-        <a href="/contact" onClick={(e) => { e.preventDefault(); onNavigate('contact'); }} className="text-[10px] font-bold uppercase tracking-widest hover:text-brand-600 transition-colors whitespace-nowrap">Suporte</a>
-        <button onClick={() => {
-          handleShare({
-            title: 'Aplicativo Feira Livre',
-            text: 'Conecte-se com produtores, feirantes e atacadistas de todo o Brasil no Aplicativo Feira Livre! 🇧🇷🥦🍎',
-            url: window.location.href
-          });
-        }} className="text-[10px] font-black text-brand-600 uppercase tracking-widest flex items-center gap-1.5 hover:scale-110 transition-all whitespace-nowrap cursor-pointer">
-          <Share2 size={12} /> Compartilhe o aplicativo, Feira Livre!
-        </button>
-      </div>
-      <p className="text-slate-400 text-[10px] font-medium tracking-wide">
-        © 2026 FEIRA LIVRE • TODOS OS DIREITOS RESERVADOS
-      </p>
-    </footer>
   </div>
 );
 
@@ -3993,72 +3854,205 @@ const PrivacyScreen = ({ config }: { config: AppConfig | null }) => (
               <ShieldCheck size={32} />
             </div>
             <div>
-              <h2 className="text-4xl font-black text-slate-900 font-display tracking-tight animate-fade-in">Privacidade</h2>
+              <h2 className="text-4xl font-black text-slate-900 font-display tracking-tight leading-none">Privacidade e Segurança — Feira Livre</h2>
+              <p className="text-slate-400 font-bold text-[10px] uppercase tracking-widest mt-1">Sua Confiança e Liberdade na Plataforma</p>
             </div>
           </div>
 
           <div className="space-y-12 text-slate-600 leading-relaxed">
+            <p className="text-sm font-semibold text-slate-600">
+              No aplicativo Feira Livre, queremos que clientes, feirantes, mercados e atacadistas utilizem a plataforma com mais confiança, segurança e liberdade.
+            </p>
+            <p className="text-sm font-semibold text-slate-600">
+              Por isso, algumas informações são utilizadas apenas para o funcionamento do aplicativo e proteção dos usuários.
+            </p>
+
             <section className="space-y-4">
-              <h3 className="text-xl font-black text-slate-900 border-b border-slate-100 pb-2 font-display">1. Integração Direta Google OAuth</h3>
-              <p className="text-xs font-medium text-slate-500">
-                Para consolidar o ambiente seguro e impedir a proliferação de perfis falsos ou fraudulentos na plataforma, utilizamos o método oficial de autenticação por meio do <strong className="text-slate-800">Google OAuth</strong>.
+              <h3 className="text-xl font-black text-slate-900 border-b border-slate-100 pb-2 font-display uppercase tracking-wider text-[11px] text-slate-400">Seu acesso ao aplicativo</h3>
+              <p className="text-sm font-semibold text-slate-600">
+                Você pode entrar no aplicativo usando sua conta Google. Isso ajuda a deixar o acesso mais rápido e seguro.
               </p>
-              <ul className="list-disc pl-6 space-y-2 text-xs font-semibold text-slate-600">
-                <li>Coletamos estritamente seu identificador único do Google, nome completo, endereço de e-mail associado à conta e foto de avatar oficial.</li>
-                <li>Nenhum dado pessoal extra de senhas é exigido ou de alguma forma armazenado no banco de dados local. Toda a interface de autenticação é operada diretamente pelos servidores integrados do Google, blindando seu acesso.</li>
-              </ul>
+              <div className="p-6 bg-brand-50/50 rounded-2xl border border-brand-100/30">
+                <p className="text-xs font-black text-slate-800 uppercase tracking-widest mb-3">O Feira Livre poderá visualizar apenas:</p>
+                <ul className="list-disc pl-6 space-y-2 text-xs font-black text-slate-700">
+                  <li>Seu nome;</li>
+                  <li>Seu e-mail;</li>
+                  <li>Sua foto de perfil.</li>
+                </ul>
+              </div>
+              <p className="text-xs text-slate-400 font-bold italic mt-2 uppercase tracking-wider">
+                O aplicativo não vê sua senha do Google e não pede informações bancárias da sua conta Google.
+              </p>
             </section>
 
             <section className="space-y-4">
-              <h3 className="text-xl font-black text-slate-900 border-b border-slate-100 pb-2 font-display">2. Verificação Avançada para Vendedores (Foto Física)</h3>
-              <p className="text-xs font-medium text-slate-500">
-                No intuito de estabelecer total legitimidade perante o catálogo ofertado, a política de privacidade exige que todos os candidatos à categoria de Vendedores (Feira Livre, Ambulantes, Atacado ou Parcerias) forneçam e atualizem:
+              <h3 className="text-xl font-black text-slate-900 border-b border-slate-100 pb-2 font-display uppercase tracking-wider text-[11px] text-slate-400">Cadastro de vendedores</h3>
+              <p className="text-sm font-semibold text-slate-600">
+                Para ajudar clientes a reconhecer vendedores reais, alguns vendedores poderão adicionar:
               </p>
-              <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100 text-xs flex flex-col gap-3 font-semibold text-slate-600">
-                <p className="flex items-start gap-2">
-                  <span className="text-brand-500">✔</span>
-                  <span><strong>Foto do Vendedor junto de sua Loja/Barraca Física:</strong> Coletamos e registramos uma fotografia real do vendedor ao lado do seu comércio físico cadastrado. Essa imagem serve como controle biométrico e verificação presencial obrigatória conduzida pelos administradores do aplicativo.</span>
-                </p>
-                <p className="flex items-start gap-2">
-                  <span className="text-brand-500">✔</span>
-                  <span><strong>Uso da Imagem:</strong> A foto em questão ficará disponível aos clientes reais somente para fins informativos de identificação e segurança de ambas as partes (fidelização da legitimidade comercial), impossibilitando o anonimato nocivo.</span>
-                </p>
+              <div className="p-6 bg-slate-50 border border-slate-100 rounded-xl">
+                <ul className="list-disc pl-6 space-y-2 text-xs text-slate-600 font-bold">
+                  <li>Foto da barraca;</li>
+                  <li>Foto da loja;</li>
+                  <li>Foto do feirante;</li>
+                  <li>Nome da loja;</li>
+                  <li>Cidade e estado.</li>
+                </ul>
+              </div>
+              <p className="text-sm text-slate-500 font-medium leading-relaxed">
+                Essas informações ajudam clientes a conhecer melhor quem está vendendo os produtos.
+              </p>
+            </section>
+
+            <section className="space-y-4">
+              <h3 className="text-xl font-black text-slate-900 border-b border-slate-100 pb-2 font-display uppercase tracking-wider text-[11px] text-slate-400">Conversas no bate-papo</h3>
+              <p className="text-sm font-semibold text-slate-600">
+                O bate-papo do aplicativo serve para:
+              </p>
+              <div className="p-6 bg-slate-50 border border-slate-100 rounded-xl">
+                <ul className="list-disc pl-6 space-y-2 text-xs text-slate-600 font-bold">
+                  <li>combinar entregas;</li>
+                  <li>combinar retiradas;</li>
+                  <li>enviar comprovantes;</li>
+                  <li>conversar sobre produtos;</li>
+                  <li>tirar dúvidas sobre pedidos.</li>
+                </ul>
+              </div>
+              <p className="text-sm font-black text-brand-600 bg-brand-50 p-4 rounded-2xl border border-brand-100/50">
+                Pedimos sempre respeito entre clientes e vendedores durante as conversas.
+              </p>
+            </section>
+
+            <section className="space-y-4">
+              <h3 className="text-xl font-black text-slate-900 border-b border-slate-100 pb-2 font-display uppercase tracking-wider text-[11px] text-slate-400">Entregas e retiradas</h3>
+              <p className="text-sm font-semibold text-slate-600">
+                O cliente pode:
+              </p>
+              <div className="p-6 bg-slate-50 border border-slate-100 rounded-xl">
+                <ul className="list-disc pl-6 space-y-2 text-xs text-slate-600 font-bold">
+                  <li>pedir entrega;</li>
+                  <li>retirar o pedido no local;</li>
+                  <li>combinar diretamente com o vendedor.</li>
+                </ul>
+              </div>
+              <p className="text-sm text-slate-500 font-medium leading-relaxed">
+                Cada vendedor pode trabalhar com formas diferentes de entrega e pagamento.
+              </p>
+            </section>
+
+            <section className="space-y-6">
+              <h3 className="text-xl font-black text-slate-900 border-b border-slate-100 pb-2 font-display uppercase tracking-wider text-[11px] text-slate-400">Pagamentos</h3>
+              <p className="text-sm font-semibold text-slate-700 leading-relaxed font-display">
+                Os pagamentos são combinados entre cliente e vendedor.
+              </p>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="p-5 bg-brand-50/50 rounded-2xl border border-brand-100/30 flex flex-col justify-between">
+                  <div>
+                    <h4 className="font-bold text-slate-900 text-xs uppercase mb-2">Modalidade Entrega</h4>
+                    <p className="text-xs text-slate-500 font-medium leading-relaxed mb-4">
+                      Nos pedidos com entrega, os pagamentos poderão ser realizados por:
+                    </p>
+                    <ul className="list-disc pl-4 space-y-1 text-xs text-slate-600 font-bold mb-4">
+                      <li>Pix;</li>
+                      <li>Cartão de débito virtual;</li>
+                      <li>Cartão de crédito virtual;</li>
+                      <li>Pagamento antecipado combinado entre cliente e vendedor.</li>
+                    </ul>
+                  </div>
+                  <p className="text-[10px] text-brand-600 font-black uppercase tracking-wider bg-white p-2.5 rounded-xl border border-brand-100/50">
+                    O envio de comprovantes poderá ser feito pelo bate-papo do aplicativo para facilitar a confirmação do pedido.
+                  </p>
+                </div>
+
+                <div className="p-5 bg-slate-50 border border-slate-100 rounded-2xl flex flex-col justify-between">
+                  <div>
+                    <h4 className="font-bold text-slate-900 text-xs uppercase mb-2">Modalidade Retirada</h4>
+                    <p className="text-xs text-slate-500 font-medium leading-relaxed mb-4">
+                      Nos pedidos para retirada no local, os pagamentos poderão ser realizados por:
+                    </p>
+                    <ul className="list-disc pl-4 space-y-1 text-xs text-slate-600 font-bold mb-4">
+                      <li>Dinheiro;</li>
+                      <li>Pix;</li>
+                      <li>Cartão de débito;</li>
+                      <li>Cartão de crédito.</li>
+                    </ul>
+                  </div>
+                  <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider bg-white p-2.5 rounded-xl border border-slate-100">
+                    Cada vendedor poderá escolher quais formas de pagamento aceitar em sua loja ou barraca.
+                  </p>
+                </div>
               </div>
             </section>
 
             <section className="space-y-4">
-              <h3 className="text-xl font-black text-slate-900 border-b border-slate-100 pb-2 font-display">3. Taxas Administrativas e Registro Financeiro</h3>
-              <p className="text-xs font-medium text-slate-500">
-                O provisionamento contábil e as transações de serviços seguem rígidos parâmetros de privacidade:
+              <h3 className="text-xl font-black text-slate-900 border-b border-slate-100 pb-2 font-display uppercase tracking-wider text-[11px] text-slate-400">Meta para vendedores</h3>
+              <p className="text-sm font-semibold text-slate-600 leading-relaxed">
+                O aplicativo Feira Livre busca ajudar vendedores cadastrados a alcançarem melhores resultados de vendas e crescimento dentro da plataforma.
               </p>
-              <ul className="list-disc pl-6 space-y-2 text-xs font-semibold text-slate-600">
-                <li>Os vendedores cadastrados concordam com o repasse da <strong>taxa de R$ 20,00 única</strong> para catalogação definitiva e hospedagem de portfólio, <strong>promovendo e projetando a meta de faturamento de R$ 250,00 mensais aos Vendedores</strong> cadastrados na plataforma.</li>
-                <li>Os dados gerados pelo recolhimento da taxa única de R$ 20,00 são armazenados e tratados unicamente para controle fiscal e contabilidade interna da administração do aplicativo, garantindo total privacidade, segurança e sigilo interno.</li>
-              </ul>
+              <p className="text-sm font-semibold text-slate-600 leading-relaxed">
+                A plataforma trabalha com meta estimada de até R$ 250,00 por mês para vendedores ativos, dependendo da movimentação, produtos anunciados e participação no aplicativo.
+              </p>
             </section>
 
             <section className="space-y-4">
-              <h3 className="text-xl font-black text-slate-900 border-b border-slate-100 pb-2 font-display">4. Rastreabilidade das Transações</h3>
-              <p className="text-xs font-medium text-slate-500">
-                Alinhados com a garantia de anonimato parcial e segurança no ecossistema logístico da aplicação, os métodos de pagamento têm a seguinte finalidade de tratamento de dados de acordo com as modalidades:
+              <h3 className="text-xl font-black text-slate-900 border-b border-slate-100 pb-2 font-display uppercase tracking-wider text-[11px] text-slate-400">Taxa única</h3>
+              <p className="text-sm font-semibold text-slate-600 leading-relaxed">
+                Para manutenção da plataforma, divulgação do catálogo e organização do sistema, poderá existir uma taxa única de R$ 20,00 para ativação ou manutenção de anúncios e catálogo de vendedores.
               </p>
-              <ul className="list-disc pl-6 space-y-2 text-xs font-semibold text-slate-600">
-                <li><strong>Modalidade de Entrega:</strong> Para a proteção física dos entregadores cadastrados e preservação da privacidade contra roubos ou extravios, requer-se exclusivamente <strong>métodos de pagamentos virtuais</strong> (tais como Pix antecipado com envio de foto de comprovante por chat criptografado).</li>
-                <li><strong>Modalidade de Retirada:</strong> Em retiradas diretas do produto na feira ou comércio parceiro, o cliente mantém direito a transacionar sob <strong>todos os demais meios de pagamento convencionais</strong> (físicos, cartões locais ou Pix na hora).</li>
-              </ul>
             </section>
 
             <section className="space-y-4">
-              <h3 className="text-xl font-black text-slate-900 border-b border-slate-100 pb-2 font-display">5. Comunicação Integrada e Bate Papo</h3>
-              <p className="text-xs font-medium text-slate-500">
-                As conversações ativas realizadas através do Bate Papo interno do aplicativo são protegidas e destinam-se exclusivamente a combinar entregas, detalhes dos frutos e verduras ou transferência de materiais gráficos. As mensagens possuem exclusão periódica programada.
+              <h3 className="text-xl font-black text-slate-900 border-b border-slate-100 pb-2 font-display uppercase tracking-wider text-[11px] text-slate-400">Segurança da plataforma</h3>
+              <p className="text-xs font-bold text-slate-500 uppercase tracking-widest">
+                O Feira Livre procura manter um ambiente mais seguro para todos.
+              </p>
+
+              <div className="p-6 bg-slate-50 border border-slate-100 rounded-2xl space-y-4">
+                <h4 className="font-black text-slate-800 text-sm uppercase tracking-wider">Verificação Avançada para Vendedores (Foto Física)</h4>
+                <p className="text-xs text-slate-600 font-semibold leading-relaxed">
+                  No intuito de estabelecer total legitimidade perante o catálogo ofertado, a política de privacidade exige que todos os candidatos à categoria de Vendedores (Feira Livre, Ambulantes, Atacado ou Parcerias) forneçam e atualizem:
+                </p>
+                <div className="space-y-3 pl-4">
+                  <p className="text-xs text-slate-600 font-bold">
+                    📌 <strong>Foto do Vendedor junto de sua Loja/Barraca Física:</strong> Coletamos e registramos uma fotografia real do vendedor ao lado do seu comércio físico cadastrado. Essa imagem serve como controle biométrico e verificação presencial obrigatória conduzida pelos administradores do aplicativo.
+                  </p>
+                  <p className="text-xs text-slate-600 font-bold">
+                    📌 <strong>Uso da Imagem:</strong> A foto em questão ficará disponível aos clientes reais somente para fins informativos de identificação e segurança de ambas as partes (fidelização da legitimidade comercial).
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            <section className="space-y-4">
+              <h3 className="text-xl font-black text-slate-900 border-b border-slate-100 pb-2 font-display uppercase tracking-wider text-[11px] text-slate-400">Sobre suas informações</h3>
+              <p className="text-sm font-semibold text-slate-600">
+                As informações utilizadas dentro do aplicativo servem para:
+              </p>
+              <div className="p-6 bg-slate-50 border border-slate-100 rounded-xl">
+                <ul className="list-disc pl-6 space-y-2 text-xs text-slate-600 font-bold">
+                  <li>funcionamento da plataforma;</li>
+                  <li>identificação dos usuários;</li>
+                  <li>organização de pedidos;</li>
+                  <li>melhoria da experiência no aplicativo.</li>
+                </ul>
+              </div>
+              <p className="text-sm font-black text-emerald-750 bg-emerald-50 p-4 rounded-2xl border border-emerald-100/50">
+                O Feira Livre não vende informações pessoais dos usuários.
+              </p>
+            </section>
+
+            <section className="space-y-4">
+              <h3 className="text-xl font-black text-slate-900 border-b border-slate-100 pb-2 font-display uppercase tracking-wider text-[11px] text-slate-400">Atualizações</h3>
+              <p className="text-sm font-semibold text-slate-600">
+                Esta página pode receber atualizações para melhorar a segurança, o funcionamento e a experiência dos usuários.
               </p>
             </section>
 
             <div className="pt-12 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Última atualização: Maio de 2026</p>
+              <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Feira Livre</p>
               <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">
-                Feira Livre • Compromisso de Proteção de Dados
+                Produtos frescos, feirantes reais e uma plataforma feita para aproximar clientes e vendedores
               </p>
             </div>
           </div>
@@ -4155,6 +4149,188 @@ const TermsScreen = ({ config }: { config: AppConfig | null }) => (
             <div className="pt-12 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Última atualização: Maio de 2026</p>
               <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Feira Livre • Compromisso de Honestidade e Parcerias</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </PageContainer>
+  </div>
+);
+
+const AboutScreen = ({ config }: { config: AppConfig | null }) => (
+  <div className="p-6 max-w-4xl mx-auto pb-32">
+    <PageContainer screen="about" config={config}>
+      <div className="bg-white rounded-[40px] shadow-soft border border-slate-100 overflow-hidden">
+        <div className="p-12 md:p-20">
+          <div className="flex items-center gap-4 mb-12">
+            <div className="w-16 h-16 bg-brand-50 text-brand-600 rounded-[24px] flex items-center justify-center shadow-inner">
+              <Logo size="md" />
+            </div>
+            <div>
+              <h2 className="text-4xl font-black text-slate-900 font-display tracking-tight">Sobre o Feira Livre</h2>
+              <p className="text-slate-400 font-bold text-[10px] uppercase tracking-widest mt-1">Nossa História e Funcionamento</p>
+            </div>
+          </div>
+
+          <div className="space-y-12 text-slate-600 leading-relaxed">
+            <section className="space-y-4">
+              <h3 className="text-xl font-black text-slate-900 border-b border-slate-100 pb-2 font-display uppercase tracking-wider text-[11px] text-slate-400">FEIRA LIVRE</h3>
+              <p className="text-sm font-semibold text-slate-600">
+                O aplicativo Feira Livre é o mais novo e seguro lugar para procurar feiras livres, barracas livres, mercados livres e atacados livres, próximos ou mais distantes. Você escolhe. Existem opções por todo o país.
+              </p>
+            </section>
+
+            <section className="space-y-4">
+              <h3 className="text-xl font-black text-slate-900 border-b border-slate-100 pb-2 font-display uppercase tracking-wider text-[11px] text-slate-400">CATÁLOGO DE PRODUTOS</h3>
+              <p className="text-sm font-semibold text-slate-600">
+                Os produtos são vendidos diretamente pelos vendedores cadastrados, e você escolhe a forma de pagamento. Com o vendedor ativo no bate-papo, é possível enviar comprovantes por foto, combinar retirada dos produtos ou solicitar entrega.
+              </p>
+              <p className="text-sm font-semibold text-slate-600">
+                Selecione os produtos desejados, finalize o pedido e acompanhe sua compra. Caso escolha um entregador, mantenha contato e envie os detalhes da entrega ou retirada para facilitar o atendimento. Boas compras!
+              </p>
+              <div className="p-6 bg-emerald-50 rounded-2xl border border-emerald-100 mt-4">
+                <p className="text-xs font-black text-emerald-800 uppercase tracking-widest mb-3">Você pode se cadastrar no aplicativo Feira Livre como:</p>
+                <ul className="list-disc pl-6 space-y-2 text-xs font-black text-emerald-955">
+                  <li>Feirante;</li>
+                  <li>Atacadista;</li>
+                  <li>Cliente.</li>
+                </ul>
+              </div>
+            </section>
+
+            <section className="space-y-4">
+              <h3 className="text-xl font-black text-slate-900 border-b border-slate-100 pb-2 font-display uppercase tracking-wider text-[11px] text-slate-400">FEIRA LIVRE, O APLICATIVO</h3>
+              <p className="text-sm font-semibold text-slate-600">
+                O aplicativo é de fácil acesso e possui aprovação rápida de cadastro. Após a aprovação da administração, o usuário poderá acessar os recursos disponíveis da plataforma.
+              </p>
+            </section>
+
+            <section className="space-y-4">
+              <h3 className="text-xl font-black text-slate-900 border-b border-slate-100 pb-2 font-display uppercase tracking-wider text-[11px] text-slate-400">FEIRANTES / ATACADISTAS</h3>
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-bold text-slate-850 text-sm mb-1 uppercase tracking-wider text-xs text-brand-600">Feirantes Livres</h4>
+                  <p className="text-sm text-slate-500 font-medium leading-relaxed">
+                    Barracas livres, mercados livres e feiras livres são os locais onde se encontram diversos feirantes e vendedores parceiros da plataforma. Pequenos feirantes também podem atender clientes em diferentes locais, ampliando as oportunidades de comercialização.
+                  </p>
+                  <p className="text-sm text-slate-500 font-medium leading-relaxed mt-2">
+                    Na Feira Livre, os produtos chegam para comercialização e podem ser revendidos em barracas, lojas ou mercados, por quilo, unidade ou outras medidas.
+                  </p>
+                </div>
+                <div className="pt-4">
+                  <h4 className="font-bold text-slate-850 text-sm mb-1 uppercase tracking-wider text-xs text-brand-600">Atacado Livre</h4>
+                  <p className="text-sm text-slate-500 font-medium leading-relaxed">
+                    O Atacado Livre é destinado à venda de produtos em grandes quantidades. É o local onde feirantes, comerciantes e donos de barracas compram mercadorias para iniciar ou abastecer suas vendas de frutas, verduras, legumes, raízes e outros produtos.
+                  </p>
+                  <div className="p-4 bg-slate-50 border border-slate-100 rounded-xl mt-3">
+                    <p className="text-xs font-black text-slate-700 label-uppercase mb-2">As vendas podem acontecer em:</p>
+                    <ul className="list-disc pl-6 space-y-1 text-xs text-slate-600 font-bold">
+                      <li>Sacos;</li>
+                      <li>Caixas;</li>
+                      <li>Quilos;</li>
+                      <li>Grandes quantidades;</li>
+                      <li>Muitas unidades.</li>
+                    </ul>
+                  </div>
+                  <p className="text-sm text-slate-500 font-medium leading-relaxed mt-3">
+                    O objetivo é atender lojas e vendedores que comercializam produtos para vários clientes.
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            <section className="space-y-2">
+              <h3 className="text-xl font-black text-slate-900 border-b border-slate-100 pb-2 font-display uppercase tracking-wider text-[11px] text-slate-400">O FEIRANTE NO APLICATIVO FEIRA LIVRE</h3>
+              <p className="text-sm font-semibold text-slate-600">
+                O feirante ou atacadista possui um space próprio dentro do aplicativo para divulgar e administrar sua loja.
+              </p>
+              <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100 mt-4">
+                <p className="text-xs font-black text-slate-800 uppercase tracking-widest mb-3">O vendedor poderá:</p>
+                <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2 list-disc pl-6 text-xs text-slate-600 font-black">
+                  <li>Adicionar fotos da barraca ou loja;</li>
+                  <li>Inserir foto de perfil;</li>
+                  <li>Informar nome, cidade, estado e país;</li>
+                  <li>Disponibilizar número de celular;</li>
+                  <li>Configurar horário de funcionamento;</li>
+                  <li>Visualizar faturamento;</li>
+                  <li>Acompanhar pedidos ativos;</li>
+                  <li>Atualizar preços e promoções;</li>
+                  <li>Conversar com a administração pelo suporte.</li>
+                </ul>
+              </div>
+              <p className="text-xs text-slate-400 font-bold italic mt-2 uppercase tracking-wider">
+                O aplicativo é brasileiro e mantém suporte para funcionamento em todo o Brasil.
+              </p>
+            </section>
+
+            <section className="space-y-4">
+              <h3 className="text-xl font-black text-slate-900 border-b border-slate-100 pb-2 font-display uppercase tracking-wider text-[11px] text-slate-400">CLIENTES</h3>
+              <p className="text-sm font-semibold text-slate-600">
+                Clientes são consumidores cadastrados no aplicativo Feira Livre. Caso precise visitar uma Feira Livre presencialmente, o endereço estará disponível dentro do aplicativo.
+              </p>
+              <p className="text-sm font-semibold text-slate-600">
+                Você sempre poderá encontrar feiras, mercados e vendedores disponíveis para compra.
+              </p>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                <div className="p-5 bg-brand-50/50 rounded-2xl border border-brand-100/30">
+                  <h4 className="font-bold text-slate-900 text-xs uppercase mb-2">Está em casa?</h4>
+                  <p className="text-xs text-slate-500 font-medium leading-relaxed">
+                    No aplicativo Feira Livre, você pode escolher retirar o pedido ou solicitar uma entrega.
+                  </p>
+                </div>
+                <div className="p-5 bg-brand-50/50 rounded-2xl border border-brand-100/30">
+                  <h4 className="font-bold text-slate-900 text-xs uppercase mb-2">Vai pedir entrega?</h4>
+                  <p className="text-xs text-slate-500 font-medium leading-relaxed">
+                    O entregador irá até a Feira Livre parceira para buscar seus produtos. Sua entrega chegará de forma rápida e prática.
+                  </p>
+                </div>
+                <div className="p-5 bg-brand-50/50 rounded-2xl border border-brand-100/30">
+                  <h4 className="font-bold text-slate-900 text-xs uppercase mb-2">Vai sair?</h4>
+                  <p className="text-xs text-slate-500 font-medium leading-relaxed">
+                    Guarde o endereço da Feira Livre mais próxima e retire seu pedido diretamente no local.
+                  </p>
+                </div>
+              </div>
+
+              <p className="text-sm font-bold text-slate-700 mt-4 leading-relaxed">
+                Compre produtos frescos com preços justos e diferentes formas de pagamento. Abra o aplicativo Feira Livre, adicione produtos ao pedido e finalize sua compra com facilidade.
+              </p>
+            </section>
+
+            <section className="space-y-4">
+              <h3 className="text-xl font-black text-slate-900 border-b border-slate-100 pb-2 font-display uppercase tracking-wider text-[11px] text-slate-400">ADMINISTRAÇÃO</h3>
+              <p className="text-sm font-semibold text-slate-600">
+                A administração do aplicativo Feira Livre permite que feiras livres, barracas, mercados e atacados tenham gerenciamento ativo dentro da plataforma.
+              </p>
+              <div className="p-5 bg-slate-50 border border-slate-100 rounded-xl mt-3">
+                <p className="text-xs font-black text-slate-700 uppercase tracking-widest mb-2">Os administradores podem acompanhar:</p>
+                <ul className="grid grid-cols-2 gap-2 list-disc pl-6 text-xs text-slate-600 font-bold">
+                  <li>Pedidos;</li>
+                  <li>Vendas;</li>
+                  <li>Funcionamento das lojas;</li>
+                  <li>Promoções;</li>
+                  <li>Atendimento;</li>
+                  <li>Suporte aos usuários.</li>
+                </ul>
+              </div>
+            </section>
+
+            <section className="space-y-4">
+              <h3 className="text-xl font-black text-slate-900 border-b border-slate-100 pb-2 font-display uppercase tracking-wider text-[11px] text-slate-400">ÍNDICE DE VENDAS</h3>
+              <p className="text-sm font-semibold text-slate-600 pb-2">
+                O índice de vendas acompanha o desempenho dos produtos e das lojas cadastradas. Produtos frescos e de qualidade costumam gerar melhores resultados de vendas.
+              </p>
+              <p className="text-sm font-black text-brand-600 mt-4 bg-brand-50 p-6 rounded-3xl border border-brand-100 tracking-wide">
+                A tradicional Feira Livre representa a força do trabalhador, do comércio local e dos produtos do campo, oferecendo uma experiência otimista e acessível para vendedores e consumidores.
+              </p>
+            </section>
+
+            <div className="pt-12 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Feira Livre • Informações de Plataforma</p>
+              <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">
+                Suporte de ponta a ponta
+              </p>
             </div>
           </div>
         </div>
@@ -10685,8 +10861,9 @@ function MainApp() {
     if (typeof window !== 'undefined') {
       const searchParams = new URLSearchParams(window.location.search);
       const screen = searchParams.get('screen');
-      if (screen === 'privacy') return 'privacy';
-      if (screen === 'terms') return 'terms';
+      if (screen === 'privacy' || screen === 'privacidade') return 'privacy';
+      if (screen === 'terms' || screen === 'termosdeusos') return 'terms';
+      if (screen === 'about' || screen === 'sobre') return 'about';
     }
     return 'landing';
   });
@@ -10808,8 +10985,8 @@ function MainApp() {
     const screenParam = searchParams.get('screen');
     
     // Check if it's a public path or parameter
-    const isPublicPath = path === '/' || path === '/privacy' || path === '/privacidade' || path === '/tos' || path === '/terms' || path === '/termos-of-service' || path === '/termosdeusos';
-    const isPublicParam = screenParam === 'privacy' || screenParam === 'terms' || screenParam === 'landing' || screenParam === 'privacidade' || screenParam === 'termosdeusos';
+    const isPublicPath = path === '/' || path === '/privacy' || path === '/privacidade' || path === '/tos' || path === '/terms' || path === '/termos-of-service' || path === '/termosdeusos' || path === '/sobre' || path === '/about';
+    const isPublicParam = screenParam === 'privacy' || screenParam === 'terms' || screenParam === 'landing' || screenParam === 'privacidade' || screenParam === 'termosdeusos' || screenParam === 'about' || screenParam === 'sobre';
     const isPublicMode = isPublicPath || isPublicParam;
 
     if (!hasSeen && !isPublicMode) {
@@ -10823,13 +11000,16 @@ function MainApp() {
     } else if (path === '/tos' || path === '/terms' || path === '/terms-of-service' || path === '/termosdeusos' || screenParam === 'terms' || screenParam === 'termosdeusos') {
       _setCurrentScreen('terms');
       setShowPermissionModal(false);
+    } else if (path === '/sobre' || path === '/about' || screenParam === 'about' || screenParam === 'sobre') {
+      _setCurrentScreen('about');
+      setShowPermissionModal(false);
     }
   }, []);
 
   const handleNavigate = async (screen: Screen) => {
     // Verify permission modal acknowledgment
     const permissionsSeen = localStorage.getItem('feira_livre_permissions_seen');
-    const isPublicScreen = screen === 'landing' || screen === 'privacy' || screen === 'terms';
+    const isPublicScreen = screen === 'landing' || screen === 'privacy' || screen === 'terms' || screen === 'about' || screen === 'careers' || screen === 'contact';
 
     if (!permissionsSeen && !isPublicScreen) {
       setShowPermissionModal(true);
@@ -11830,6 +12010,7 @@ const renderScreen = () => {
     // Check if it's a public utility screen first
     if (currentScreen === 'privacy') return <PrivacyScreen config={appConfig} />;
     if (currentScreen === 'terms') return <TermsScreen config={appConfig} />;
+    if (currentScreen === 'about') return <AboutScreen config={appConfig} />;
 
     // Check if screen is visible in config
     if (appConfig?.pages && currentScreen in appConfig.pages) {
@@ -11924,7 +12105,16 @@ const renderScreen = () => {
         return <VendorAccounting user={user} showNotification={showNotification} config={appConfig} onNavigate={setCurrentScreen} />;
       case 'vendor-accounting':
         return <VendorAccounting user={user} showNotification={showNotification} config={appConfig} onNavigate={setCurrentScreen} />;
-      case 'calculator': return <CalculatorScreen config={appConfig} user={user} />;
+      case 'calculator':
+      case 'feira-livre-calculadora':
+        return (
+          <FeiraLivreCalculadoraScreen 
+            config={appConfig} 
+            user={user} 
+            onNavigate={setCurrentScreen} 
+            handleShare={handleShare} 
+          />
+        );
       case 'contact': return <ContactScreen user={user} showNotification={showNotification} config={appConfig} />;
       case 'admin-dashboard': return <AdminDashboard user={user} showNotification={showNotification} showConfirm={showConfirm} onNavigate={handleNavigate} setSelectedShop={setSelectedShop} setSelectedChat={setSelectedChat} />;
       case 'shop-detail': 
@@ -12200,8 +12390,71 @@ const renderScreen = () => {
 
       {/* Floating Checkout Bar Removed - Integrated into CartSummaryBar */}
 
+      {/* Top Pages List Navigation (Superior List of Pages) */}
+      {(currentScreen === 'landing' || currentScreen === 'feira-livre-calculadora' || currentScreen === 'about' || currentScreen === 'privacy' || currentScreen === 'terms' || currentScreen === 'careers' || currentScreen === 'contact') && (
+        <div className="w-full bg-white border-b border-slate-100 py-4 px-6 fixed top-0 left-0 right-0 z-50 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-3 cursor-pointer" onClick={() => handleNavigate('landing')}>
+            <Logo size="sm" className="w-8 h-8" />
+            <div className="flex flex-col">
+              <span className="text-xs font-black text-slate-900 font-display tracking-tight leading-none">Feira Livre 🇧🇷</span>
+              <span className="text-[7px] font-bold text-slate-500 uppercase tracking-widest mt-1">Conectando o Campo à Mesa</span>
+            </div>
+          </div>
+          <nav className="flex items-center justify-center gap-x-4 md:gap-x-8 gap-y-2 flex-wrap text-slate-500 font-bold uppercase tracking-widest text-[9px]">
+            <button 
+              onClick={() => handleNavigate('landing')} 
+              className={cn("hover:text-brand-600 transition-colors cursor-pointer", currentScreen === 'landing' ? "text-brand-600 font-black" : "")}
+            >
+              Início
+            </button>
+            <button 
+              onClick={() => handleNavigate('feira-livre-calculadora')} 
+              className={cn("hover:text-brand-600 transition-colors cursor-pointer", currentScreen === 'feira-livre-calculadora' ? "text-brand-600 font-black" : "")}
+            >
+              Calculadora
+            </button>
+            <button 
+              onClick={() => handleNavigate('about')} 
+              className={cn("hover:text-brand-600 transition-colors cursor-pointer", currentScreen === 'about' ? "text-brand-600 font-black" : "")}
+            >
+              Sobre
+            </button>
+            <button 
+              onClick={() => handleNavigate('privacy')} 
+              className={cn("hover:text-brand-600 transition-colors cursor-pointer", currentScreen === 'privacy' ? "text-brand-600 font-black" : "")}
+            >
+              Privacidade
+            </button>
+            <button 
+              onClick={() => handleNavigate('terms')} 
+              className={cn("hover:text-brand-600 transition-colors cursor-pointer", currentScreen === 'terms' ? "text-brand-600 font-black" : "")}
+            >
+              Termos de Usos
+            </button>
+            <button 
+              onClick={() => handleNavigate('careers')} 
+              className={cn("hover:text-brand-600 transition-colors cursor-pointer", currentScreen === 'careers' ? "text-brand-600 font-black" : "")}
+            >
+              Trabalhe Conosco
+            </button>
+            <button 
+              onClick={() => handleNavigate('contact')} 
+              className={cn("hover:text-brand-600 transition-colors cursor-pointer", currentScreen === 'contact' ? "text-brand-600 font-black" : "")}
+            >
+              Suporte
+            </button>
+          </nav>
+        </div>
+      )}
+
       {/* Top Floating Header */}
-      {currentScreen !== 'landing' && (
+      {currentScreen !== 'landing' && 
+       currentScreen !== 'feira-livre-calculadora' && 
+       currentScreen !== 'about' && 
+       currentScreen !== 'privacy' && 
+       currentScreen !== 'terms' && 
+       currentScreen !== 'careers' && 
+       currentScreen !== 'contact' && (
         <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-[430px] px-4 flex flex-col gap-3 pointer-events-none">
           {/* Main Bar */}
           <div className="bg-white/90 backdrop-blur-2xl border border-slate-200/50 rounded-[32px] shadow-[0_20px_50px_rgba(0,0,0,0.1)] px-6 h-16 flex items-center justify-between gap-4 pointer-events-auto">
@@ -12227,7 +12480,7 @@ const renderScreen = () => {
 
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-1 bg-slate-100 p-1.5 rounded-2xl border border-slate-200">
-                <button onClick={() => handleNavigate('calculator')} className="w-11 h-11 flex items-center justify-center text-slate-500 hover:text-brand-600 hover:bg-white rounded-xl transition-all active:scale-90">
+                <button onClick={() => handleNavigate('feira-livre-calculadora')} className="w-11 h-11 flex items-center justify-center text-slate-500 hover:text-brand-600 hover:bg-white rounded-xl transition-all active:scale-90">
                   <Calculator size={22} />
                 </button>
                 <button onClick={() => handleNavigate('saved')} className="w-11 h-11 flex items-center justify-center text-slate-500 hover:text-brand-600 hover:bg-white rounded-xl transition-all relative active:scale-90">
@@ -12314,7 +12567,7 @@ const renderScreen = () => {
       {/* Main Content Area */}
       <main className={cn(
         "relative z-10 bg-white min-h-screen pb-40",
-        currentScreen === 'landing' ? "" : "pt-44"
+        (currentScreen === 'landing' || currentScreen === 'feira-livre-calculadora' || currentScreen === 'about' || currentScreen === 'privacy' || currentScreen === 'terms' || currentScreen === 'careers' || currentScreen === 'contact') ? "pt-28 md:pt-24" : "pt-44"
       )}>
         <AnimatePresence>
           <motion.div
@@ -12328,52 +12581,51 @@ const renderScreen = () => {
       </main>
 
       {/* Bottom Navigation Bar */}
-      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-[430px] px-4 flex flex-col items-center">
-        {/* Category Floating Bar */}
-        {(currentScreen === 'search' || currentScreen === 'wholesale') && (
-          <div className="w-full mb-4">
-            <CategoryFilter 
-              categories={PRODUCT_CATEGORIES} 
-              selectedCategory={globalSelectedCategory} 
-              onSelect={setGlobalSelectedCategory} 
-            />
-          </div>
-        )}
-        {currentScreen !== 'orders' && <CartSummaryBar cart={cart} onNavigate={handleNavigate} user={user} />}
-        <BottomMenu 
-          activeScreen={currentScreen} 
-          onNavigate={handleNavigate}
-          screens={[
-            { id: 'search', label: 'BUSCAR', icon: Search },
-            { id: 'wholesale', label: 'ATACADO', icon: Truck },
-            { id: 'orders', label: 'PEDIDOS', icon: Package, badge: newBuyerOrdersCount > 0 },
-            { id: 'chats', label: 'BATE PAPO', icon: MessageSquare, badge: unreadChatsCount > 0 },
-            { id: 'saved', label: 'SALVOS', icon: Heart },
-            ...(user && user.role !== 'client' && currentScreen !== 'admin-dashboard' 
-              ? [{ id: 'sales', label: 'VENDAS', icon: BarChart, badge: newOrdersCount > 0 }] 
-              : [])
-          ]}
-        />
-      </div>
-
-      {/* Global Footer (only on landing) */}
-      {currentScreen !== 'landing' && (
-        <footer className="py-20 flex flex-col items-center gap-8 bg-white border-t border-slate-100 mb-24">
-          <div className="opacity-10 grayscale hover:grayscale-0 transition-all duration-500 hover:opacity-40">
-            <Logo size="md" />
-          </div>
-          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 px-6 max-w-full w-full overflow-x-auto pb-4">
-            <a href="/contact" onClick={(e) => { e.preventDefault(); setCurrentScreen('contact'); }} className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-brand-600 transition-colors whitespace-nowrap">Suporte</a>
-            <a href="/privacidade" onClick={(e) => { e.preventDefault(); setCurrentScreen('privacy'); }} className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-brand-600 transition-colors whitespace-nowrap">Privacidade</a>
-            <a href="/termosdeusos" onClick={(e) => { e.preventDefault(); setCurrentScreen('terms'); }} className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-brand-600 transition-colors whitespace-nowrap">Termos de Usos</a>
-            <a href="/careers" onClick={(e) => { e.preventDefault(); setCurrentScreen('careers'); }} className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-brand-600 transition-colors whitespace-nowrap">Trabalhe Conosco</a>
-          </div>
-          
-          <p className="text-slate-400 text-[10px] font-bold uppercase tracking-[0.3em] text-center px-6">
-            © 2026 FEIRA LIVRE • CONECTANDO O CAMPO À MESA
-          </p>
-        </footer>
+      {user && currentScreen !== 'landing' && (
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-[430px] px-4 flex flex-col items-center">
+          {/* Category Floating Bar */}
+          {(currentScreen === 'search' || currentScreen === 'wholesale') && (
+            <div className="w-full mb-4">
+              <CategoryFilter 
+                categories={PRODUCT_CATEGORIES} 
+                selectedCategory={globalSelectedCategory} 
+                onSelect={setGlobalSelectedCategory} 
+              />
+            </div>
+          )}
+          {currentScreen !== 'orders' && <CartSummaryBar cart={cart} onNavigate={handleNavigate} user={user} />}
+          <BottomMenu 
+            activeScreen={currentScreen} 
+            onNavigate={handleNavigate}
+            screens={[
+              { id: 'search', label: 'BUSCAR', icon: Search },
+              { id: 'wholesale', label: 'ATACADO', icon: Truck },
+              { id: 'feira-livre-calculadora', label: 'CALCULADORA', icon: Calculator },
+              { id: 'orders', label: 'PEDIDOS', icon: Package, badge: newBuyerOrdersCount > 0 },
+              { id: 'chats', label: 'BATE PAPO', icon: MessageSquare, badge: unreadChatsCount > 0 },
+              { id: 'saved', label: 'SALVOS', icon: Heart },
+              { id: 'sales', label: 'VENDAS', icon: BarChart, badge: newOrdersCount > 0 }
+            ]}
+          />
+        </div>
       )}
+
+      {/* Global Footer (Visible on all screens in the exact same place for identical alignment) */}
+      <footer className="py-20 flex flex-col items-center gap-8 bg-white border-t border-slate-100 mb-24 w-full">
+        <div className="opacity-10 grayscale hover:grayscale-0 transition-all duration-500 hover:opacity-40">
+          <Logo size="md" />
+        </div>
+        <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 px-6 max-w-full w-full pb-4">
+          <a href="/privacidade" onClick={(e) => { e.preventDefault(); handleNavigate('privacy'); }} className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-brand-600 transition-colors whitespace-nowrap">Privacidade</a>
+          <a href="/termosdeusos" onClick={(e) => { e.preventDefault(); handleNavigate('terms'); }} className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-brand-600 transition-colors whitespace-nowrap">Termos de Usos</a>
+          <a href="/careers" onClick={(e) => { e.preventDefault(); handleNavigate('careers'); }} className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-brand-600 transition-colors whitespace-nowrap">Trabalhe conosco</a>
+          <a href="/contact" onClick={(e) => { e.preventDefault(); handleNavigate('contact'); }} className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-brand-600 transition-colors whitespace-nowrap">Suporte</a>
+        </div>
+        
+        <p className="text-slate-400 text-[10px] font-bold uppercase tracking-[0.3em] text-center px-6">
+          © 2026 FEIRA LIVRE • CONECTANDO O CAMPO À MESA
+        </p>
+      </footer>
     </div>
   );
 }

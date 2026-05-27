@@ -51,6 +51,7 @@ export type Screen =
   | 'inventory'
   | 'seller'
   | 'shop-detail'
+  | 'feira-livre-calculadora'
   | 'pending-approval';
 
 export type UserRole = 'client' | 'vendor' | 'admin' | 'state_admin' | 'municipal_admin';

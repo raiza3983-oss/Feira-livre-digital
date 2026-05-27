@@ -82,130 +82,13 @@ export const LandingScreen = ({
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.2 }}
-      className="text-center mb-12 space-y-8"
+      className="text-center mb-12"
     >
       <div>
         <h2 className="text-3xl font-black text-slate-900 mb-3 font-display tracking-tight">Feira Livre 🇧🇷</h2>
         <p className="text-slate-500 text-sm max-w-xs mx-auto text-balance leading-relaxed">
           A plataforma que conecta você aos melhores produtos frescos da sua região.
         </p>
-      </div>
-
-      <div className="max-w-md mx-auto bg-white/40 backdrop-blur-sm rounded-[32px] p-8 border border-white/50 text-left space-y-6 shadow-sm">
-        <div className="space-y-1">
-          <h3 className="text-[10px] font-black text-slate-900 uppercase tracking-[0.2em]">FEIRA LIVRE</h3>
-          <p className="text-xs text-slate-600 font-medium leading-relaxed">
-            O aplicativo Feira Livre é um mais novo e seguro lugar de procurar feiras livres, barracas livres, mercados livres ou atacados livres próximas ou mais distantes. Você escolhe. Tem por todo o país.
-          </p>
-        </div>
-
-        <div className="space-y-1">
-          <h3 className="text-[10px] font-black text-slate-900 uppercase tracking-[0.2em]">CATÁLOGO DE PRODUTOS</h3>
-          <p className="text-xs text-slate-600 font-medium leading-relaxed">
-            Os produtos são vendidos e você escolhe a forma de pagamento, com o vendedor ativo no bate papo poderá mandar comprovante por foto ou marcar de ir buscar produtos. Selecione quantos produtos você deseja, pague e receba. Escolha com paciência, se for pedir um entregador. Isso é um convite em outra plataforma, peço que mantenha contato e ajude ao vendedor entender sua escolha. Registre e mande por foto, os detalhes sobre a sua retirada ou entrega. Boas compras!
-          </p>
-        </div>
-
-        <div className="p-3 bg-emerald-50 rounded-2xl border border-emerald-100">
-          <p className="text-[9px] font-black text-emerald-800 uppercase tracking-widest text-center">
-            Você pode se cadastrar no Aplicativo Feira Livre. Feirantes ou Clientes.
-          </p>
-        </div>
-
-        <div className="space-y-1">
-          <h3 className="text-[10px] font-black text-slate-900 uppercase tracking-[0.2em]">FEIRA LIVRE, O APLICATIVO.</h3>
-          <p className="text-xs text-slate-600 font-medium leading-relaxed">
-            O aplicativo é fácil de acesso, a permissão é rápida. Você poderá ter acesso após o acesso aprovado pela administração.
-          </p>
-        </div>
-      </div>
-
-      <div className="max-w-5xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8 text-left py-8">
-        <div className="space-y-8">
-          <section className="bg-white/40 backdrop-blur-sm rounded-[32px] p-8 border border-white/50 shadow-sm">
-            <h3 className="text-sm font-black text-slate-900 uppercase tracking-[0.2em] mb-4 border-b border-slate-100 pb-2">FEIRANTES / ATACADISTAS</h3>
-            <div className="space-y-4">
-              <div>
-                <h4 className="text-[10px] font-black text-brand-600 uppercase tracking-widest mb-1">Feirantes Livres</h4>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  As barracas livres, os mercados livres, feiras livres são os lugares mais recomendados e onde se encontram mais Feirantes, os vendedores em Feira Livre. Acontecem de pequenos feirantes estarem em outros lugares levando produtos para clientes. A comercialização é a oportunidade de um novo negócio. Na feira Livre, os produtos chegam e são vendidos para Feirantes Livre pra depois nas barracas ou lojas serem vendidos por quilos ou unidades.
-                </p>
-              </div>
-              <div>
-                <h4 className="text-[10px] font-black text-brand-600 uppercase tracking-widest mb-1">Atacado Livre</h4>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  Atacado Livre é uma loja de produtos para a comercialização, vendidos em grandes quantidades. O Atacado Livre, é onde os feirantes e donos de barracas compram suas mercadorias, para começar a venda de Frutas, Verduras e Legumes e outras Raízes. Os produtos são vendidos em SACOS, CAIXAS, SACOLONAS OU MUITAS UNIDADES. São grandes quantidades, pra loja que alcance vários clientes que compram por quilo ou pequenas quantidades.
-                </p>
-              </div>
-              <div>
-                <h4 className="text-[10px] font-black text-brand-600 uppercase tracking-widest mb-1">O feirante, a Feira Livre aplicativo</h4>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  Feirante Livre ou Atacado tem um espaço pra Buscar e Atacado onde se encontra todas as lojas com o Catálogo de produtos a serem comercializados. Você vai poder Feirante Livre ou Atacado, adicionar fotos ao vivo, da barraca ou loja, sua foto, nome, cidade, estado, país ("Brasil" que tá sempre Possível no aplicativo por ser um aplicativo Brasileiro) e até mesmo o número de celular para completar o pedido ou adicionar novos clientes a sua lista de contatos. Conserte o Horário de Funcionamento, veja faturamento, pedidos ativos. Endereço da loja, preços de produtos, promoções, promover sua loja conversando com a Administration.
-                </p>
-              </div>
-            </div>
-          </section>
-        </div>
-
-        <div className="space-y-8">
-          <section className="bg-white/40 backdrop-blur-sm rounded-[32px] p-8 border border-white/50 shadow-sm">
-            <h3 className="text-sm font-black text-slate-900 uppercase tracking-[0.2em] mb-4 border-b border-slate-100 pb-2">CLIENTES</h3>
-            <div className="space-y-4">
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Cliente, consumidores, cadastrados no aplicativo Feira Livre. Se você precisar ir a Feira Livre o endereço do local estará disponível. Você terá sempre uma Feira Livre disponível. Compre produtos no aplicativo Feira Livre.
-              </p>
-              <div className="p-4 bg-brand-50/50 rounded-2xl space-y-3 border border-brand-100">
-                <div className="flex items-start gap-3">
-                  <div className="w-1.5 h-1.5 rounded-full bg-brand-500 mt-1.5" />
-                  <div>
-                    <h5 className="text-[10px] font-bold text-slate-900 uppercase">Tá em casa?</h5>
-                    <p className="text-[11px] text-slate-500">Aplicativo Feira Livre, você pede e seleciona se vai sair para retirar ou chamar um entregador.</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-1.5 h-1.5 rounded-full bg-brand-500 mt-1.5" />
-                  <div>
-                    <h5 className="text-[10px] font-bold text-slate-900 uppercase">Vai entregar?</h5>
-                    <p className="text-[11px] text-slate-500">Quem for entregar para você, vai ir numa Feira Livre e pegar suas compras. Rápido, sua entrega chegará!</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-1.5 h-1.5 rounded-full bg-brand-500 mt-1.5" />
-                  <div>
-                    <h5 className="text-[10px] font-bold text-slate-900 uppercase">Vai sair?</h5>
-                    <p className="text-[11px] text-slate-500">Guarde o endereço da Feira Livre próxima a você e retire seu pedido. O cliente sempre tem razão.</p>
-                  </div>
-                </div>
-              </div>
-              <p className="text-xs text-slate-600 leading-relaxed italic">
-                Compre produtos da Feira Livre esses são livres, com preços justos, aceitando vários métodos de pagamentos. Abra o Aplicativo Feira Livre. Adicione produtos no Pedido, depois Pedido Concluído!
-              </p>
-            </div>
-          </section>
-
-          <section className="bg-white/40 backdrop-blur-sm rounded-[32px] p-8 border border-white/50 shadow-sm">
-            <h3 className="text-sm font-black text-slate-900 uppercase tracking-[0.2em] mb-4 border-b border-slate-100 pb-2">ADMINISTRAÇÃO</h3>
-            <div className="space-y-4">
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Administração no aplicativo Feira Livre: O aplicativo permite que as Feiras Livres, Barracas Livres, Mercados Livres, Atacados Livres possam ter uma administração activa do estado.
-              </p>
-              <div>
-                <h4 className="text-[10px] font-black text-brand-600 uppercase tracking-widest mb-1">ADMINISTRAÇÃO NO APLICATIVO FEIRA LIVRE</h4>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  O Aplicativo permite que as lojas de Atacados Livres possam ter uma administração ativa do estado.
-                </p>
-              </div>
-            </div>
-          </section>
-
-          <section className="bg-white/40 backdrop-blur-sm rounded-[32px] p-8 border border-white/50 shadow-sm relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-50 rounded-bl-full -mr-8 -mt-8 opacity-50" />
-            <h3 className="text-sm font-black text-slate-900 uppercase tracking-[0.2em] mb-4 border-b border-slate-100 pb-2">Índice de vendas</h3>
-            <p className="text-xs text-slate-600 leading-relaxed">
-              O índice de vendas quando soube, é pelo simples motivo: boas compras; bons frutos. As compras acompanham os produtos melhores, as Feiras Livres tem um índice alto por serem produtos frescos. A tradicional Feira Livre é uma imagem de lugar otimista ao consumo do campo do trabalhador.
-            </p>
-          </section>
-        </div>
       </div>
     </motion.div>
 
@@ -503,15 +386,13 @@ export const LandingScreen = ({
       </div>
     </motion.div>
 
-    <footer className="mt-20 flex flex-col items-center gap-8">
-      <div className="flex items-center gap-8 text-slate-400 opacity-60">
-        <a href="/privacidade" onClick={(e) => { e.preventDefault(); onNavigate('privacy'); }} className="text-[10px] font-bold uppercase tracking-widest hover:text-brand-600 transition-colors">Privacidade</a>
-        <a href="/termosdeusos" onClick={(e) => { e.preventDefault(); onNavigate('terms'); }} className="text-[10px] font-bold uppercase tracking-widest hover:text-brand-600 transition-colors">Termos de Usos</a>
-        <a href="/careers" onClick={(e) => { e.preventDefault(); onNavigate('careers'); }} className="text-[10px] font-bold uppercase tracking-widest hover:text-brand-600 transition-colors">Trabalhe conosco</a>
+    <footer className="mt-20 flex flex-col items-center gap-6">
+      <div className="flex flex-wrap items-center justify-center gap-6 text-slate-400 opacity-60">
         <button onClick={() => {
           const el = document.getElementById('calc-section');
           el?.scrollIntoView({ behavior: 'smooth' });
         }} className="text-[10px] font-bold uppercase tracking-widest hover:text-brand-600 transition-colors cursor-pointer">Feira Livre Calculadora</button>
+        <span className="text-slate-300">•</span>
         <button onClick={() => {
           handleShare({
             title: 'Aplicativo Feira Livre',
@@ -521,9 +402,8 @@ export const LandingScreen = ({
         }} className="text-[10px] font-black text-brand-600 uppercase tracking-widest flex items-center gap-1.5 hover:scale-110 transition-all cursor-pointer">
           <Share2 size={12} /> Compartilhar App
         </button>
-        <a href="/contact" onClick={(e) => { e.preventDefault(); onNavigate('contact'); }} className="text-[10px] font-bold uppercase tracking-widest hover:text-brand-600 transition-colors">Suporte</a>
       </div>
-      <p className="text-slate-400 text-[10px] font-medium tracking-wide">
+      <p className="text-slate-400 text-[10px] font-medium tracking-wide uppercase tracking-[0.2em]">
         © 2026 FEIRA LIVRE • TODOS OS DIREITOS RESERVADOS
       </p>
     </footer>
