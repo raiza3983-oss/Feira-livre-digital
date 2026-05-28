@@ -10882,6 +10882,8 @@ function MainApp() {
       if (path === '/vendas' || path === '/painel-de-vendas' || screen === 'vendas' || screen === 'painel-de-vendas' || screen === 'sales') return 'sales';
       if (path === '/caixa' || path === '/contabilidade' || screen === 'caixa' || screen === 'contabilidade' || screen === 'vendor-accounting') return 'vendor-accounting';
       if (path === '/painel-admin' || path === '/admin' || screen === 'painel-admin' || screen === 'admin' || screen === 'admin-dashboard') return 'admin-dashboard';
+
+      if (path === '/' || path === '/inicio' || path === '/paginainicial' || screen === 'landing' || screen === 'inicio' || screen === 'paginainicial') return 'landing';
     }
     return 'landing';
   });
@@ -11003,8 +11005,8 @@ function MainApp() {
     const screenParam = searchParams.get('screen');
     
     // Check if it's a public path or parameter
-    const isPublicPath = path === '/' || path === '/privacy' || path === '/privacidade' || path === '/tos' || path === '/terms' || path === '/termos-of-service' || path === '/termosdeusos' || path === '/sobre' || path === '/about' || path === '/careers' || path === '/trabalhe-conosco' || path === '/contact' || path === '/contato' || path === '/suporte' || path === '/calculadora' || path === '/feira-livre-calculadora' || path === '/varejo' || path === '/comprar' || path === '/busca' || path === '/atacado' || path === '/perfil' || path === '/cadastro' || path === '/pedidos' || path === '/meus-pedidos' || path === '/conversas' || path === '/mensagens' || path === '/salvos' || path === '/favoritos' || path === '/minha-loja' || path === '/gerenciar-loja' || path === '/criar-loja' || path === '/vendas' || path === '/caixa' || path === '/contabilidade' || path === '/painel-admin' || path === '/admin';
-    const isPublicParam = screenParam === 'privacy' || screenParam === 'terms' || screenParam === 'landing' || screenParam === 'privacidade' || screenParam === 'termosdeusos' || screenParam === 'about' || screenParam === 'sobre' || screenParam === 'careers' || screenParam === 'trabalhe-conosco' || screenParam === 'contact' || screenParam === 'contato' || screenParam === 'suporte' || screenParam === 'feira-livre-calculadora' || screenParam === 'varejo' || screenParam === 'comprar' || screenParam === 'busca' || screenParam === 'search' || screenParam === 'atacado' || screenParam === 'wholesale' || screenParam === 'perfil' || screenParam === 'cadastro' || screenParam === 'profile' || screenParam === 'pedidos' || screenParam === 'meus-pedidos' || screenParam === 'orders' || screenParam === 'conversas' || screenParam === 'mensagens' || screenParam === 'chats' || screenParam === 'salvos' || screenParam === 'favoritos' || screenParam === 'saved' || screenParam === 'minha-loja' || screenParam === 'gerenciar-loja' || screenParam === 'shop-management' || screenParam === 'criar-loja' || screenParam === 'create-shop' || screenParam === 'vendas' || screenParam === 'sales' || screenParam === 'caixa' || screenParam === 'contabilidade' || screenParam === 'vendor-accounting' || screenParam === 'painel-admin' || screenParam === 'admin' || screenParam === 'admin-dashboard';
+    const isPublicPath = path === '/' || path === '/inicio' || path === '/paginainicial' || path === '/privacy' || path === '/privacidade' || path === '/tos' || path === '/terms' || path === '/termos-of-service' || path === '/termosdeusos' || path === '/sobre' || path === '/about' || path === '/careers' || path === '/trabalhe-conosco' || path === '/contact' || path === '/contato' || path === '/suporte' || path === '/calculadora' || path === '/feira-livre-calculadora' || path === '/varejo' || path === '/comprar' || path === '/busca' || path === '/atacado' || path === '/perfil' || path === '/cadastro' || path === '/pedidos' || path === '/meus-pedidos' || path === '/conversas' || path === '/mensagens' || path === '/salvos' || path === '/favoritos' || path === '/minha-loja' || path === '/gerenciar-loja' || path === '/criar-loja' || path === '/vendas' || path === '/caixa' || path === '/contabilidade' || path === '/painel-admin' || path === '/admin';
+    const isPublicParam = screenParam === 'privacy' || screenParam === 'terms' || screenParam === 'landing' || screenParam === 'inicio' || screenParam === 'paginainicial' || screenParam === 'privacidade' || screenParam === 'termosdeusos' || screenParam === 'about' || screenParam === 'sobre' || screenParam === 'careers' || screenParam === 'trabalhe-conosco' || screenParam === 'contact' || screenParam === 'contato' || screenParam === 'suporte' || screenParam === 'feira-livre-calculadora' || screenParam === 'varejo' || screenParam === 'comprar' || screenParam === 'busca' || screenParam === 'search' || screenParam === 'atacado' || screenParam === 'wholesale' || screenParam === 'perfil' || screenParam === 'cadastro' || screenParam === 'profile' || screenParam === 'pedidos' || screenParam === 'meus-pedidos' || screenParam === 'orders' || screenParam === 'conversas' || screenParam === 'mensagens' || screenParam === 'chats' || screenParam === 'salvos' || screenParam === 'favoritos' || screenParam === 'saved' || screenParam === 'minha-loja' || screenParam === 'gerenciar-loja' || screenParam === 'shop-management' || screenParam === 'criar-loja' || screenParam === 'create-shop' || screenParam === 'vendas' || screenParam === 'sales' || screenParam === 'caixa' || screenParam === 'contabilidade' || screenParam === 'vendor-accounting' || screenParam === 'painel-admin' || screenParam === 'admin' || screenParam === 'admin-dashboard';
     const isPublicMode = isPublicPath || isPublicParam;
 
     if (!hasSeen && !isPublicMode) {
@@ -11063,6 +11065,9 @@ function MainApp() {
     } else if (path === '/painel-admin' || path === '/admin' || screenParam === 'painel-admin' || screenParam === 'admin' || screenParam === 'admin-dashboard') {
       _setCurrentScreen('admin-dashboard');
       setShowPermissionModal(false);
+    } else if (path === '/' || path === '/inicio' || path === '/paginainicial' || screenParam === 'landing' || screenParam === 'inicio' || screenParam === 'paginainicial') {
+      _setCurrentScreen('landing');
+      setShowPermissionModal(false);
     }
 
     // Add popstate listener for browser back/forward buttons
@@ -11088,6 +11093,7 @@ function MainApp() {
         else if (currPath === '/vendas' || currPath === '/painel-de-vendas') _setCurrentScreen('sales');
         else if (currPath === '/caixa' || currPath === '/contabilidade') _setCurrentScreen('vendor-accounting');
         else if (currPath === '/painel-admin' || currPath === '/admin') _setCurrentScreen('admin-dashboard');
+        else if (currPath === '/' || currPath === '/inicio' || currPath === '/paginainicial') _setCurrentScreen('landing');
         else _setCurrentScreen('landing');
       }
     };
@@ -11101,8 +11107,15 @@ function MainApp() {
   // Synchronize active screen back to browser address bar URL pathname
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      let expectedPath = '/';
-      if (currentScreen === 'privacy') {
+      let expectedPath = '/inicio';
+      if (currentScreen === 'landing') {
+        const currentPathName = window.location.pathname;
+        if (currentPathName === '/paginainicial') {
+          expectedPath = '/paginainicial';
+        } else {
+          expectedPath = '/inicio';
+        }
+      } else if (currentScreen === 'privacy') {
         expectedPath = '/privacidade';
       } else if (currentScreen === 'terms') {
         expectedPath = '/termosdeusos';
