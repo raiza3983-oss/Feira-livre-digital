@@ -11203,6 +11203,13 @@ function MainApp() {
 
   const setCurrentScreen = (screen: Screen) => handleNavigate(screen);
 
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, screen: Screen) => {
+    if (e.button === 0 && !e.ctrlKey && !e.metaKey && !e.shiftKey && !e.altKey) {
+      e.preventDefault();
+      handleNavigate(screen);
+    }
+  };
+
   // Keep lastSeen timestamps updated if user is on the screen to clear notifications immediately
   useEffect(() => {
     if (!user) return;
@@ -11234,6 +11241,21 @@ function MainApp() {
   const showNotification = (message: string, type: 'success' | 'error' = 'success') => {
     setNotification({ message, type });
     setTimeout(() => setNotification(null), 3000);
+  };
+
+  const copyCurrentPageLink = () => {
+    try {
+      navigator.clipboard.writeText(window.location.href);
+      showNotification('Link da página copiado com sucesso! 📋', 'success');
+    } catch (err) {
+      const el = document.createElement('textarea');
+      el.value = window.location.href;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
+      showNotification('Link da página copiado com sucesso! 📋', 'success');
+    }
   };
 
   const showConfirm = (
@@ -12664,47 +12686,63 @@ const renderScreen = () => {
             </div>
           </div>
           <nav className="flex items-center justify-center gap-x-4 md:gap-x-8 gap-y-2 flex-wrap text-slate-500 font-bold uppercase tracking-widest text-[9px]">
-            <button 
-              onClick={() => handleNavigate('landing')} 
+            <a 
+              href="/inicio"
+              onClick={(e) => handleLinkClick(e, 'landing')} 
               className={cn("hover:text-brand-600 transition-colors cursor-pointer", currentScreen === 'landing' ? "text-brand-600 font-black" : "")}
             >
               Início
-            </button>
-            <button 
-              onClick={() => handleNavigate('feira-livre-calculadora')} 
+            </a>
+            <a 
+              href="/calculadora"
+              onClick={(e) => handleLinkClick(e, 'feira-livre-calculadora')} 
               className={cn("hover:text-brand-600 transition-colors cursor-pointer", currentScreen === 'feira-livre-calculadora' ? "text-brand-600 font-black" : "")}
             >
               Calculadora
-            </button>
-            <button 
-              onClick={() => handleNavigate('about')} 
+            </a>
+            <a 
+              href="/sobre"
+              onClick={(e) => handleLinkClick(e, 'about')} 
               className={cn("hover:text-brand-600 transition-colors cursor-pointer", currentScreen === 'about' ? "text-brand-600 font-black" : "")}
             >
               Sobre
-            </button>
-            <button 
-              onClick={() => handleNavigate('privacy')} 
+            </a>
+            <a 
+              href="/privacidade"
+              onClick={(e) => handleLinkClick(e, 'privacy')} 
               className={cn("hover:text-brand-600 transition-colors cursor-pointer", currentScreen === 'privacy' ? "text-brand-600 font-black" : "")}
             >
-              Privacidade
-            </button>
-            <button 
-              onClick={() => handleNavigate('terms')} 
+              Política de Privacidade
+            </a>
+            <a 
+              href="/termosdeusos"
+              onClick={(e) => handleLinkClick(e, 'terms')} 
               className={cn("hover:text-brand-600 transition-colors cursor-pointer", currentScreen === 'terms' ? "text-brand-600 font-black" : "")}
             >
-              Termos de Usos
-            </button>
-            <button 
-              onClick={() => handleNavigate('careers')} 
+              Termos de Uso
+            </a>
+            <a 
+              href="/trabalhe-conosco"
+              onClick={(e) => handleLinkClick(e, 'careers')} 
               className={cn("hover:text-brand-600 transition-colors cursor-pointer", currentScreen === 'careers' ? "text-brand-600 font-black" : "")}
             >
               Trabalhe Conosco
-            </button>
-            <button 
-              onClick={() => handleNavigate('contact')} 
+            </a>
+            <a 
+              href="/suporte"
+              onClick={(e) => handleLinkClick(e, 'contact')} 
               className={cn("hover:text-brand-600 transition-colors cursor-pointer", currentScreen === 'contact' ? "text-brand-600 font-black" : "")}
             >
               Suporte
+            </a>
+            <div className="h-4 w-px bg-slate-200 hidden sm:block" />
+            <button 
+              onClick={copyCurrentPageLink}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-brand-50 hover:bg-brand-100 text-brand-600 transition-all font-black text-[9px] uppercase tracking-wider cursor-pointer shadow-sm border border-brand-100/30"
+              title="Copiar link desta página"
+            >
+              <Copy size={12} />
+              Copiar Link
             </button>
           </nav>
         </div>
@@ -12743,13 +12781,16 @@ const renderScreen = () => {
 
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-1 bg-slate-100 p-1.5 rounded-2xl border border-slate-200">
-                <button onClick={() => handleNavigate('feira-livre-calculadora')} className="w-11 h-11 flex items-center justify-center text-slate-500 hover:text-brand-600 hover:bg-white rounded-xl transition-all active:scale-90">
+                <button onClick={() => handleNavigate('feira-livre-calculadora')} className="w-11 h-11 flex items-center justify-center text-slate-500 hover:text-brand-600 hover:bg-white rounded-xl transition-all active:scale-90" title="Calculadora">
                   <Calculator size={22} />
                 </button>
-                <button onClick={() => handleNavigate('saved')} className="w-11 h-11 flex items-center justify-center text-slate-500 hover:text-brand-600 hover:bg-white rounded-xl transition-all relative active:scale-90">
+                <button onClick={() => handleNavigate('saved')} className="w-11 h-11 flex items-center justify-center text-slate-500 hover:text-brand-600 hover:bg-white rounded-xl transition-all relative active:scale-90" title="Salvos">
                   <Heart size={22} fill={currentScreen === 'saved' ? "currentColor" : "none"} className={currentScreen === 'saved' ? "text-red-500" : ""} />
                 </button>
-                <button onClick={() => handleNavigate('notifications')} className="w-11 h-11 flex items-center justify-center text-slate-500 hover:text-brand-600 hover:bg-white rounded-xl transition-all relative active:scale-90">
+                <button onClick={copyCurrentPageLink} className="w-11 h-11 flex items-center justify-center text-slate-500 hover:text-brand-600 hover:bg-white rounded-xl transition-all relative active:scale-90" title="Copiar link desta página">
+                  <Copy size={20} />
+                </button>
+                <button onClick={() => handleNavigate('notifications')} className="w-11 h-11 flex items-center justify-center text-slate-500 hover:text-brand-600 hover:bg-white rounded-xl transition-all relative active:scale-90" title="Notificações">
                   <Bell size={22} className={currentScreen === 'notifications' ? "text-brand-600" : ""} />
                   {newAdminNotificationsCount > 0 && (
                     <span className="absolute top-3 right-3 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white" />
@@ -12879,10 +12920,10 @@ const renderScreen = () => {
           <Logo size="md" />
         </div>
         <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 px-6 max-w-full w-full pb-4">
-          <a href="/privacidade" onClick={(e) => { e.preventDefault(); handleNavigate('privacy'); }} className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-brand-600 transition-colors whitespace-nowrap">Privacidade</a>
-          <a href="/termosdeusos" onClick={(e) => { e.preventDefault(); handleNavigate('terms'); }} className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-brand-600 transition-colors whitespace-nowrap">Termos de Usos</a>
-          <a href="/trabalhe-conosco" onClick={(e) => { e.preventDefault(); handleNavigate('careers'); }} className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-brand-600 transition-colors whitespace-nowrap">Trabalhe conosco</a>
-          <a href="/suporte" onClick={(e) => { e.preventDefault(); handleNavigate('contact'); }} className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-brand-600 transition-colors whitespace-nowrap">Suporte</a>
+          <a href="/privacidade" onClick={(e) => handleLinkClick(e, 'privacy')} className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-brand-600 transition-colors whitespace-nowrap">Política de Privacidade</a>
+          <a href="/termosdeusos" onClick={(e) => handleLinkClick(e, 'terms')} className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-brand-600 transition-colors whitespace-nowrap">Termos de Uso</a>
+          <a href="/trabalhe-conosco" onClick={(e) => handleLinkClick(e, 'careers')} className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-brand-600 transition-colors whitespace-nowrap">Trabalhe conosco</a>
+          <a href="/suporte" onClick={(e) => handleLinkClick(e, 'contact')} className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-brand-600 transition-colors whitespace-nowrap">Suporte</a>
         </div>
         
         <p className="text-slate-400 text-[10px] font-bold uppercase tracking-[0.3em] text-center px-6">
