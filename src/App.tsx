@@ -10859,11 +10859,29 @@ function useProducts(shopId?: string) {
 function MainApp() {
   const [currentScreen, _setCurrentScreen] = useState<Screen>(() => {
     if (typeof window !== 'undefined') {
+      const path = window.location.pathname;
       const searchParams = new URLSearchParams(window.location.search);
       const screen = searchParams.get('screen');
-      if (screen === 'privacy' || screen === 'privacidade') return 'privacy';
-      if (screen === 'terms' || screen === 'termosdeusos') return 'terms';
-      if (screen === 'about' || screen === 'sobre') return 'about';
+      
+      if (path === '/privacy' || path === '/privacidade' || screen === 'privacy' || screen === 'privacidade') return 'privacy';
+      if (path === '/tos' || path === '/terms' || path === '/termos-of-service' || path === '/termosdeusos' || screen === 'terms' || screen === 'termosdeusos') return 'terms';
+      if (path === '/sobre' || path === '/about' || screen === 'about' || screen === 'sobre') return 'about';
+      if (path === '/careers' || path === '/trabalhe-conosco' || screen === 'careers' || screen === 'trabalhe-conosco') return 'careers';
+      if (path === '/contact' || path === '/contato' || path === '/suporte' || screen === 'contact' || screen === 'contato' || screen === 'suporte') return 'contact';
+      if (path === '/calculadora' || screen === 'feira-livre-calculadora' || screen === 'calculadora') return 'feira-livre-calculadora';
+      
+      // Internal Auth / App Pages mapped to Portuguese friendly paths
+      if (path === '/varejo' || path === '/comprar' || path === '/busca' || screen === 'varejo' || screen === 'search') return 'search';
+      if (path === '/atacado' || screen === 'atacado' || screen === 'wholesale') return 'wholesale';
+      if (path === '/perfil' || path === '/cadastro' || screen === 'perfil' || screen === 'cadastro' || screen === 'profile') return 'profile';
+      if (path === '/pedidos' || path === '/meus-pedidos' || screen === 'pedidos' || screen === 'meus-pedidos' || screen === 'orders') return 'orders';
+      if (path === '/conversas' || path === '/mensagens' || screen === 'conversas' || screen === 'mensagens' || screen === 'chats') return 'chats';
+      if (path === '/salvos' || path === '/favoritos' || screen === 'salvos' || screen === 'favoritos' || screen === 'saved') return 'saved';
+      if (path === '/minha-loja' || path === '/gerenciar-loja' || screen === 'minha-loja' || screen === 'gerenciar-loja' || screen === 'shop-management') return 'shop-management';
+      if (path === '/criar-loja' || screen === 'criar-loja' || screen === 'create-shop') return 'create-shop';
+      if (path === '/vendas' || path === '/painel-de-vendas' || screen === 'vendas' || screen === 'painel-de-vendas' || screen === 'sales') return 'sales';
+      if (path === '/caixa' || path === '/contabilidade' || screen === 'caixa' || screen === 'contabilidade' || screen === 'vendor-accounting') return 'vendor-accounting';
+      if (path === '/painel-admin' || path === '/admin' || screen === 'painel-admin' || screen === 'admin' || screen === 'admin-dashboard') return 'admin-dashboard';
     }
     return 'landing';
   });
@@ -10985,15 +11003,15 @@ function MainApp() {
     const screenParam = searchParams.get('screen');
     
     // Check if it's a public path or parameter
-    const isPublicPath = path === '/' || path === '/privacy' || path === '/privacidade' || path === '/tos' || path === '/terms' || path === '/termos-of-service' || path === '/termosdeusos' || path === '/sobre' || path === '/about';
-    const isPublicParam = screenParam === 'privacy' || screenParam === 'terms' || screenParam === 'landing' || screenParam === 'privacidade' || screenParam === 'termosdeusos' || screenParam === 'about' || screenParam === 'sobre';
+    const isPublicPath = path === '/' || path === '/privacy' || path === '/privacidade' || path === '/tos' || path === '/terms' || path === '/termos-of-service' || path === '/termosdeusos' || path === '/sobre' || path === '/about' || path === '/careers' || path === '/trabalhe-conosco' || path === '/contact' || path === '/contato' || path === '/suporte' || path === '/calculadora' || path === '/feira-livre-calculadora' || path === '/varejo' || path === '/comprar' || path === '/busca' || path === '/atacado' || path === '/perfil' || path === '/cadastro' || path === '/pedidos' || path === '/meus-pedidos' || path === '/conversas' || path === '/mensagens' || path === '/salvos' || path === '/favoritos' || path === '/minha-loja' || path === '/gerenciar-loja' || path === '/criar-loja' || path === '/vendas' || path === '/caixa' || path === '/contabilidade' || path === '/painel-admin' || path === '/admin';
+    const isPublicParam = screenParam === 'privacy' || screenParam === 'terms' || screenParam === 'landing' || screenParam === 'privacidade' || screenParam === 'termosdeusos' || screenParam === 'about' || screenParam === 'sobre' || screenParam === 'careers' || screenParam === 'trabalhe-conosco' || screenParam === 'contact' || screenParam === 'contato' || screenParam === 'suporte' || screenParam === 'feira-livre-calculadora' || screenParam === 'varejo' || screenParam === 'comprar' || screenParam === 'busca' || screenParam === 'search' || screenParam === 'atacado' || screenParam === 'wholesale' || screenParam === 'perfil' || screenParam === 'cadastro' || screenParam === 'profile' || screenParam === 'pedidos' || screenParam === 'meus-pedidos' || screenParam === 'orders' || screenParam === 'conversas' || screenParam === 'mensagens' || screenParam === 'chats' || screenParam === 'salvos' || screenParam === 'favoritos' || screenParam === 'saved' || screenParam === 'minha-loja' || screenParam === 'gerenciar-loja' || screenParam === 'shop-management' || screenParam === 'criar-loja' || screenParam === 'create-shop' || screenParam === 'vendas' || screenParam === 'sales' || screenParam === 'caixa' || screenParam === 'contabilidade' || screenParam === 'vendor-accounting' || screenParam === 'painel-admin' || screenParam === 'admin' || screenParam === 'admin-dashboard';
     const isPublicMode = isPublicPath || isPublicParam;
 
     if (!hasSeen && !isPublicMode) {
       setShowPermissionModal(true);
     }
 
-    // URL path or param detection for OAuth verification
+    // URL path or param detection on startup
     if (path === '/privacy' || path === '/privacidade' || screenParam === 'privacy' || screenParam === 'privacidade') {
       _setCurrentScreen('privacy');
       setShowPermissionModal(false);
@@ -11003,13 +11021,133 @@ function MainApp() {
     } else if (path === '/sobre' || path === '/about' || screenParam === 'about' || screenParam === 'sobre') {
       _setCurrentScreen('about');
       setShowPermissionModal(false);
+    } else if (path === '/careers' || path === '/trabalhe-conosco' || screenParam === 'careers' || screenParam === 'trabalhe-conosco') {
+      _setCurrentScreen('careers');
+      setShowPermissionModal(false);
+    } else if (path === '/contact' || path === '/contato' || path === '/suporte' || screenParam === 'contact' || screenParam === 'contato' || screenParam === 'suporte') {
+      _setCurrentScreen('contact');
+      setShowPermissionModal(false);
+    } else if (path === '/calculadora' || path === '/feira-livre-calculadora' || screenParam === 'feira-livre-calculadora' || screenParam === 'calculadora') {
+      _setCurrentScreen('feira-livre-calculadora');
+      setShowPermissionModal(false);
+    } else if (path === '/varejo' || path === '/comprar' || path === '/busca' || screenParam === 'varejo' || screenParam === 'search') {
+      _setCurrentScreen('search');
+      setShowPermissionModal(false);
+    } else if (path === '/atacado' || screenParam === 'atacado' || screenParam === 'wholesale') {
+      _setCurrentScreen('wholesale');
+      setShowPermissionModal(false);
+    } else if (path === '/perfil' || path === '/cadastro' || screenParam === 'perfil' || screenParam === 'cadastro' || screenParam === 'profile') {
+      _setCurrentScreen('profile');
+      setShowPermissionModal(false);
+    } else if (path === '/pedidos' || path === '/meus-pedidos' || screenParam === 'pedidos' || screenParam === 'meus-pedidos' || screenParam === 'orders') {
+      _setCurrentScreen('orders');
+      setShowPermissionModal(false);
+    } else if (path === '/conversas' || path === '/mensagens' || screenParam === 'conversas' || screenParam === 'mensagens' || screenParam === 'chats') {
+      _setCurrentScreen('chats');
+      setShowPermissionModal(false);
+    } else if (path === '/salvos' || path === '/favoritos' || screenParam === 'salvos' || screenParam === 'favoritos' || screenParam === 'saved') {
+      _setCurrentScreen('saved');
+      setShowPermissionModal(false);
+    } else if (path === '/minha-loja' || path === '/gerenciar-loja' || screenParam === 'minha-loja' || screenParam === 'gerenciar-loja' || screenParam === 'shop-management') {
+      _setCurrentScreen('shop-management');
+      setShowPermissionModal(false);
+    } else if (path === '/criar-loja' || screenParam === 'criar-loja' || screenParam === 'create-shop') {
+      _setCurrentScreen('create-shop');
+      setShowPermissionModal(false);
+    } else if (path === '/vendas' || path === '/painel-de-vendas' || screenParam === 'vendas' || screenParam === 'painel-de-vendas' || screenParam === 'sales') {
+      _setCurrentScreen('sales');
+      setShowPermissionModal(false);
+    } else if (path === '/caixa' || path === '/contabilidade' || screenParam === 'caixa' || screenParam === 'contabilidade' || screenParam === 'vendor-accounting') {
+      _setCurrentScreen('vendor-accounting');
+      setShowPermissionModal(false);
+    } else if (path === '/painel-admin' || path === '/admin' || screenParam === 'painel-admin' || screenParam === 'admin' || screenParam === 'admin-dashboard') {
+      _setCurrentScreen('admin-dashboard');
+      setShowPermissionModal(false);
     }
+
+    // Add popstate listener for browser back/forward buttons
+    const handlePopState = (event: PopStateEvent) => {
+      if (event.state && event.state.screen) {
+        _setCurrentScreen(event.state.screen);
+      } else {
+        const currPath = window.location.pathname;
+        if (currPath === '/privacy' || currPath === '/privacidade') _setCurrentScreen('privacy');
+        else if (currPath === '/tos' || currPath === '/terms' || currPath === '/termosdeusos') _setCurrentScreen('terms');
+        else if (currPath === '/sobre' || currPath === '/about') _setCurrentScreen('about');
+        else if (currPath === '/careers' || currPath === '/trabalhe-conosco') _setCurrentScreen('careers');
+        else if (currPath === '/contact' || currPath === '/contato' || currPath === '/suporte') _setCurrentScreen('contact');
+        else if (currPath === '/calculadora') _setCurrentScreen('feira-livre-calculadora');
+        else if (currPath === '/varejo' || currPath === '/comprar' || currPath === '/busca') _setCurrentScreen('search');
+        else if (currPath === '/atacado') _setCurrentScreen('wholesale');
+        else if (currPath === '/perfil' || currPath === '/cadastro') _setCurrentScreen('profile');
+        else if (currPath === '/pedidos' || currPath === '/meus-pedidos') _setCurrentScreen('orders');
+        else if (currPath === '/conversas' || currPath === '/mensagens') _setCurrentScreen('chats');
+        else if (currPath === '/salvos' || currPath === '/favoritos') _setCurrentScreen('saved');
+        else if (currPath === '/minha-loja' || currPath === '/gerenciar-loja') _setCurrentScreen('shop-management');
+        else if (currPath === '/criar-loja') _setCurrentScreen('create-shop');
+        else if (currPath === '/vendas' || currPath === '/painel-de-vendas') _setCurrentScreen('sales');
+        else if (currPath === '/caixa' || currPath === '/contabilidade') _setCurrentScreen('vendor-accounting');
+        else if (currPath === '/painel-admin' || currPath === '/admin') _setCurrentScreen('admin-dashboard');
+        else _setCurrentScreen('landing');
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
   }, []);
+
+  // Synchronize active screen back to browser address bar URL pathname
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      let expectedPath = '/';
+      if (currentScreen === 'privacy') {
+        expectedPath = '/privacidade';
+      } else if (currentScreen === 'terms') {
+        expectedPath = '/termosdeusos';
+      } else if (currentScreen === 'about') {
+        expectedPath = '/sobre';
+      } else if (currentScreen === 'careers') {
+        expectedPath = '/trabalhe-conosco';
+      } else if (currentScreen === 'contact') {
+        expectedPath = '/suporte';
+      } else if (currentScreen === 'feira-livre-calculadora') {
+        expectedPath = '/calculadora';
+      } else if (currentScreen === 'search') {
+        expectedPath = '/varejo';
+      } else if (currentScreen === 'wholesale') {
+        expectedPath = '/atacado';
+      } else if (currentScreen === 'profile') {
+        expectedPath = '/perfil';
+      } else if (currentScreen === 'orders') {
+        expectedPath = '/meus-pedidos';
+      } else if (currentScreen === 'chats') {
+        expectedPath = '/conversas';
+      } else if (currentScreen === 'saved') {
+        expectedPath = '/salvos';
+      } else if (currentScreen === 'shop-management') {
+        expectedPath = '/minha-loja';
+      } else if (currentScreen === 'create-shop') {
+        expectedPath = '/criar-loja';
+      } else if (currentScreen === 'sales') {
+        expectedPath = '/vendas';
+      } else if (currentScreen === 'vendor-accounting') {
+        expectedPath = '/caixa';
+      } else if (currentScreen === 'admin-dashboard') {
+        expectedPath = '/painel-admin';
+      }
+
+      if (window.location.pathname !== expectedPath) {
+        window.history.pushState({ screen: currentScreen }, '', expectedPath);
+      }
+    }
+  }, [currentScreen]);
 
   const handleNavigate = async (screen: Screen) => {
     // Verify permission modal acknowledgment
     const permissionsSeen = localStorage.getItem('feira_livre_permissions_seen');
-    const isPublicScreen = screen === 'landing' || screen === 'privacy' || screen === 'terms' || screen === 'about' || screen === 'careers' || screen === 'contact';
+    const isPublicScreen = screen === 'landing' || screen === 'privacy' || screen === 'terms' || screen === 'about' || screen === 'careers' || screen === 'contact' || screen === 'search' || screen === 'wholesale' || screen === 'feira-livre-calculadora';
 
     if (!permissionsSeen && !isPublicScreen) {
       setShowPermissionModal(true);
@@ -12007,6 +12145,118 @@ const renderScreen = () => {
         />
       );
     }
+
+    // Check if a guest is attempting to access an authenticated inner screen link directly
+    const isGuest = !user;
+    const isInnerScreen = [
+      'profile',
+      'orders',
+      'chats',
+      'saved',
+      'shop-management',
+      'create-shop',
+      'sales',
+      'vendor-accounting',
+      'wholesale-accounting',
+      'admin-dashboard'
+    ].includes(currentScreen);
+
+    if (isGuest && isInnerScreen) {
+      const isCheckout = currentScreen === 'orders' && cart && cart.items?.length > 0;
+      if (!isCheckout) {
+        let PortugueseTitle = 'Acesso Restrito';
+        let PortugueseDescription = 'Esta seção é exclusiva para usuários cadastrados.';
+        let screenType: 'vendor' | 'client' | 'admin' = 'client';
+
+        if (currentScreen === 'profile') {
+          PortugueseTitle = 'Meu Perfil & Cadastro';
+          PortugueseDescription = 'Faça login ou cadastre-se para gerenciar seus dados pessoais e endereços de entrega.';
+        } else if (currentScreen === 'orders') {
+          PortugueseTitle = 'Meus Pedidos';
+          PortugueseDescription = 'Faça login para acompanhar o status de suas compras e histórico de pedidos.';
+        } else if (currentScreen === 'chats') {
+          PortugueseTitle = 'Minhas Conversas';
+          PortugueseDescription = 'Faça login para trocar mensagens com feirantes e clientes em tempo real.';
+        } else if (currentScreen === 'saved') {
+          PortugueseTitle = 'Meus Favoritos';
+          PortugueseDescription = 'Faça login para salvar suas bancas, feirantes e produtos preferidos.';
+        } else if (currentScreen === 'shop-management' || currentScreen === 'create-shop') {
+          PortugueseTitle = 'Área do Feirante';
+          PortugueseDescription = 'Acesse ou crie sua barraca digital para gerenciar produtos, estoque e receber pedidos.';
+          screenType = 'vendor';
+        } else if (currentScreen === 'sales' || currentScreen === 'vendor-accounting' || currentScreen === 'wholesale-accounting') {
+          PortugueseTitle = 'Painel de Vendas';
+          PortugueseDescription = 'Painel exclusivo para feirantes autorizados gerenciarem vendas, fluxo de caixa e contabilidade.';
+          screenType = 'vendor';
+        } else if (currentScreen === 'admin-dashboard') {
+          PortugueseTitle = 'Painel Administrativo';
+          PortugueseDescription = 'Acesso restrito para administradores municipais ou estaduais.';
+          screenType = 'admin';
+        }
+
+        return (
+          <div className="flex flex-col items-center justify-center min-h-[70vh] text-slate-400 px-6 text-center max-w-xl mx-auto py-20">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="bg-white p-10 md:p-14 rounded-[48px] border border-slate-100 shadow-soft w-full flex flex-col items-center"
+            >
+              <div className="w-24 h-24 bg-brand-50 rounded-[32px] flex items-center justify-center mb-8 shadow-inner text-brand-600">
+                {currentScreen === 'profile' && <User size={48} />}
+                {currentScreen === 'orders' && <ShoppingBag size={48} />}
+                {currentScreen === 'chats' && <MessageSquare size={48} />}
+                {currentScreen === 'saved' && <Heart size={48} />}
+                {(currentScreen === 'shop-management' || currentScreen === 'create-shop') && <Store size={48} />}
+                {(currentScreen === 'sales' || currentScreen === 'vendor-accounting' || currentScreen === 'wholesale-accounting') && <TrendingUp size={48} />}
+                {currentScreen === 'admin-dashboard' && <ShieldAlert size={48} />}
+              </div>
+              
+              <p className="font-black uppercase tracking-widest text-[10px] text-brand-600 mb-3">Identificação Necessária</p>
+              <h2 className="text-3xl font-black text-slate-900 font-display tracking-tight leading-none mb-4">{PortugueseTitle}</h2>
+              <p className="text-sm text-slate-500 font-medium leading-relaxed mb-10 max-w-[340px]">
+                {PortugueseDescription}
+              </p>
+              
+              <div className="flex flex-col gap-3 w-full max-w-[280px]">
+                {screenType === 'admin' ? (
+                  <button 
+                    onClick={() => handleGoogleLogin('admin')}
+                    className="w-full py-5 bg-slate-900 hover:bg-slate-800 text-white rounded-[24px] font-black text-[10px] uppercase tracking-widest active:scale-95 transition-all flex items-center justify-center gap-3 shadow-lg shadow-slate-900/10"
+                  >
+                    <ShieldCheck size={18} />
+                    Acesso Administrativo
+                  </button>
+                ) : (
+                  <>
+                    <button 
+                      onClick={() => handleGoogleLogin(screenType)}
+                      className="w-full py-5 bg-brand-600 hover:bg-brand-700 text-white rounded-[24px] font-black text-[10px] uppercase tracking-widest active:scale-95 transition-all flex items-center justify-center gap-3 shadow-xl shadow-brand-600/20"
+                    >
+                      <img src="https://www.google.com/favicon.ico" className="w-4 h-4 brightness-0 invert" alt="" />
+                      Entrar com o Google
+                    </button>
+                    <button 
+                      onClick={() => handleGoogleLogin(screenType)}
+                      className="w-full py-5 bg-slate-50 hover:bg-slate-100 text-slate-600 rounded-[24px] font-black text-[10px] uppercase tracking-widest active:scale-95 transition-all flex items-center justify-center gap-3"
+                    >
+                      Criar Nova Conta
+                    </button>
+                  </>
+                )}
+                
+                <button 
+                  onClick={() => setCurrentScreen('landing')}
+                  className="w-full py-5 text-slate-400 hover:text-slate-600 font-black text-[10px] uppercase tracking-widest active:scale-95 transition-all text-center mt-2"
+                >
+                  Voltar ao Início
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        );
+      }
+    }
+
     // Check if it's a public utility screen first
     if (currentScreen === 'privacy') return <PrivacyScreen config={appConfig} />;
     if (currentScreen === 'terms') return <TermsScreen config={appConfig} />;
@@ -12618,8 +12868,8 @@ const renderScreen = () => {
         <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 px-6 max-w-full w-full pb-4">
           <a href="/privacidade" onClick={(e) => { e.preventDefault(); handleNavigate('privacy'); }} className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-brand-600 transition-colors whitespace-nowrap">Privacidade</a>
           <a href="/termosdeusos" onClick={(e) => { e.preventDefault(); handleNavigate('terms'); }} className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-brand-600 transition-colors whitespace-nowrap">Termos de Usos</a>
-          <a href="/careers" onClick={(e) => { e.preventDefault(); handleNavigate('careers'); }} className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-brand-600 transition-colors whitespace-nowrap">Trabalhe conosco</a>
-          <a href="/contact" onClick={(e) => { e.preventDefault(); handleNavigate('contact'); }} className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-brand-600 transition-colors whitespace-nowrap">Suporte</a>
+          <a href="/trabalhe-conosco" onClick={(e) => { e.preventDefault(); handleNavigate('careers'); }} className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-brand-600 transition-colors whitespace-nowrap">Trabalhe conosco</a>
+          <a href="/suporte" onClick={(e) => { e.preventDefault(); handleNavigate('contact'); }} className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-brand-600 transition-colors whitespace-nowrap">Suporte</a>
         </div>
         
         <p className="text-slate-400 text-[10px] font-bold uppercase tracking-[0.3em] text-center px-6">
