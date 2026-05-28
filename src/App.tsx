@@ -10864,7 +10864,7 @@ function MainApp() {
       const screen = searchParams.get('screen');
       
       if (path === '/privacy' || path === '/privacidade' || screen === 'privacy' || screen === 'privacidade') return 'privacy';
-      if (path === '/tos' || path === '/terms' || path === '/termos-of-service' || path === '/termosdeusos' || screen === 'terms' || screen === 'termosdeusos') return 'terms';
+      if (path === '/tos' || path === '/terms' || path === '/termos-of-service' || path === '/termosdeusos' || path === '/termos-de-uso' || path === '/termos-de-usos' || screen === 'terms' || screen === 'termos-de-uso') return 'terms';
       if (path === '/sobre' || path === '/about' || screen === 'about' || screen === 'sobre') return 'about';
       if (path === '/careers' || path === '/trabalhe-conosco' || screen === 'careers' || screen === 'trabalhe-conosco') return 'careers';
       if (path === '/contact' || path === '/contato' || path === '/suporte' || screen === 'contact' || screen === 'contato' || screen === 'suporte') return 'contact';
@@ -11005,8 +11005,8 @@ function MainApp() {
     const screenParam = searchParams.get('screen');
     
     // Check if it's a public path or parameter
-    const isPublicPath = path === '/' || path === '/inicio' || path === '/paginainicial' || path === '/privacy' || path === '/privacidade' || path === '/tos' || path === '/terms' || path === '/termos-of-service' || path === '/termosdeusos' || path === '/sobre' || path === '/about' || path === '/careers' || path === '/trabalhe-conosco' || path === '/contact' || path === '/contato' || path === '/suporte' || path === '/calculadora' || path === '/feira-livre-calculadora' || path === '/varejo' || path === '/comprar' || path === '/busca' || path === '/atacado' || path === '/perfil' || path === '/cadastro' || path === '/pedidos' || path === '/meus-pedidos' || path === '/conversas' || path === '/mensagens' || path === '/salvos' || path === '/favoritos' || path === '/minha-loja' || path === '/gerenciar-loja' || path === '/criar-loja' || path === '/vendas' || path === '/caixa' || path === '/contabilidade' || path === '/painel-admin' || path === '/admin';
-    const isPublicParam = screenParam === 'privacy' || screenParam === 'terms' || screenParam === 'landing' || screenParam === 'inicio' || screenParam === 'paginainicial' || screenParam === 'privacidade' || screenParam === 'termosdeusos' || screenParam === 'about' || screenParam === 'sobre' || screenParam === 'careers' || screenParam === 'trabalhe-conosco' || screenParam === 'contact' || screenParam === 'contato' || screenParam === 'suporte' || screenParam === 'feira-livre-calculadora' || screenParam === 'varejo' || screenParam === 'comprar' || screenParam === 'busca' || screenParam === 'search' || screenParam === 'atacado' || screenParam === 'wholesale' || screenParam === 'perfil' || screenParam === 'cadastro' || screenParam === 'profile' || screenParam === 'pedidos' || screenParam === 'meus-pedidos' || screenParam === 'orders' || screenParam === 'conversas' || screenParam === 'mensagens' || screenParam === 'chats' || screenParam === 'salvos' || screenParam === 'favoritos' || screenParam === 'saved' || screenParam === 'minha-loja' || screenParam === 'gerenciar-loja' || screenParam === 'shop-management' || screenParam === 'criar-loja' || screenParam === 'create-shop' || screenParam === 'vendas' || screenParam === 'sales' || screenParam === 'caixa' || screenParam === 'contabilidade' || screenParam === 'vendor-accounting' || screenParam === 'painel-admin' || screenParam === 'admin' || screenParam === 'admin-dashboard';
+    const isPublicPath = path === '/' || path === '/inicio' || path === '/paginainicial' || path === '/privacy' || path === '/privacidade' || path === '/tos' || path === '/terms' || path === '/termos-of-service' || path === '/termosdeusos' || path === '/termos-de-uso' || path === '/termos-de-usos' || path === '/sobre' || path === '/about' || path === '/careers' || path === '/trabalhe-conosco' || path === '/contact' || path === '/contato' || path === '/suporte' || path === '/calculadora' || path === '/feira-livre-calculadora' || path === '/varejo' || path === '/comprar' || path === '/busca' || path === '/atacado' || path === '/perfil' || path === '/cadastro' || path === '/pedidos' || path === '/meus-pedidos' || path === '/conversas' || path === '/mensagens' || path === '/salvos' || path === '/favoritos' || path === '/minha-loja' || path === '/gerenciar-loja' || path === '/criar-loja' || path === '/vendas' || path === '/caixa' || path === '/contabilidade' || path === '/painel-admin' || path === '/admin';
+    const isPublicParam = screenParam === 'privacy' || screenParam === 'terms' || screenParam === 'landing' || screenParam === 'inicio' || screenParam === 'paginainicial' || screenParam === 'privacidade' || screenParam === 'termosdeusos' || screenParam === 'termos-de-uso' || screenParam === 'about' || screenParam === 'sobre' || screenParam === 'careers' || screenParam === 'trabalhe-conosco' || screenParam === 'contact' || screenParam === 'contato' || screenParam === 'suporte' || screenParam === 'feira-livre-calculadora' || screenParam === 'varejo' || screenParam === 'comprar' || screenParam === 'busca' || screenParam === 'search' || screenParam === 'atacado' || screenParam === 'wholesale' || screenParam === 'perfil' || screenParam === 'cadastro' || screenParam === 'profile' || screenParam === 'pedidos' || screenParam === 'meus-pedidos' || screenParam === 'orders' || screenParam === 'conversas' || screenParam === 'mensagens' || screenParam === 'chats' || screenParam === 'salvos' || screenParam === 'favoritos' || screenParam === 'saved' || screenParam === 'minha-loja' || screenParam === 'gerenciar-loja' || screenParam === 'shop-management' || screenParam === 'criar-loja' || screenParam === 'create-shop' || screenParam === 'vendas' || screenParam === 'sales' || screenParam === 'caixa' || screenParam === 'contabilidade' || screenParam === 'vendor-accounting' || screenParam === 'painel-admin' || screenParam === 'admin' || screenParam === 'admin-dashboard';
     const isPublicMode = isPublicPath || isPublicParam;
 
     if (!hasSeen && !isPublicMode) {
@@ -11017,7 +11017,7 @@ function MainApp() {
     if (path === '/privacy' || path === '/privacidade' || screenParam === 'privacy' || screenParam === 'privacidade') {
       _setCurrentScreen('privacy');
       setShowPermissionModal(false);
-    } else if (path === '/tos' || path === '/terms' || path === '/terms-of-service' || path === '/termosdeusos' || screenParam === 'terms' || screenParam === 'termosdeusos') {
+    } else if (path === '/tos' || path === '/terms' || path === '/terms-of-service' || path === '/termosdeusos' || path === '/termos-de-uso' || path === '/termos-de-usos' || screenParam === 'terms' || screenParam === 'termosdeusos' || screenParam === 'termos-de-uso') {
       _setCurrentScreen('terms');
       setShowPermissionModal(false);
     } else if (path === '/sobre' || path === '/about' || screenParam === 'about' || screenParam === 'sobre') {
@@ -11077,7 +11077,7 @@ function MainApp() {
       } else {
         const currPath = window.location.pathname;
         if (currPath === '/privacy' || currPath === '/privacidade') _setCurrentScreen('privacy');
-        else if (currPath === '/tos' || currPath === '/terms' || currPath === '/termosdeusos') _setCurrentScreen('terms');
+        else if (currPath === '/tos' || currPath === '/terms' || currPath === '/termosdeusos' || currPath === '/termos-de-uso' || currPath === '/termos-de-usos') _setCurrentScreen('terms');
         else if (currPath === '/sobre' || currPath === '/about') _setCurrentScreen('about');
         else if (currPath === '/careers' || currPath === '/trabalhe-conosco') _setCurrentScreen('careers');
         else if (currPath === '/contact' || currPath === '/contato' || currPath === '/suporte') _setCurrentScreen('contact');
@@ -11118,7 +11118,14 @@ function MainApp() {
       } else if (currentScreen === 'privacy') {
         expectedPath = '/privacidade';
       } else if (currentScreen === 'terms') {
-        expectedPath = '/termosdeusos';
+        const currentPathName = window.location.pathname;
+        if (currentPathName === '/termosdeusos' || currentPathName === '/tos' || currentPathName === '/terms') {
+          expectedPath = currentPathName;
+        } else if (currentPathName === '/termos-de-usos') {
+          expectedPath = '/termos-de-usos';
+        } else {
+          expectedPath = '/termos-de-uso';
+        }
       } else if (currentScreen === 'about') {
         expectedPath = '/sobre';
       } else if (currentScreen === 'careers') {
@@ -12715,7 +12722,7 @@ const renderScreen = () => {
               Política de Privacidade
             </a>
             <a 
-              href="/termosdeusos"
+              href="/termos-de-uso"
               onClick={(e) => handleLinkClick(e, 'terms')} 
               className={cn("hover:text-brand-600 transition-colors cursor-pointer", currentScreen === 'terms' ? "text-brand-600 font-black" : "")}
             >
@@ -12921,7 +12928,7 @@ const renderScreen = () => {
         </div>
         <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 px-6 max-w-full w-full pb-4">
           <a href="/privacidade" onClick={(e) => handleLinkClick(e, 'privacy')} className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-brand-600 transition-colors whitespace-nowrap">Política de Privacidade</a>
-          <a href="/termosdeusos" onClick={(e) => handleLinkClick(e, 'terms')} className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-brand-600 transition-colors whitespace-nowrap">Termos de Uso</a>
+          <a href="/termos-de-uso" onClick={(e) => handleLinkClick(e, 'terms')} className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-brand-600 transition-colors whitespace-nowrap">Termos de Uso</a>
           <a href="/trabalhe-conosco" onClick={(e) => handleLinkClick(e, 'careers')} className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-brand-600 transition-colors whitespace-nowrap">Trabalhe conosco</a>
           <a href="/suporte" onClick={(e) => handleLinkClick(e, 'contact')} className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-brand-600 transition-colors whitespace-nowrap">Suporte</a>
         </div>
