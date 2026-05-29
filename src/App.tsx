@@ -119,6 +119,7 @@ import {
   auth, 
   db, 
   loginWithGoogle,
+  getRedirectResult,
   logout, 
   doc, 
   getDoc, 
@@ -11374,6 +11375,27 @@ function MainApp() {
       }
     };
     checkConnection();
+
+    const checkRedirect = async () => {
+      try {
+        const result = await getRedirectResult(auth);
+        if (result && result.user) {
+          console.log("Login obtido com sucesso via redirecionamento do Google:", result.user.email);
+          const savedRole = (localStorage.getItem('pending_google_login_role') || 'client') as UserRole;
+          const savedType = localStorage.getItem('pending_google_login_type') || undefined;
+          
+          // Limpar dados temporários salvos
+          localStorage.removeItem('pending_google_login_role');
+          localStorage.removeItem('pending_google_login_type');
+          
+          await handleLogin(savedRole, savedType, result.user);
+        }
+      } catch (error: any) {
+        console.error("Erro ao processar redirecionamento do Google:", error);
+        showNotification("Erro ao concluir o login por redirecionamento: " + (error.message || ""), "error");
+      }
+    };
+    checkRedirect();
     
     const initConfig = async (retries = 3) => {
       try {
@@ -11740,10 +11762,22 @@ function MainApp() {
 
   const handleGoogleLogin = async (role: UserRole, loginType?: string) => {
     setLoggingInRole(loginType || role);
+    
+    // Salvar o papel de login temporariamente para caso haja redirecionamento (signInWithRedirect usado em ambiente móvel/APK)
+    localStorage.setItem('pending_google_login_role', role);
+    if (loginType) {
+      localStorage.setItem('pending_google_login_type', loginType);
+    } else {
+      localStorage.removeItem('pending_google_login_type');
+    }
+
     try {
       const result = await loginWithGoogle();
-      if (result.user) {
-        await handleLogin(role, loginType, result.user);
+      if (result && (result as any).user) {
+        // Se retornar resultado (login via Popup no desktop), limpa o armazenamento e faz o login imediatamente
+        localStorage.removeItem('pending_google_login_role');
+        localStorage.removeItem('pending_google_login_type');
+        await handleLogin(role, loginType, (result as any).user);
       }
     } catch (err: any) {
       if (err.code === 'auth/popup-closed-by-user') {

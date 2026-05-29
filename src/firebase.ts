@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect, getRedirectResult, signOut } from "firebase/auth";
 import { initializeFirestore } from "firebase/firestore";
 
 // Configuração robusta com fallback automático para variáveis de ambiente (essencial para deploy no Vercel/Netlify/GitHub)
@@ -32,10 +32,23 @@ export const db = initializeFirestore(app, {
 
 export const loginWithGoogle = async () => {
   const provider = new GoogleAuthProvider();
-  return signInWithPopup(auth, provider);
+  
+  // Detecção robusta de ambiente móvel/APK/WebView
+  // Se estiver em navegador mobile ou rodando dentro do APK (Capacitor), signInWithRedirect é mais resiliente do que signInWithPopup
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  const isNative = typeof window !== 'undefined' && ((window as any).Capacitor?.isNativePlatform() || (window as any).Android);
+  
+  if (isNative || isMobile) {
+    console.log("Detectado ambiente móvel/APK/WebView. Utilizando signInWithRedirect para login do Google.");
+    return signInWithRedirect(auth, provider);
+  } else {
+    console.log("Detectado ambiente de desktop. Utilizando signInWithPopup para login do Google.");
+    return signInWithPopup(auth, provider);
+  }
 };
 
 export const logout = () => signOut(auth);
+export { getRedirectResult };
 
 // Adicionando re-exports necessários para não quebrar o App.tsx
 export { 

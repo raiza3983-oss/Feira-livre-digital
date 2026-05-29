@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "103881183527",
+    "firebase_url": "https://meuapp-e998a-default-rtdb.firebaseio.com",
+    "project_id": "meuapp-e998a",
+    "storage_bucket": "meuapp-e998a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:103881183527:android:edf6a97c53cf5986f89902",
+        "android_client_info": {
+          "package_name": "com.feiralivre.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "103881183527-52bi3bmkjf9g90kfti2th70rarotfqt5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmJe74WRGJ_MIFmNpi0wf0muaKV0cTwrQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "103881183527-52bi3bmkjf9g90kfti2th70rarotfqt5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
