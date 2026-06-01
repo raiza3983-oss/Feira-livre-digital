@@ -191,7 +191,15 @@ export interface Shop {
   reference?: string;
   whatsapp?: string;
   isContactRestricted?: boolean;
+  autoReplyEnabled?: boolean;
+  autoReplyText?: string;
   createdAt: string;
+  metaMilestones?: {
+    firstSaleSent?: boolean;
+    halfTargetSent?: boolean;
+    fullTargetSent?: boolean;
+    notCompletedSent?: boolean;
+  };
 }
 
 export interface Product {
@@ -295,5 +303,11 @@ export interface AppConfig {
       title: string;
       objective?: string;
     };
+  };
+  metaMessages?: {
+    firstSale: string;
+    halfTarget: string;
+    fullTarget: string;
+    notCompleted: string;
   };
 }

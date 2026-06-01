@@ -15,7 +15,8 @@ import {
   ShieldCheck, 
   Share2, 
   Plus, 
-  Minus 
+  Minus,
+  KeyRound
 } from 'lucide-react';
 import { Logo } from '../components/Logo';
 import { PageContainer } from '../components/PageContainer';
@@ -24,6 +25,7 @@ import { UserRole, Screen, AppConfig } from '../types';
 interface LandingScreenProps {
   onSelectRole: (role: string) => void;
   onGoogleLogin: (role: UserRole, loginType?: string) => void;
+  onQuickLogin?: (role: UserRole) => void;
   onNavigate: (screen: Screen) => void;
   loggingInRole: string | null;
   authError: string | null;
@@ -34,6 +36,7 @@ interface LandingScreenProps {
 export const LandingScreen = ({ 
   onSelectRole, 
   onGoogleLogin,
+  onQuickLogin,
   onNavigate,
   loggingInRole,
   authError,
@@ -328,71 +331,8 @@ export const LandingScreen = ({
       </PageContainer>
     </div>
 
-    {/* Seção FEIRA LIVRE CALCULADORA */}
-    <motion.div 
-      id="calc-section"
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      className="w-full max-w-4xl mt-32 mb-16 px-6"
-    >
-      <div className="bg-white rounded-[48px] shadow-2xl border border-slate-100 overflow-hidden">
-        <div className="flex flex-col items-center">
-          <div className="w-full p-10 md:p-14 space-y-8 text-center flex flex-col items-center">
-            <div className="space-y-3 flex flex-col items-center">
-              <div className="flex items-center gap-4 mb-2">
-                <img 
-                  src="/calculadora_app.png.png" 
-                  alt="Logo" 
-                  className="w-12 h-12 object-contain rounded-xl shadow-sm"
-                />
-                <span className="text-[11px] font-black text-brand-500 uppercase tracking-[0.3em] bg-brand-50 px-4 py-1.5 rounded-full border border-brand-100">
-                  BAIXE AGORA!
-                </span>
-              </div>
-              <h3 className="text-4xl md:text-5xl font-black text-slate-900 font-display italic tracking-tight uppercase leading-none text-center">
-                FEIRA LIVRE <span className="text-brand-600 block">CALCULADORA</span>
-              </h3>
-            </div>
-            
-            <p className="text-lg text-slate-600 font-medium leading-relaxed max-w-2xl mx-auto">
-              Da pra usar sem conexão com Internet, pode usar a vontade pra fazer cálculos e registrar a tela, é a vontade. 
-              Coloque o nome do produto, preço e quantidade. Pra da fazer dinheiro e ainda registrar se você puder! 
-              Baixe na PlayStore.
-            </p>
-
-            <div className="flex flex-wrap items-center justify-center gap-4">
-              <button className="flex items-center gap-4 bg-slate-900 text-white px-8 py-5 rounded-3xl hover:bg-slate-800 transition-all shadow-xl active:scale-95 group">
-                <div className="flex flex-col items-start leading-none">
-                  <span className="text-[10px] font-black uppercase tracking-widest opacity-60">Disponível na</span>
-                  <span className="text-xl font-bold">Google Play</span>
-                </div>
-              </button>
-
-              <button 
-                onClick={() => handleShare({
-                  title: 'Feira Livre Calculadora',
-                  text: 'Baixe agora a Calculadora Feira Livre! Funciona offline e ajuda você a registrar suas vendas e cálculos de produtos frescos. 🇧🇷',
-                  url: 'https://ais-pre-hi2uw6gyumtv3zgsf6dwn2-260480316891.us-east1.run.app' // URL do app
-                })}
-                className="flex items-center gap-3 bg-white border-2 border-slate-100 text-slate-900 px-8 py-5 rounded-3xl hover:border-brand-500 hover:text-brand-600 transition-all shadow-lg active:scale-95"
-              >
-                <Share2 size={24} />
-                <span className="text-sm font-black uppercase tracking-widest">Compartilhar</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </motion.div>
-
     <footer className="mt-20 flex flex-col items-center gap-6">
       <div className="flex flex-wrap items-center justify-center gap-6 text-slate-400 opacity-60">
-        <button onClick={() => {
-          const el = document.getElementById('calc-section');
-          el?.scrollIntoView({ behavior: 'smooth' });
-        }} className="text-[10px] font-bold uppercase tracking-widest hover:text-brand-600 transition-colors cursor-pointer">Feira Livre Calculadora</button>
-        <span className="text-slate-300">•</span>
         <button onClick={() => {
           handleShare({
             title: 'Aplicativo Feira Livre',

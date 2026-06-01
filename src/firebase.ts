@@ -1,25 +1,24 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect, getRedirectResult, signOut } from "firebase/auth";
 import { initializeFirestore } from "firebase/firestore";
+import appletConfig from "../firebase-applet-config.json";
 
 // Configuração robusta com fallback automático para variáveis de ambiente (essencial para deploy no Vercel/Netlify/GitHub)
-// Sanitize the database ID to avoid RTDB URL values breaking connections
-const sanitizeDatabaseId = (id: string | undefined): string => {
-  if (!id || id.includes("://") || id.includes("firebaseio.com") || id.includes("firebasestorage")) {
-    return "ai-studio-092a1eb7-e70b-46cb-b920-f325cbdb21bf";
-  }
-  return id;
-};
-
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "AIzaSyDOehbIQMm5Czz1nWEXQyEN1ryICLqnaFU",
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "meuapp-e998a.firebaseapp.com",
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "meuapp-e998a",
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || "meuapp-e998a.firebasestorage.app",
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || "103881183527",
-  appId: import.meta.env.VITE_FIREBASE_APP_ID || "1:103881183527:web:b4fed604e70fce88f89902",
-  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID || "",
-  firestoreDatabaseId: sanitizeDatabaseId(import.meta.env.VITE_FIREBASE_FIRESTORE_DATABASE_ID || "ai-studio-092a1eb7-e70b-46cb-b920-f325cbdb21bf")
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || appletConfig.apiKey,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || appletConfig.authDomain,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || appletConfig.projectId,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || appletConfig.storageBucket,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || appletConfig.messagingSenderId,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID || appletConfig.appId,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID || appletConfig.measurementId || "",
+  firestoreDatabaseId: (() => {
+    const envDBId = import.meta.env.VITE_FIREBASE_FIRESTORE_DATABASE_ID;
+    if (envDBId && !envDBId.includes("://") && !envDBId.includes("firebaseio.com") && !envDBId.includes("firebasestorage")) {
+      return envDBId;
+    }
+    return appletConfig.firestoreDatabaseId;
+  })()
 };
 
 const app = initializeApp(firebaseConfig);
@@ -32,19 +31,32 @@ export const db = initializeFirestore(app, {
 
 export const loginWithGoogle = async () => {
   const provider = new GoogleAuthProvider();
+  // Configura para abrir sempre por Pop-up (Janela flutuante)
+  console.log("Abrindo login do Google via Pop-up.");
+  return signInWithPopup(auth, provider);
+};
+
+export const getFriendlyAuthErrorMessage = (err: any): string => {
+  const code = err?.code || "";
+  const message = err?.message || "";
   
-  // Detecção robusta de ambiente móvel/APK/WebView
-  // Se estiver em navegador mobile ou rodando dentro do APK (Capacitor), signInWithRedirect é mais resiliente do que signInWithPopup
-  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-  const isNative = typeof window !== 'undefined' && ((window as any).Capacitor?.isNativePlatform() || (window as any).Android);
-  
-  if (isNative || isMobile) {
-    console.log("Detectado ambiente móvel/APK/WebView. Utilizando signInWithRedirect para login do Google.");
-    return signInWithRedirect(auth, provider);
-  } else {
-    console.log("Detectado ambiente de desktop. Utilizando signInWithPopup para login do Google.");
-    return signInWithPopup(auth, provider);
+  if (code === "auth/unauthorized-domain" || message.includes("unauthorized-domain") || message.includes("unauthorized domain")) {
+    const currentDomain = typeof window !== 'undefined' ? window.location.hostname : 'este domínio';
+    return `Domínio não autorizado! Você precisa adicionar este domínio no seu Console do Firebase:\n\n1. Acesse o Console do Firebase (meuapp-e998a)\n2. Vá em 'Authentication' > guia 'Configurações' > 'Domínios autorizados'\n3. Clique em 'Adicionar domínio' e insira:\n   👉 ${currentDomain}\n\nIsso é necessário para que o login do Google funcione no ambiente web de testes!`;
   }
+  if (code === "auth/operation-not-allowed" || message.includes("operation-not-allowed")) {
+    return "O provedor de login do Google não está ativado no seu Firebase!\n\nNo Console do Firebase, acesse:\n1. 'Authentication' > guia 'Método de login'\n2. Clique em 'Adicionar novo provedor' e selecione 'Google'\n3. Ative-o e salve as alterações.";
+  }
+  if (code === "auth/popup-blocked" || message.includes("popup-blocked")) {
+    return "O pop-up de login do Google foi bloqueado pelo seu navegador.\n\nPor favor, permita pop-ups para este site ou clique para tentar novamente.";
+  }
+  if (code === "auth/web-storage-unsupported" || message.includes("web-storage-unsupported")) {
+    return "Armazenamento ou cookies do navegador não suportados (comum em abas anônimas ou dentro de iframes).\n\nTente utilizar o botão de abrir o app em uma Nova Guia (no topo do AI Studio) ou habilite cookies de terceiros.";
+  }
+  if (code === "auth/network-request-failed" || message.includes("network-request-failed")) {
+    return "Erro de conexão de rede ao comunicar com o Firebase Authentication. Verifique sua conexão.";
+  }
+  return err?.message || "Ocorreu um erro desconhecido ao entrar com o Google.";
 };
 
 export const logout = () => signOut(auth);
