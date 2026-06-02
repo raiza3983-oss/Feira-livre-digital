@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { 
   Menu, X, Home, Calculator, Info, ShieldCheck, 
   FileText, Briefcase, MessageSquare, User, LogOut,
-  ChevronRight, Truck, Heart, Bell, Package, BarChart, Store, Smartphone, Check, Lock
+  ChevronRight, ChevronDown, Truck, Heart, Bell, Package, BarChart, Store, Smartphone, Check, Lock
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Logo } from './Logo';
@@ -210,102 +210,215 @@ export const AndroidTopAppBar: React.FC<AndroidTopAppBarProps> = ({
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.95, y: -10 }}
                     transition={{ type: 'spring', damping: 22, stiffness: 210 }}
-                    className="absolute right-0 top-14 z-[9960] w-[320px] sm:w-[440px] max-w-[calc(100vw-32px)] bg-white rounded-2xl shadow-[0_16px_40px_rgba(0,0,0,0.12)] border border-slate-100 overflow-hidden font-sans flex flex-col"
+                    className="absolute right-0 top-14 z-[9960] w-[320px] sm:w-[380px] max-w-[calc(100vw-32px)] bg-white rounded-2xl shadow-[0_16px_40px_rgba(0,0,0,0.12)] border border-slate-100 overflow-hidden font-sans flex flex-col"
                   >
-                    {/* Header do Menu */}
-                    <div className="p-4 border-b border-slate-50 flex items-center justify-between bg-slate-50/50">
-                      <div className="flex items-center gap-2.5">
-                        <div className="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-600 flex items-center justify-center">
-                          <Smartphone size={16} />
-                        </div>
-                        <div>
-                          <h3 className="font-extrabold text-slate-900 text-xs tracking-tight font-sans">Tipo de Cadastro</h3>
-                          <p className="text-[9px] text-slate-400 font-medium">Selecione para prosseguir ou logar</p>
-                        </div>
-                      </div>
-                      <button 
-                        onClick={() => setIsProfileMenuOpen(false)}
-                        className="w-8 h-8 rounded-lg hover:bg-slate-100 text-slate-400 hover:text-slate-700 flex items-center justify-center transition-all"
-                      >
-                        <X size={14} />
-                      </button>
-                    </div>
+                    {user ? (
+                      /* MENU DE PERFIL PARA USUÁRIO CADASTRADO */
+                      <>
+                        {/* Header com a foto do usuário */}
+                        <div className="p-6 bg-gradient-to-b from-slate-50 to-white flex flex-col items-center text-center gap-4 relative">
+                          <button 
+                            onClick={() => setIsProfileMenuOpen(false)}
+                            className="absolute right-4 top-4 w-8 h-8 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-700 flex items-center justify-center transition-all"
+                            aria-label="Fechar"
+                          >
+                            <X size={14} />
+                          </button>
 
-                    {/* Opções de Cadastro */}
-                    <div className="p-3 overflow-y-auto max-h-[320px] flex flex-col gap-2">
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                        {registerOptions.map((option) => {
-                          const IconComponent = option.icon;
-                          const isSelected = selectedOption === option.id;
-                          
-                          return (
-                            <button
-                              key={option.id}
-                              onClick={() => handleOptionSelect(option.id)}
-                              className={cn(
-                                "p-2.5 rounded-xl border text-left transition-all duration-200 flex flex-col gap-1.5 relative overflow-hidden active:scale-98 select-none group",
-                                isSelected 
-                                  ? option.activeBg + " shadow-sm ring-1 ring-offset-1 ring-emerald-500/10" 
-                                  : option.color + " border-slate-100 text-slate-700 hover:bg-slate-50"
-                              )}
-                            >
-                              {isSelected && (
-                                <div className="absolute top-2 right-2 w-4 h-4 rounded-full bg-white/20 text-white flex items-center justify-center">
-                                  <Check size={10} strokeWidth={3} />
-                                </div>
-                              )}
-
-                              <div className="flex items-center gap-1.5">
-                                <span className={cn(
-                                  "w-6 h-6 rounded-lg flex items-center justify-center transition-transform group-hover:scale-105",
-                                  isSelected ? "bg-white/20 text-white" : option.textCol + " bg-white border border-slate-100"
-                                )}>
-                                  <IconComponent size={12} />
-                                </span>
-                                <span className={cn("font-black text-[11px] tracking-tight", isSelected ? "text-white" : "text-slate-800")}>
-                                  {option.label}
-                                </span>
+                          {/* Foto de Perfil com botão/ícone no canto inferior direito */}
+                          <div className="relative group cursor-pointer" onClick={() => {
+                            setIsProfileMenuOpen(false);
+                            onNavigate('profile');
+                          }}>
+                            <div className="w-20 h-20 rounded-full overflow-hidden border-4 border-white shadow-md relative">
+                              <SafeImage 
+                                src={user.photoURL} 
+                                className="w-full h-full object-cover" 
+                                alt={user.displayName || 'Usuário'} 
+                              />
+                              {/* Efeito hover de visualização */}
+                              <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                <span className="text-[10px] text-white font-black uppercase tracking-widest bg-black/40 px-2 py-0.5 rounded-md">Ver</span>
                               </div>
-                              <p className={cn("text-[8.5px] font-medium leading-tight", isSelected ? "text-white/85" : "text-slate-400")}>
-                                {option.description}
-                              </p>
+                            </div>
+                            
+                            {/* Botão de Perfil na Foto */}
+                            <button
+                              type="button"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setIsProfileMenuOpen(false);
+                                onNavigate('profile');
+                              }}
+                              className="absolute -bottom-1 -right-1 w-7 h-7 bg-emerald-600 hover:bg-emerald-700 text-white rounded-full flex items-center justify-center shadow-md border-2 border-white transition-all hover:scale-115 active:scale-95"
+                              title="Ver Perfil"
+                            >
+                              <User size={12} strokeWidth={3} />
                             </button>
-                          );
-                        })}
-                      </div>
-                    </div>
+                          </div>
 
-                    {/* Footer / Botão de Ação */}
-                    <div className="p-4 border-t border-slate-50 bg-slate-50/50 flex flex-col gap-2">
-                      <button
-                        onClick={handleProceedAccess}
-                        disabled={!selectedOption}
-                        className={cn(
-                          "w-full h-10 rounded-xl font-black text-[10px] uppercase tracking-wider transition-all duration-200 flex items-center justify-center gap-1.5 shadow-xs",
-                          selectedOption 
-                            ? "bg-emerald-600 text-white hover:bg-emerald-700 cursor-pointer" 
-                            : "bg-slate-100 text-slate-450 border border-slate-200 cursor-not-allowed"
-                        )}
-                      >
-                        {selectedOption ? (
-                          <>
-                            <span>Acessar</span>
-                            <ChevronRight size={14} />
-                          </>
-                        ) : (
-                          <>
-                            <Lock size={12} className="opacity-60" />
-                            <span>Selecione uma Opção</span>
-                          </>
-                        )}
-                      </button>
-                      <p className="text-[8px] text-center font-bold text-slate-450 tracking-wide uppercase">
-                        {selectedOption 
-                          ? `Selecionado: ${registerOptions.find(o => o.id === selectedOption)?.label}`
-                          : "Escolha uma categoria acima para prosseguir"
-                        }
-                      </p>
-                    </div>
+                          <div className="mt-1">
+                            <h4 className="font-black text-slate-800 text-base leading-tight">{user.displayName}</h4>
+                            <p className="text-xs text-slate-450 font-medium">{user.email}</p>
+                            
+                            {/* Crachá de tipo de conta */}
+                            <span className="inline-block mt-2 px-2.5 py-0.5 text-[9px] font-black uppercase tracking-widest text-emerald-700 bg-emerald-50 rounded-full border border-emerald-100">
+                              {user.role === 'state_admin' ? 'Administrador' : user.role === 'vendor' ? 'Feirante / Parceiro' : 'Cliente'}
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* Corpo do Dropdown com a opção "Ver Perfil" */}
+                        <div className="p-4 border-t border-slate-50 bg-slate-50/50 flex flex-col gap-2">
+                          <button
+                            onClick={() => {
+                              setIsProfileMenuOpen(false);
+                              onNavigate('profile');
+                            }}
+                            className="w-full py-3 px-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-black text-[10px] uppercase tracking-wider transition-all duration-200 flex items-center justify-center gap-2 shadow-md shadow-emerald-600/10 active:scale-98 cursor-pointer font-sans"
+                          >
+                            <User size={14} />
+                            <span>Visualizar Meu Perfil</span>
+                          </button>
+
+                          {user.role === 'vendor' && (
+                            <button
+                              onClick={() => {
+                                setIsProfileMenuOpen(false);
+                                onNavigate('shop-management');
+                              }}
+                              className="w-full py-2.5 px-4 bg-white hover:bg-slate-50 text-slate-700 border border-slate-100 rounded-xl font-bold text-[10px] uppercase tracking-wider transition-all duration-200 flex items-center justify-center gap-2 active:scale-98 cursor-pointer font-sans"
+                            >
+                              <Store size={14} className="text-slate-500" />
+                              <span>Gerenciar Minha Loja</span>
+                            </button>
+                          )}
+
+                          {user.role === 'state_admin' && (
+                            <button
+                              onClick={() => {
+                                setIsProfileMenuOpen(false);
+                                onNavigate('admin-dashboard');
+                              }}
+                              className="w-full py-2.5 px-4 bg-white hover:bg-slate-50 text-slate-700 border border-slate-100 rounded-xl font-bold text-[10px] uppercase tracking-wider transition-all duration-200 flex items-center justify-center gap-2 active:scale-98 cursor-pointer font-sans"
+                            >
+                              <ShieldCheck size={14} className="text-slate-500" />
+                              <span>Painel Administrativo</span>
+                            </button>
+                          )}
+
+                          <button
+                            onClick={() => {
+                              setIsProfileMenuOpen(false);
+                              onLogout();
+                            }}
+                            className="w-full py-2 px-4 hover:bg-red-50 text-slate-400 hover:text-red-750 transition-all text-[9px] font-black uppercase tracking-widest rounded-xl flex items-center justify-center gap-2 mt-2 cursor-pointer font-sans"
+                          >
+                            <LogOut size={13} />
+                            <span>Sair da Conta</span>
+                          </button>
+                        </div>
+                      </>
+                    ) : (
+                      /* MENU DE OPÇÕES DE CADASTRO PARA VISITANTE */
+                      <>
+                        {/* Header do Menu */}
+                        <div className="p-4 border-b border-slate-50 flex items-center justify-between bg-slate-50/50">
+                          <div className="flex items-center gap-2.5">
+                            <div className="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-600 flex items-center justify-center">
+                              <Smartphone size={16} />
+                            </div>
+                            <div>
+                              <h3 className="font-extrabold text-slate-900 text-xs tracking-tight font-sans">Tipo de Cadastro</h3>
+                              <p className="text-[9px] text-slate-400 font-medium">Selecione para prosseguir ou logar</p>
+                            </div>
+                          </div>
+                          <button 
+                            onClick={() => setIsProfileMenuOpen(false)}
+                            className="w-8 h-8 rounded-lg hover:bg-slate-100 text-slate-400 hover:text-slate-700 flex items-center justify-center transition-all"
+                            aria-label="Fechar"
+                          >
+                            <X size={14} />
+                          </button>
+                        </div>
+
+                        {/* Opções de Cadastro */}
+                        <div className="p-3 overflow-y-auto max-h-[320px] flex flex-col gap-2">
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            {registerOptions.map((option) => {
+                              const IconComponent = option.icon;
+                              const isSelected = selectedOption === option.id;
+                              
+                              return (
+                                <button
+                                  key={option.id}
+                                  onClick={() => handleOptionSelect(option.id)}
+                                  className={cn(
+                                    "p-2.5 rounded-xl border text-left transition-all duration-200 flex flex-col gap-1.5 relative overflow-hidden active:scale-98 select-none group",
+                                    isSelected 
+                                      ? option.activeBg + " shadow-sm ring-1 ring-offset-1 ring-emerald-500/10" 
+                                      : option.color + " border-slate-100 text-slate-700 hover:bg-slate-50"
+                                  )}
+                                >
+                                  {isSelected && (
+                                    <div className="absolute top-2 right-2 w-4 h-4 rounded-full bg-white/20 text-white flex items-center justify-center">
+                                      <Check size={10} strokeWidth={3} />
+                                    </div>
+                                  )}
+
+                                  <div className="flex items-center gap-1.5">
+                                    <span className={cn(
+                                      "w-6 h-6 rounded-lg flex items-center justify-center transition-transform group-hover:scale-105",
+                                      isSelected ? "bg-white/20 text-white" : option.textCol + " bg-white border border-slate-100"
+                                    )}>
+                                      <IconComponent size={12} />
+                                    </span>
+                                    <span className={cn("font-black text-[11px] tracking-tight", isSelected ? "text-white" : "text-slate-800")}>
+                                      {option.label}
+                                    </span>
+                                  </div>
+                                  <p className={cn("text-[8.5px] font-medium leading-tight", isSelected ? "text-white/85" : "text-slate-400")}>
+                                    {option.description}
+                                  </p>
+                                </button>
+                              );
+                            })}
+                          </div>
+                        </div>
+
+                        {/* Footer / Botão de Ação */}
+                        <div className="p-4 border-t border-slate-50 bg-slate-50/50 flex flex-col gap-2">
+                          <button
+                            onClick={handleProceedAccess}
+                            disabled={!selectedOption}
+                            className={cn(
+                              "w-full h-10 rounded-xl font-black text-[10px] uppercase tracking-wider transition-all duration-200 flex items-center justify-center gap-1.5 shadow-xs",
+                              selectedOption 
+                                ? "bg-emerald-600 text-white hover:bg-emerald-700 cursor-pointer" 
+                                : "bg-slate-100 text-slate-455 border border-slate-200 cursor-not-allowed"
+                            )}
+                          >
+                            {selectedOption ? (
+                              <>
+                                <span>Acessar</span>
+                                <ChevronRight size={14} />
+                              </>
+                            ) : (
+                              <>
+                                <Lock size={12} className="opacity-60" />
+                                <span>Selecione uma Opção</span>
+                              </>
+                            )}
+                          </button>
+                          <p className="text-[8px] text-center font-bold text-slate-450 tracking-wide uppercase">
+                            {selectedOption 
+                              ? `Selecionado: ${registerOptions.find(o => o.id === selectedOption)?.label}`
+                              : "Escolha uma categoria acima para prosseguir"
+                            }
+                          </p>
+                        </div>
+                      </>
+                    )}
 
                   </motion.div>
                 </>

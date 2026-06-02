@@ -345,15 +345,36 @@ const getFullStateName = (stateId?: string) => {
 };
 
 const PRODUCT_CATEGORIES = [
-  { id: 'carne', name: 'Carne', icon: '🥩' },
-  { id: 'grao', name: 'Grão', icon: '🫘' },
-  { id: 'frutas', name: 'Frutas', icon: '🍎' },
-  { id: 'legumes', name: 'Legumes', icon: '🥦' },
-  { id: 'verduras', name: 'Verduras', icon: '🥬' },
-  { id: 'restaurante', name: 'Restaurante', icon: '🍽️' },
-  { id: 'hortalicas', name: 'Hortaliças', icon: '🥗' },
-  { id: 'temperos', name: 'Temperos', icon: '🧂' },
-  { id: 'outros', name: 'Outros', icon: '📦' },
+  { id: 'Alimentação Pronta e Lanches', name: 'Alimentação Pronta e Lanches', icon: '🍔' },
+  { id: 'Antiguidades, Cultura e Lazer.', name: 'Antiguidades, Cultura e Lazer.', icon: '🏺' },
+  { id: 'Aquarismo e Pequenos Animais', name: 'Aquarismo e Pequenos Animais', icon: '🐠' },
+  { id: 'Armarinhos, Tecidos e Artesanato.', name: 'Armarinhos, Tecidos e Artesanato.', icon: '🧵' },
+  { id: 'Carnes, Peixes e Embutidos.', name: 'Carnes, Peixes e Embutidos.', icon: '🥩' },
+  { id: 'Conservas, Licores.', name: 'Conservas, Licores.', icon: '🍯' },
+  { id: 'Combustíveis e Acendimento Tradicional', name: 'Combustíveis e Acendimento Tradicional', icon: '🔥' },
+  { id: 'Cordoaria e Amarração Profissional', name: 'Cordoaria e Amarração Profissional', icon: '🪢' },
+  { id: 'Cosméticos, Perfumaria e Bem-Estar.', name: 'Cosméticos, Perfumaria e Bem-Estar.', icon: '🧴' },
+  { id: 'Economia Circular e Sucata', name: 'Economia Circular e Sucata', icon: '♻️' },
+  { id: 'Eletrônicos, Mídias, Objetos Eletrônicos.', name: 'Eletrônicos, Mídias, Objetos Eletrônicos.', icon: '📱' },
+  { id: 'Embalagens e Descartáveis', name: 'Embalagens e Descartáveis', icon: '📦' },
+  { id: 'Entretenimento de Rua e Arte Urbana', name: 'Entretenimento de Rua e Arte Urbana', icon: '🎸' },
+  { id: 'Frutas Frescas', name: 'Frutas Frescas', icon: '🍎' },
+  { id: 'Laticínios e Ovos', name: 'Laticínios e Ovos', icon: '🧀' },
+  { id: 'Legumes, Verduras, Ervas e Raízes.', name: 'Legumes, Verduras, Ervas e Raízes.', icon: '🥬' },
+  { id: 'Mercearia, Grãos e Temperos.', name: 'Mercearia, Grãos e Temperos.', icon: '🫘' },
+  { id: 'Misticismo, Religiosidade e Artigos de Fé.', name: 'Misticismo, Religiosidade e Artigos de Fé.', icon: '🕯️' },
+  { id: 'Mobilidade Urbana', name: 'Mobilidade Urbana', icon: '🚲' },
+  { id: 'Plantas e Jardinagem', name: 'Plantas e Jardinagem', icon: '🪴' },
+  { id: 'Produtos Artesanais', name: 'Produtos Artesanais', icon: '🎨' },
+  { id: 'Produtos Químicos de Limpeza', name: 'Produtos Químicos de Limpeza', icon: '🧼' },
+  { id: 'Produtos Sazonais e Festivos', name: 'Produtos Sazonais e Festivos', icon: '🎉' },
+  { id: 'Produtos para Pets e Agropecuária', name: 'Produtos para Pets e Agropecuária', icon: '🐶' },
+  { id: 'Saúde Popular e Ortopedia Básica', name: 'Saúde Popular e Ortopedia Básica', icon: '💊' },
+  { id: 'Selaria e Artigos de Couro', name: 'Selaria e Artigos de Couro', icon: '👢' },
+  { id: 'Serviços Rápidos e Logística de Apoio', name: 'Serviços Rápidos e Logística de Apoio', icon: '🛠️' },
+  { id: 'Utensílios de Cozinha', name: 'Utensílios de Cozinha', icon: '🍳' },
+  { id: 'Utilidades para Construção e Pequenos Reparos', name: 'Utilidades para Construção e Pequenos Reparos', icon: '🔨' },
+  { id: 'Vestuário, Acessórios e Conveniência.', name: 'Vestuário, Acessórios e Conveniência.', icon: '👕' }
 ];
 
 
@@ -2058,10 +2079,10 @@ const SalesScreen = ({ config, user, onNavigate, showNotification, showConfirm }
                     </div>
 
                     {/* PREÇO VENDA (R$) */}
-                    <div className="space-y-4">
+                    <div className="space-y-2">
                       <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block ml-2">Preço Venda (R$)</label>
                       <div className="relative group">
-                        <div className="absolute left-8 top-1/2 -translate-y-1/2 text-3xl font-black text-slate-300 pointer-events-none transition-colors group-focus-within:text-emerald-500">
+                        <div className="absolute left-4 top-1/2 -translate-y-1/2 text-lg font-black text-slate-300 pointer-events-none transition-colors group-focus-within:text-emerald-500">
                           R$
                         </div>
                         <input 
@@ -2069,7 +2090,7 @@ const SalesScreen = ({ config, user, onNavigate, showNotification, showConfirm }
                           value={commPrice || ''}
                           onChange={(e) => setCommPrice(parseFormattedNumber(e.target.value))}
                           placeholder="0,00"
-                          className="w-full pl-20 pr-8 py-8 bg-slate-50 border border-slate-100 rounded-[32px] outline-none text-6xl font-black text-slate-900 placeholder:text-slate-200 transition-all focus:bg-white focus:border-emerald-500 focus:shadow-xl focus:shadow-emerald-500/10 shadow-inner"
+                          className="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-100 rounded-xl outline-none text-2xl font-black text-slate-900 placeholder:text-slate-200 transition-all focus:bg-white focus:border-emerald-500 focus:shadow-md focus:shadow-emerald-500/5 shadow-inner"
                         />
                       </div>
                     </div>
@@ -2278,27 +2299,27 @@ const SalesScreen = ({ config, user, onNavigate, showNotification, showConfirm }
                     </div>
 
                     {/* RESUMO DA VENDA */}
-                    <div className="bg-brand-600 p-12 rounded-[48px] text-white space-y-10 shadow-2xl shadow-brand-600/30 relative overflow-hidden group">
-                      <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32 blur-3xl transition-transform group-hover:scale-125 duration-1000" />
+                    <div className="bg-brand-600 p-6 rounded-2xl text-white space-y-6 shadow-xl shadow-brand-600/20 relative overflow-hidden group font-sans">
+                      <div className="absolute top-0 right-0 w-48 h-48 bg-white/10 rounded-full -mr-24 -mt-24 blur-2xl transition-transform group-hover:scale-110 duration-1000" />
                       
-                      <div className="flex items-center gap-3">
-                         <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center">
-                           <CheckCircle size={16} />
+                      <div className="flex items-center gap-2">
+                         <div className="w-6 h-6 bg-white/20 rounded flex items-center justify-center">
+                           <CheckCircle size={12} />
                          </div>
-                         <span className="text-[10px] font-black uppercase tracking-[0.2em]">Resumo da {commType === 'sale' ? 'Venda' : 'Compra'}</span>
+                         <span className="text-[9px] font-black uppercase tracking-[0.2em]">Resumo da {commType === 'sale' ? 'Venda' : 'Compra'}</span>
                       </div>
 
-                      <div className="space-y-2">
-                        <span className="text-[10px] font-black text-white/60 uppercase tracking-widest block">Total a {commType === 'sale' ? 'Receber' : 'Pagar'}</span>
-                        <div className="flex items-end gap-3 leading-none">
-                           <span className="text-2xl font-black opacity-40 mb-2">R$</span>
-                           <span className="text-8xl font-black font-display tracking-tighter">{(commTotal || 0).toFixed(2)}</span>
+                      <div className="space-y-1">
+                        <span className="text-[9px] font-black text-white/60 uppercase tracking-widest block">Total a {commType === 'sale' ? 'Receber' : 'Pagar'}</span>
+                        <div className="flex items-end gap-2 leading-none">
+                           <span className="text-sm font-black opacity-40 mb-0.5">R$</span>
+                           <span className="text-4xl md:text-5xl font-black font-display tracking-tight">{(commTotal || 0).toFixed(2)}</span>
                         </div>
                       </div>
 
                       <div className="h-px bg-white/10" />
 
-                      <div className="grid grid-cols-2 gap-8">
+                      <div className="grid grid-cols-2 gap-4">
                          <div className="flex justify-between items-center group/item hover:translate-x-1 transition-transform">
                             <span className="text-[10px] font-black text-white/60 uppercase tracking-widest">Quant. Itens</span>
                             <span className="text-xl font-black text-white">{commItems.length || (commQuantity > 0 ? 1 : 0)}</span>

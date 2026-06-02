@@ -42,14 +42,37 @@ const BRAZIL_STATES = [
 ];
 
 const PRODUCT_CATEGORIES = [
-  { id: 'all', name: 'Todos' },
-  { id: 'frutas', name: 'Frutas' },
-  { id: 'verduras', name: 'Verduras' },
-  { id: 'legumes', name: 'Legumes' },
-  { id: 'ovos-laticinios', name: 'Ovos & Laticínios' },
-  { id: 'graos-cereais', name: 'Grãos' },
-  { id: 'artesanais', name: 'Artesanais' },
-  { id: 'outros', name: 'Outros' }
+  { id: 'all', name: 'Todos', icon: '🔍' },
+  { id: 'Alimentação Pronta e Lanches', name: 'Alimentação Pronta e Lanches', icon: '🍔' },
+  { id: 'Antiguidades, Culture e Lazer.', name: 'Antiguidades, Cultura e Lazer.', icon: '🏺' },
+  { id: 'Aquarismo e Pequenos Animais', name: 'Aquarismo e Pequenos Animais', icon: '🐠' },
+  { id: 'Armarinhos, Tecidos e Artesanato.', name: 'Armarinhos, Tecidos e Artesanato.', icon: '🧵' },
+  { id: 'Carnes, Peixes e Embutidos.', name: 'Carnes, Peixes e Embutidos.', icon: '🥩' },
+  { id: 'Conservas, Licores.', name: 'Conservas, Licores.', icon: '🍯' },
+  { id: 'Combustíveis e Acendimento Tradicional', name: 'Combustíveis e Acendimento Tradicional', icon: '🔥' },
+  { id: 'Cordoaria e Amarração Profissional', name: 'Cordoaria e Amarração Profissional', icon: '🪢' },
+  { id: 'Cosméticos, Perfumaria e Bem-Estar.', name: 'Cosméticos, Perfumaria e Bem-Estar.', icon: '🧴' },
+  { id: 'Economia Circular e Sucata', name: 'Economia Circular e Sucata', icon: '♻️' },
+  { id: 'Eletrônicos, Mídias, Objetos Eletrônicos.', name: 'Eletrônicos, Mídias, Objetos Eletrônicos.', icon: '📱' },
+  { id: 'Embalagens e Descartáveis', name: 'Embalagens e Descartáveis', icon: '📦' },
+  { id: 'Entretenimento de Rua e Arte Urbana', name: 'Entretenimento de Rua e Arte Urbana', icon: '🎸' },
+  { id: 'Frutas Frescas', name: 'Frutas Frescas', icon: '🍎' },
+  { id: 'Laticínios e Ovos', name: 'Laticínios e Ovos', icon: '🧀' },
+  { id: 'Legumes, Verduras, Ervas e Raízes.', name: 'Legumes, Verduras, Ervas e Raízes.', icon: '🥬' },
+  { id: 'Mercearia, Grãos e Temperos.', name: 'Mercearia, Grãos e Temperos.', icon: '🫘' },
+  { id: 'Misticismo, Religiosidade e Artigos de Fé.', name: 'Misticismo, Religiosidade e Artigos de Fé.', icon: '🕯️' },
+  { id: 'Mobilidade Urbana', name: 'Mobilidade Urbana', icon: '🚲' },
+  { id: 'Plantas e Jardinagem', name: 'Plantas e Jardinagem', icon: '🪴' },
+  { id: 'Produtos Artesanais', name: 'Produtos Artesanais', icon: '🎨' },
+  { id: 'Produtos Químicos de Limpeza', name: 'Produtos Químicos de Limpeza', icon: '🧼' },
+  { id: 'Produtos Sazonais e Festivos', name: 'Produtos Sazonais e Festivos', icon: '🎉' },
+  { id: 'Produtos para Pets e Agropecuária', name: 'Produtos para Pets e Agropecuária', icon: '🐶' },
+  { id: 'Saúde Popular e Ortopedia Básica', name: 'Saúde Popular e Ortopedia Básica', icon: '💊' },
+  { id: 'Selaria e Artigos de Couro', name: 'Selaria e Artigos de Couro', icon: '👢' },
+  { id: 'Serviços Rápidos e Logística de Apoio', name: 'Serviços Rápidos e Logística de Apoio', icon: '🛠️' },
+  { id: 'Utensílios de Cozinha', name: 'Utensílios de Cozinha', icon: '🍳' },
+  { id: 'Utilidades para Construção e Pequenos Reparos', name: 'Utilidades para Construção e Pequenos Reparos', icon: '🔨' },
+  { id: 'Vestuário, Acessórios e Conveniência.', name: 'Vestuário, Acessórios e Conveniência.', icon: '👕' }
 ];
 
 const handleFirestoreError = (error: any, op: OperationType, path: string) => {
@@ -97,6 +120,9 @@ const WholesaleScreen = ({
 }: Props) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedState, setSelectedState] = useState('all');
+  const [categorySearchQuery, setCategorySearchQuery] = useState('');
+  const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
+  const [dropdownSearch, setDropdownSearch] = useState('');
   const [shops, setShops] = useState<Shop[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
@@ -163,204 +189,395 @@ const WholesaleScreen = ({
   });
 
   return (
-    <div className="p-6 max-w-7xl mx-auto pb-32 min-h-screen bg-transparent">
+    <div className="p-4 max-w-7xl mx-auto pb-24 min-h-screen bg-transparent">
       <PageContainer>
-        <div className="mb-12">
-          <h2 className="text-5xl font-light text-slate-900 font-serif italic tracking-tight mb-2 uppercase">ATACADO LIVRE</h2>
-          <p className="text-slate-500 font-medium ml-1 text-sm uppercase tracking-wider">FORNECEDORES, PARA GRANDES VOLUMES E LOGÍSTICA PROFISSIONAL.</p>
+        <div className="mb-6">
+          <h2 className="text-3xl md:text-4xl font-light text-slate-900 font-serif italic tracking-tight mb-1 uppercase">ATACADO LIVRE</h2>
+          <p className="text-slate-500 font-medium ml-1 text-xs uppercase tracking-wider">FORNECEDORES, PARA GRANDES VOLUMES E LOGÍSTICA PROFISSIONAL.</p>
           
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mt-8 pt-8 border-t border-slate-100">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center">
-                <Truck size={24} />
+          <div className="mt-4 pt-4 border-t border-slate-100">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center">
+                <Truck size={18} />
               </div>
               <div>
-                <p className="text-[10px] font-black text-blue-600 uppercase tracking-widest leading-none mb-1">Negócios Estratégicos</p>
-                <p className="text-sm font-bold text-slate-900">Preços e condições exclusivas direto do campo</p>
+                <p className="text-[9px] font-black text-blue-600 uppercase tracking-widest leading-none mb-1 font-sans">Negócios Estratégicos</p>
+                <p className="text-xs font-bold text-slate-900">Preços e condições exclusivas direto do campo</p>
               </div>
-            </div>
-            
-            <div className="flex flex-wrap gap-2 overflow-x-auto no-scrollbar pb-2 whitespace-nowrap max-w-full">
-              <span className="text-[9px] font-black text-slate-300 uppercase tracking-widest w-full mb-1">Buscas Recentes</span>
-              {recentSearches.map(s => (
-                <button 
-                  key={s}
-                  onClick={() => setSearchTerm(s)}
-                  className="px-4 py-2 bg-white border border-slate-100 rounded-full text-[10px] font-black uppercase tracking-widest text-slate-400 hover:border-brand-300 hover:text-brand-600 transition-all whitespace-nowrap"
-                >
-                  {s}
-                </button>
-              ))}
             </div>
           </div>
         </div>
 
-        <div className="bg-white p-8 rounded-[40px] shadow-soft border border-slate-100 mb-12">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div className="lg:col-span-2 relative">
-              <Search size={24} className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-400" />
+        <div className="bg-white p-4 rounded-2xl shadow-md border border-slate-100 mb-6 font-sans">
+          <div className="flex flex-col lg:flex-row gap-4">
+            <div className="flex-1 relative group">
+              <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
               <input 
                 type="text" 
                 placeholder="Pesquisar fornecedores e produtos no atacado..." 
                 value={searchTerm || ''}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-16 pr-6 py-5 bg-slate-50 border border-slate-100 rounded-3xl text-lg font-medium outline-none focus:ring-2 focus:ring-brand-500 transition-all"
+                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-100 rounded-xl text-sm font-medium outline-none focus:ring-1 focus:ring-brand-500 transition-all placeholder:text-slate-400"
               />
             </div>
-            <div className="relative">
-              <MapPin size={20} className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400" />
-              <select 
-                value={selectedState || 'all'}
-                onChange={(e) => setSelectedState(e.target.value)}
-                className="w-full pl-14 pr-10 py-5 bg-slate-50 border border-slate-100 rounded-3xl font-bold text-slate-700 outline-none appearance-none focus:ring-2 focus:ring-brand-500"
-              >
-                <option value="all">Todos os Estados</option>
-                {BRAZIL_STATES.map(s => <option key={s.id} value={s.id}>{s.name}</option>)}
-              </select>
-              <ChevronDown size={20} className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+            <div className="flex flex-col sm:flex-row gap-3 min-w-[300px]">
+              <div className="relative flex-1 min-w-[120px]">
+                <MapPin size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+                <select 
+                  value={selectedState || 'all'}
+                  onChange={(e) => setSelectedState(e.target.value)}
+                  className="w-full pl-10 pr-8 py-2.5 bg-slate-50 border border-slate-100 rounded-xl font-bold text-xs text-slate-700 outline-none appearance-none focus:ring-1 focus:ring-brand-500 cursor-pointer h-full"
+                >
+                  <option value="all">Sua Região</option>
+                  {BRAZIL_STATES.map(s => <option key={s.id} value={s.id}>{s.name}</option>)}
+                </select>
+                <ChevronDown size={14} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+              </div>
+
+              {/* Categorias Search Combobox Dropdown */}
+              <div className="relative flex-1 min-w-[140px]">
+                <button
+                  type="button"
+                  onClick={() => setIsCategoryDropdownOpen(!isCategoryDropdownOpen)}
+                  className="w-full flex items-center justify-between gap-1.5 px-4 py-2.5 bg-brand-500 border border-brand-400 rounded-xl font-black text-[9px] uppercase tracking-widest text-white outline-none hover:bg-brand-600 transition-all cursor-pointer shadow-md shadow-brand-500/10 h-full"
+                >
+                  <span className="truncate">
+                    {selectedCategory === 'all' 
+                      ? 'Categorias' 
+                      : (PRODUCT_CATEGORIES.find(c => c.id === selectedCategory)?.name || 'Categorias')}
+                  </span>
+                  <ChevronDown size={14} className={cn("transition-transform flex-shrink-0", isCategoryDropdownOpen && "rotate-180")} />
+                </button>
+
+                {isCategoryDropdownOpen && (
+                  <>
+                    <div className="fixed inset-0 z-40" onClick={() => { setIsCategoryDropdownOpen(false); setDropdownSearch(''); }} />
+                    
+                    <div className="absolute right-0 mt-2 w-72 max-h-96 bg-white border border-slate-100 rounded-2xl shadow-xl z-50 overflow-hidden flex flex-col">
+                      <div className="p-3 border-b border-slate-50 relative">
+                        <Search size={14} className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-400" />
+                        <input
+                          type="text"
+                          placeholder="Pesquisar categoria..."
+                          value={dropdownSearch}
+                          onChange={(e) => setDropdownSearch(e.target.value)}
+                          className="w-full pl-9 pr-8 py-2.5 bg-slate-50 border border-slate-100 rounded-xl text-xs font-bold text-slate-800 outline-none focus:border-brand-500 focus:bg-white transition-all placeholder:text-slate-400 font-sans"
+                          autoFocus
+                        />
+                        {dropdownSearch && (
+                          <button
+                            type="button"
+                            onClick={() => setDropdownSearch('')}
+                            className="absolute right-6 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 text-[10px] font-bold"
+                          >
+                            ✕
+                          </button>
+                        )}
+                      </div>
+
+                      <div className="overflow-y-auto max-h-[250px] p-2 flex flex-col gap-1 no-scrollbar">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setSelectedCategory('all');
+                            setIsCategoryDropdownOpen(false);
+                            setDropdownSearch('');
+                          }}
+                          className={cn(
+                            "w-full text-left p-2.5 rounded-xl text-xs font-bold flex items-center gap-2 transition-all border",
+                            selectedCategory === 'all' 
+                              ? "bg-brand-50 border-brand-100 text-brand-600" 
+                              : "bg-white border-transparent text-slate-600 hover:bg-slate-50"
+                          )}
+                        >
+                          <span>🔍</span>
+                          <span className="truncate font-sans font-black uppercase text-[10px] tracking-wider">Todas</span>
+                        </button>
+
+                        {PRODUCT_CATEGORIES.filter(c => 
+                          c.id !== 'all' && 
+                          c.name.toLowerCase().includes(dropdownSearch.toLowerCase())
+                        ).map((cat) => {
+                          const isSelected = selectedCategory === cat.id;
+                          return (
+                            <button
+                              key={cat.id}
+                              type="button"
+                              onClick={() => {
+                                setSelectedCategory(cat.id);
+                                setIsCategoryDropdownOpen(false);
+                                setDropdownSearch('');
+                              }}
+                              className={cn(
+                                "w-full text-left p-2.5 rounded-xl text-xs font-bold flex items-center gap-2 transition-all border",
+                                isSelected 
+                                  ? "bg-brand-50 border-brand-100 text-brand-600" 
+                                  : "bg-white border-transparent text-slate-600 hover:bg-slate-50"
+                              )}
+                            >
+                              <span className="text-sm">{cat.icon}</span>
+                              <span className="truncate font-sans font-black uppercase text-[10px] tracking-wider">{cat.name}</span>
+                            </button>
+                          );
+                        })}
+
+                        {PRODUCT_CATEGORIES.filter(c => 
+                          c.id !== 'all' && 
+                          c.name.toLowerCase().includes(dropdownSearch.toLowerCase())
+                        ).length === 0 && (
+                          <div className="p-4 text-center text-slate-400 text-xs italic font-sans">
+                            Nenhuma categoria encontrada
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </>
+                )}
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="flex gap-4 mb-20 -mt-10">
-          <button 
-            onClick={() => setActiveView('shops')}
-            className={cn(
-              "flex-1 py-5 rounded-[24px] font-black uppercase tracking-widest text-xs transition-all border flex items-center justify-center gap-3",
-              activeView === 'shops' ? "bg-slate-900 text-white border-slate-900 shadow-xl shadow-slate-900/20" : "bg-white text-slate-400 border-slate-100 hover:border-brand-200"
-            )}
-          >
-            <Store size={18} /> Lojas
-          </button>
-          <button 
-            onClick={() => setActiveView('products')}
-            className={cn(
-              "flex-1 py-5 rounded-[24px] font-black uppercase tracking-widest text-xs transition-all border flex items-center justify-center gap-3",
-              activeView === 'products' ? "bg-slate-900 text-white border-slate-900 shadow-xl shadow-slate-900/20" : "bg-white text-slate-400 border-slate-100 hover:border-brand-200"
-            )}
-          >
-            <Package size={18} /> Produtos
-          </button>
+        {/* Menu Topbar Nav (Touch scrolling horizontal list for mobile/tablet) */}
+        <div className="lg:hidden mb-10 -mt-6">
+          <div className="flex items-center justify-between gap-4 mb-2 px-1">
+            <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest font-sans">Categorias de Atacado</p>
+          </div>
+          <div className="flex gap-2 overflow-x-auto no-scrollbar py-1">
+            <button
+              onClick={() => setSelectedCategory('all')}
+              className={cn(
+                "px-4.5 py-2.5 rounded-full text-xs font-bold transition-all duration-200 whitespace-nowrap flex items-center gap-1.5 shadow-[0_2px_8px_rgba(0,0,0,0.02)] select-none border",
+                selectedCategory === 'all' 
+                  ? "bg-brand-600 border-brand-600 text-white shadow-md shadow-brand-500/10" 
+                  : "bg-white border-slate-100 text-slate-600 hover:border-slate-200"
+              )}
+            >
+              <span>🔍</span>
+              <span>Todos</span>
+            </button>
+            {PRODUCT_CATEGORIES.filter(c => c.id !== 'all' && c.name.toLowerCase().includes(categorySearchQuery.toLowerCase())).map((cat) => {
+              const isSelected = selectedCategory === cat.id;
+              return (
+                <button
+                  key={cat.id}
+                  onClick={() => setSelectedCategory(cat.id)}
+                  className={cn(
+                    "px-4.5 py-2.5 rounded-full text-xs font-bold transition-all duration-200 whitespace-nowrap flex items-center gap-1.5 shadow-[0_2px_8px_rgba(0,0,0,0.02)] select-none border",
+                    isSelected 
+                      ? "bg-brand-600 border-brand-600 text-white shadow-md shadow-brand-500/10" 
+                      : "bg-white border-slate-100 text-slate-600 hover:border-slate-200"
+                  )}
+                >
+                  <span className="text-sm">{cat.icon}</span>
+                  <span>{cat.name}</span>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
-        {activeView === 'products' ? (
-          <div className="flex flex-col gap-6" style={{ transform: 'translateZ(0)', backfaceVisibility: 'hidden', willChange: 'transform', contain: 'layout style paint' }}>
-            {React.useMemo(() => filteredProducts.map((product, idx) => {
-              const shop = shops.find(s => s.id === product.shopId);
-              const itemInCart = cart?.items.find((i: any) => i.product.id === product.id);
-              const quantityInCart = itemInCart ? itemInCart.quantity : 0;
-              
-              return (
-                <ProductCard 
-                  key={product.id}
-                  product={product}
-                  user={user}
-                  shop={shop!}
-                  initialQuantity={quantityInCart}
-                  addToCart={(p) => sharedAddToCart(p, shop!)}
-                  removeFromCart={sharedRemoveFromCart}
-                  onNavigate={onNavigate}
-                  showNotification={showNotification}
-                  handleShare={() => handleShare(shop!)}
-                />
-              );
-            }), [filteredProducts, shops, sharedAddToCart, sharedRemoveFromCart, onNavigate, showNotification, handleShare])}
-            {filteredProducts.length === 0 && (
-              <div className="py-32 text-center bg-white rounded-[64px] border border-dashed border-slate-200">
-                <div className="w-24 h-24 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Package size={40} className="text-slate-200" />
-                </div>
-                <h3 className="text-2xl font-serif italic text-slate-900 mb-2">Nenhum produto em atacado encontrado</h3>
-                <p className="text-slate-400 text-sm italic">Tente mudar sua busca ou filtros.</p>
+        {/* Gráfico Layout Columnas (Desk: Sidebar Coluna + Main Content Grid) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-20">
+          
+          {/* Coluna Categoria (Desktop Sidebar) */}
+          <div className="hidden lg:block lg:col-span-3 bg-white rounded-[32px] p-5 border border-slate-100 shadow-sm self-start h-fit max-h-[82vh] overflow-y-auto no-scrollbar">
+            <div className="flex items-center gap-2 mb-4 pb-3 border-b border-slate-50">
+              <div className="w-8 h-8 rounded-lg bg-brand-500/10 text-brand-600 flex items-center justify-center">
+                <Store size={15} />
               </div>
-            )}
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredShops.map(shop => (
-              <motion.div 
-                key={shop.id}
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                whileHover={{ y: -10 }}
-                className="bg-white rounded-[40px] shadow-soft border border-slate-100 overflow-hidden group cursor-pointer"
-                onClick={() => {
-                  setSelectedShop(shop);
-                  onNavigate('shop-detail');
-                }}
+              <h3 className="font-black text-[9px] uppercase tracking-wider text-slate-800">Categorias</h3>
+            </div>
+            
+            <div className="flex flex-col gap-1.5">
+              <button
+                onClick={() => setSelectedCategory('all')}
+                className={cn(
+                  "w-full text-left p-3 rounded-2xl text-[10.5px] font-bold tracking-tight transition-all flex items-center justify-between select-none border group",
+                  selectedCategory === 'all' 
+                    ? "bg-brand-600 border-brand-600 text-white shadow-md shadow-brand-500/10 pr-4" 
+                    : "bg-white border-transparent text-slate-600 hover:bg-slate-50"
+                )}
               >
-                <div className="h-48 bg-slate-100 relative">
-                  <SafeImage src={shop.photoURL} type="shop" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt={shop.name} />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60" />
-                  <div className="absolute top-6 left-6 px-4 py-1.5 bg-blue-600 text-white text-[10px] font-black uppercase tracking-widest rounded-full flex items-center gap-2 shadow-lg">
-                    {(() => {
-                        const typeInfo = getShopTypeInfo(shop.type || 'atacado');
-                        const Icon = typeInfo.icon;
-                        return (
-                          <>
-                            <Icon size={12} /> {typeInfo.label}
-                          </>
-                        );
-                    })()}
-                  </div>
-                  <div className="absolute bottom-6 left-6 flex items-center gap-3">
-                    <div className="w-12 h-12 bg-white rounded-2xl p-1 shadow-xl">
-                      <SafeImage src={shop.photoURL} type="shop" className="w-full h-full object-cover rounded-xl" alt={shop.name} />
+                <div className="flex items-center gap-2.5 truncate">
+                  <span className="text-base flex-shrink-0">🔍</span>
+                  <span className="truncate">Todos</span>
+                </div>
+                {selectedCategory === 'all' && (
+                  <span className="w-1.5 h-1.5 rounded-full bg-white flex-shrink-0 animate-pulse" />
+                )}
+              </button>
+              
+              {PRODUCT_CATEGORIES.filter(c => c.id !== 'all' && c.name.toLowerCase().includes(categorySearchQuery.toLowerCase())).map((cat) => {
+                const isSelected = selectedCategory === cat.id;
+                return (
+                  <button
+                    key={cat.id}
+                    onClick={() => setSelectedCategory(cat.id)}
+                    className={cn(
+                      "w-full text-left p-2.5 rounded-2xl text-[10.5px] font-bold tracking-tight transition-all flex items-center justify-between select-none border group",
+                      isSelected 
+                        ? "bg-brand-600 border-brand-600 text-white shadow-md shadow-brand-500/10 pr-4" 
+                        : "bg-white border-transparent text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+                    )}
+                  >
+                    <div className="flex items-center gap-2.5 truncate">
+                      <span className="text-base flex-shrink-0">{cat.icon}</span>
+                      <span className="truncate">{cat.name}</span>
                     </div>
-                    <div>
-                      <h3 className="text-white font-black text-lg font-display leading-none mb-1">{shop.name}</h3>
-                      <div className="flex items-center gap-1 text-white/80 text-[10px] font-bold uppercase tracking-widest">
-                        <MapPin size={10} /> {shop.address}, {shop.city}, {getFullStateName(shop.state)}. Brasil.
+                    {isSelected && (
+                      <span className="w-1.5 h-1.5 rounded-full bg-white flex-shrink-0 animate-pulse" />
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Coluna Main Content (9 spans) */}
+          <div className="lg:col-span-9 flex flex-col gap-6">
+
+            <div className="flex gap-3 -mt-2 font-sans">
+              <button 
+                onClick={() => setActiveView('shops')}
+                className={cn(
+                  "flex-1 py-2.5 rounded-xl font-black uppercase tracking-widest text-[10px] transition-all border flex items-center justify-center gap-2",
+                  activeView === 'shops' ? "bg-slate-900 text-white border-slate-900 shadow-md shadow-slate-900/10" : "bg-white text-slate-400 border-slate-100 hover:border-brand-200"
+                )}
+              >
+                <Store size={14} /> Lojas
+              </button>
+              <button 
+                onClick={() => setActiveView('products')}
+                className={cn(
+                  "flex-1 py-2.5 rounded-xl font-black uppercase tracking-widest text-[10px] transition-all border flex items-center justify-center gap-2",
+                  activeView === 'products' ? "bg-slate-900 text-white border-slate-900 shadow-md shadow-slate-900/10" : "bg-white text-slate-400 border-slate-100 hover:border-brand-200"
+                )}
+              >
+                <Package size={14} /> Produtos
+              </button>
+            </div>
+
+            {activeView === 'products' ? (
+              <div className="flex flex-col gap-4" style={{ transform: 'translateZ(0)', backfaceVisibility: 'hidden', willChange: 'transform', contain: 'layout style paint' }}>
+                {React.useMemo(() => filteredProducts.map((product, idx) => {
+                  const shop = shops.find(s => s.id === product.shopId);
+                  const itemInCart = cart?.items.find((i: any) => i.product.id === product.id);
+                  const quantityInCart = itemInCart ? itemInCart.quantity : 0;
+                  
+                  return (
+                    <ProductCard 
+                      key={product.id}
+                      product={product}
+                      user={user}
+                      shop={shop!}
+                      initialQuantity={quantityInCart}
+                      addToCart={(p) => sharedAddToCart(p, shop!)}
+                      removeFromCart={sharedRemoveFromCart}
+                      onNavigate={onNavigate}
+                      showNotification={showNotification}
+                      handleShare={() => handleShare(shop!)}
+                    />
+                  );
+                }), [filteredProducts, shops, sharedAddToCart, sharedRemoveFromCart, onNavigate, showNotification, handleShare])}
+                {filteredProducts.length === 0 && (
+                  <div className="py-16 text-center bg-white rounded-2xl border border-dashed border-slate-200 font-sans">
+                    <div className="w-12 h-12 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Package size={20} className="text-slate-200" />
+                    </div>
+                    <h3 className="text-base font-serif italic text-slate-900 mb-1">Nenhum produto em atacado encontrado</h3>
+                    <p className="text-slate-400 text-[11px] italic">Tente mudar sua busca ou filtros.</p>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-5">
+                {filteredShops.map(shop => (
+                  <motion.div 
+                    key={shop.id}
+                    initial={{ opacity: 0, scale: 0.98 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="bg-white rounded-2xl shadow-md border border-slate-100 overflow-hidden group cursor-pointer transition-all hover:border-brand-200"
+                    onClick={() => {
+                      setSelectedShop(shop);
+                      onNavigate('shop-detail');
+                    }}
+                  >
+                    <div className="h-32 bg-slate-100 relative">
+                      <SafeImage src={shop.photoURL} type="shop" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt={shop.name} />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                      <div className="absolute top-3 left-3 px-2 py-0.5 bg-blue-600 text-white text-[8px] font-black uppercase tracking-widest rounded flex items-center gap-1 shadow-sm">
+                        {(() => {
+                            const typeInfo = getShopTypeInfo(shop.type || 'atacado');
+                            const Icon = typeInfo.icon;
+                            return (
+                              <>
+                                <Icon size={10} /> {typeInfo.label}
+                              </>
+                            );
+                        })()}
+                      </div>
+                      <div className="absolute bottom-3 left-3 right-3 flex items-center gap-2.5">
+                        <div className="w-9 h-9 bg-white rounded-lg p-0.5 shadow-md flex-shrink-0">
+                          <SafeImage src={shop.photoURL} type="shop" className="w-full h-full object-cover rounded-md" alt={shop.name} />
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <h3 className="text-white font-bold text-sm tracking-tight leading-none mb-0.5 truncate">{shop.name}</h3>
+                          <div className="flex items-center gap-1 text-white/80 text-[8px] font-bold uppercase tracking-wider truncate">
+                            <MapPin size={8} /> {shop.address}, {shop.city}, {getFullStateName(shop.state)}.
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-                <div className="p-8">
-                  <p className="text-slate-500 text-sm font-medium line-clamp-2 mb-6 leading-relaxed">
-                    {shop.description || 'Fornecedor especializado em vendas no atacado.'}
-                  </p>
+                    <div className="p-4">
+                      <p className="text-slate-500 text-xs font-medium line-clamp-2 mb-4 leading-relaxed font-sans">
+                        {shop.description || 'Fornecedor especializado em vendas no atacado.'}
+                      </p>
 
-                  <div className="space-y-4 mb-6">
-                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Catálogo de Produtos</p>
-                    <div className="flex gap-2 overflow-hidden">
-                      {products
-                        .filter(p => p.shopId === shop.id)
-                        .slice(0, 5)
-                        .map(p => (
-                          <div key={p.id} className="w-14 h-14 rounded-2xl bg-slate-50 overflow-hidden border border-slate-100 flex-shrink-0 group-hover:border-brand-200 transition-colors relative flex items-center justify-center">
-                             <SafeImage src={p.photoURL} type="product" className="w-full h-full object-cover" />
-                             {searchTerm && (p.name || '').toLowerCase().includes((searchTerm || '').toLowerCase()) && (
-                               <div className="absolute inset-0 bg-blue-500/20 ring-2 ring-blue-500 ring-inset" />
-                             )}
-                          </div>
-                        ))}
-                    </div>
-                  </div>
+                      <div className="space-y-2 mb-4">
+                        <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest mb-1 font-sans">Catálogo de Produtos</p>
+                        <div className="flex gap-1.5 overflow-hidden">
+                          {products
+                            .filter(p => p.shopId === shop.id)
+                            .slice(0, 5)
+                            .map(p => (
+                              <div key={p.id} className="w-10 h-10 rounded-lg bg-slate-50 overflow-hidden border border-slate-100 flex-shrink-0 group-hover:border-brand-200 transition-colors relative flex items-center justify-center">
+                                 <SafeImage src={p.photoURL} type="product" className="w-full h-full object-cover" />
+                                 {searchTerm && (p.name || '').toLowerCase().includes((searchTerm || '').toLowerCase()) && (
+                                   <div className="absolute inset-0 bg-blue-500/20 ring-2 ring-blue-500 ring-inset" />
+                                 )}
+                              </div>
+                            ))}
+                        </div>
+                      </div>
 
-                  <div className="flex items-center justify-between pt-6 border-t border-slate-50">
-                    <div className="flex items-center gap-2 text-slate-400">
-                      <TrendingUp size={14} />
-                      <span className="text-[10px] font-black uppercase tracking-widest">Grandes volumes</span>
+                      <div className="flex items-center justify-between pt-3 border-t border-slate-50">
+                        <div className="flex items-center gap-1.5 text-slate-400 font-sans">
+                          <TrendingUp size={12} />
+                          <span className="text-[9px] font-black uppercase tracking-widest">Grandes volumes</span>
+                        </div>
+                        <div className="flex items-center gap-1 text-blue-600 font-sans">
+                          <span className="text-[10px] font-black uppercase tracking-wider">Ver Catálogo</span>
+                          <ArrowRight size={12} />
+                        </div>
+                      </div>
                     </div>
-                    <div className="flex items-center gap-1 text-blue-600">
-                      <span className="text-xs font-black">Ver Catálogo</span>
-                      <ArrowRight size={14} />
+                  </motion.div>
+                ))}
+                {filteredShops.length === 0 && (
+                  <div className="col-span-full py-16 text-center bg-white rounded-2xl border border-dashed border-slate-200 font-sans">
+                    <div className="w-12 h-12 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-4 border border-slate-100">
+                      <Truck size={20} className="text-slate-200" />
                     </div>
+                    <h3 className="text-base font-serif italic text-slate-900 mb-1">Nenhum atacadista encontrado</h3>
+                    <p className="text-slate-400 text-xs font-medium font-sans">Tente buscar por outros termos ou estados.</p>
                   </div>
-                </div>
-              </motion.div>
-            ))}
-            {filteredShops.length === 0 && (
-              <div className="col-span-full py-32 text-center">
-                <div className="w-24 h-24 bg-slate-50 rounded-[40px] flex items-center justify-center mx-auto mb-8 border border-slate-100">
-                  <Truck size={40} className="text-slate-200" />
-                </div>
-                <h3 className="text-2xl font-black text-slate-900 mb-2 font-display">Nenhum atacadista encontrado</h3>
-                <p className="text-slate-500 font-medium">Tente buscar por outros termos ou estados.</p>
+                )}
               </div>
             )}
+
           </div>
-        )}
+        </div>
       </PageContainer>
     </div>
   );

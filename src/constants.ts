@@ -34,13 +34,36 @@ export const BRAZIL_STATES = [
 ];
 
 export const PRODUCT_CATEGORIES = [
-  { id: 'frutas', name: 'Frutas', icon: '🍎' },
-  { id: 'legumes', name: 'Hortifruti', icon: '🥦' },
-  { id: 'carnes', name: 'Carnes', icon: '🥩' },
-  { id: 'pastel', name: 'Pastelaria', icon: '🥟' },
-  { id: 'artesanato', name: 'Artesanato', icon: '🎨' },
-  { id: 'bebidas', name: 'Bebidas', icon: '🥤' },
-  { id: 'outros', name: 'Outros', icon: '📦' },
+  { id: 'Alimentação Pronta e Lanches', name: 'Alimentação Pronta e Lanches', icon: '🍔' },
+  { id: 'Antiguidades, Cultura e Lazer.', name: 'Antiguidades, Cultura e Lazer.', icon: '🏺' },
+  { id: 'Aquarismo e Pequenos Animais', name: 'Aquarismo e Pequenos Animais', icon: '🐠' },
+  { id: 'Armarinhos, Tecidos e Artesanato.', name: 'Armarinhos, Tecidos e Artesanato.', icon: '🧵' },
+  { id: 'Carnes, Peixes e Embutidos.', name: 'Carnes, Peixes e Embutidos.', icon: '🥩' },
+  { id: 'Conservas, Licores.', name: 'Conservas, Licores.', icon: '🍯' },
+  { id: 'Combustíveis e Acendimento Tradicional', name: 'Combustíveis e Acendimento Tradicional', icon: '🔥' },
+  { id: 'Cordoaria e Amarração Profissional', name: 'Cordoaria e Amarração Profissional', icon: '🪢' },
+  { id: 'Cosméticos, Perfumaria e Bem-Estar.', name: 'Cosméticos, Perfumaria e Bem-Estar.', icon: '🧴' },
+  { id: 'Economia Circular e Sucata', name: 'Economia Circular e Sucata', icon: '♻️' },
+  { id: 'Eletrônicos, Mídias, Objetos Eletrônicos.', name: 'Eletrônicos, Mídias, Objetos Eletrônicos.', icon: '📱' },
+  { id: 'Embalagens e Descartáveis', name: 'Embalagens e Descartáveis', icon: '📦' },
+  { id: 'Entretenimento de Rua e Arte Urbana', name: 'Entretenimento de Rua e Arte Urbana', icon: '🎸' },
+  { id: 'Frutas Frescas', name: 'Frutas Frescas', icon: '🍎' },
+  { id: 'Laticínios e Ovos', name: 'Laticínios e Ovos', icon: '🧀' },
+  { id: 'Legumes, Verduras, Ervas e Raízes.', name: 'Legumes, Verduras, Ervas e Raízes.', icon: '🥬' },
+  { id: 'Mercearia, Grãos e Temperos.', name: 'Mercearia, Grãos e Temperos.', icon: '🫘' },
+  { id: 'Misticismo, Religiosidade e Artigos de Fé.', name: 'Misticismo, Religiosidade e Artigos de Fé.', icon: '🕯️' },
+  { id: 'Mobilidade Urbana', name: 'Mobilidade Urbana', icon: '🚲' },
+  { id: 'Plantas e Jardinagem', name: 'Plantas e Jardinagem', icon: '🪴' },
+  { id: 'Produtos Artesanais', name: 'Produtos Artesanais', icon: '🎨' },
+  { id: 'Produtos Químicos de Limpeza', name: 'Produtos Químicos de Limpeza', icon: '🧼' },
+  { id: 'Produtos Sazonais e Festivos', name: 'Produtos Sazonais e Festivos', icon: '🎉' },
+  { id: 'Produtos para Pets e Agropecuária', name: 'Produtos para Pets e Agropecuária', icon: '🐶' },
+  { id: 'Saúde Popular e Ortopedia Básica', name: 'Saúde Popular e Ortopedia Básica', icon: '💊' },
+  { id: 'Selaria e Artigos de Couro', name: 'Selaria e Artigos de Couro', icon: '👢' },
+  { id: 'Serviços Rápidos e Logística de Apoio', name: 'Serviços Rápidos e Logística de Apoio', icon: '🛠️' },
+  { id: 'Utensílios de Cozinha', name: 'Utensílios de Cozinha', icon: '🍳' },
+  { id: 'Utilidades para Construção e Pequenos Reparos', name: 'Utilidades para Construção e Pequenos Reparos', icon: '🔨' },
+  { id: 'Vestuário, Acessórios e Conveniência.', name: 'Vestuário, Acessórios e Conveniência.', icon: '👕' }
 ];
 
 export const getShopTypeInfo = (type?: string) => {
