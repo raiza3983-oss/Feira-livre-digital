@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { 
   Menu, X, Home, Calculator, Info, ShieldCheck, 
   FileText, Briefcase, MessageSquare, User, LogOut,
-  ChevronRight, Truck, Heart, Bell, Package, BarChart, Store, Smartphone
+  ChevronRight, Truck, Heart, Bell, Package, BarChart, Store, Smartphone, Check, Lock
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Logo } from './Logo';
@@ -17,6 +17,7 @@ interface AndroidTopAppBarProps {
   onLogout: () => void;
   newAdminNotificationsCount?: number;
   newOrdersCount?: number;
+  onGoogleLogin?: (role: any, loginType?: string) => Promise<void>;
 }
 
 export const AndroidTopAppBar: React.FC<AndroidTopAppBarProps> = ({
@@ -25,9 +26,22 @@ export const AndroidTopAppBar: React.FC<AndroidTopAppBarProps> = ({
   user,
   onLogout,
   newAdminNotificationsCount = 0,
-  newOrdersCount = 0
+  newOrdersCount = 0,
+  onGoogleLogin
 }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+
+  // Opções de tipos de cadastro (Material Design 3 - Com coerência visual e ícones limpos)
+  const registerOptions = [
+    { id: 'cliente', label: 'Cliente', icon: User, role: 'client', loginType: 'client', color: 'bg-blue-50 border-blue-100 hover:border-blue-300', textCol: 'text-blue-700', activeBg: 'bg-blue-600 text-white border-blue-600', description: 'Consumidor final e compras' },
+    { id: 'feira-livre', label: 'Feira Livre', icon: Store, role: 'vendor', loginType: 'vendor_feirante', color: 'bg-emerald-50 border-emerald-100 hover:border-emerald-300', textCol: 'text-emerald-700', activeBg: 'bg-emerald-600 text-white border-emerald-600', description: 'Feirantes e produtores locais' },
+    { id: 'barraca-livre', label: 'Barraca Livre', icon: Store, role: 'vendor', loginType: 'vendor_barraca', color: 'bg-amber-50 border-amber-100 hover:border-amber-300', textCol: 'text-amber-700', activeBg: 'bg-amber-600 text-white border-amber-600', description: 'Barracas físicas e hortifrútis' },
+    { id: 'mercado-livre', label: 'Mercado Livre', icon: Store, role: 'vendor', loginType: 'vendor_mercado', color: 'bg-cyan-50 border-cyan-100 hover:border-cyan-300', textCol: 'text-cyan-700', activeBg: 'bg-cyan-600 text-white border-cyan-600', description: 'Comércio, quitandas e mercearias' },
+    { id: 'atacado-livre', label: 'Atacado Livre', icon: Truck, role: 'vendor', loginType: 'vendor_atacado', color: 'bg-indigo-50 border-indigo-100 hover:border-indigo-300', textCol: 'text-indigo-700', activeBg: 'bg-indigo-600 text-white border-indigo-600', description: 'Grandes fardos e distribuidores' },
+    { id: 'administracao', label: 'Administração', icon: ShieldCheck, role: 'state_admin', loginType: 'admin', color: 'bg-rose-50 border-rose-100 hover:border-rose-300', textCol: 'text-rose-700', activeBg: 'bg-rose-600 text-white border-rose-600', description: 'Gestão geral e moderação' }
+  ];
 
   // Links principais obrigatórios para todos os usuários
   const mainLinks = [
@@ -57,10 +71,49 @@ export const AndroidTopAppBar: React.FC<AndroidTopAppBarProps> = ({
     onNavigate(screenId);
   };
 
+  const handleOptionSelect = (id: string) => {
+    setSelectedOption(id === selectedOption ? null : id);
+  };
+
+  const handleProceedAccess = async () => {
+    if (!selectedOption) return;
+    
+    const option = registerOptions.find(o => o.id === selectedOption);
+    if (!option) return;
+
+    setIsProfileMenuOpen(false);
+
+    // Save pending role variables in localStorage for auth redirects
+    localStorage.setItem('pending_google_login_role', option.role);
+    localStorage.setItem('pending_login_type', option.loginType);
+
+    if (user) {
+      if (option.role === 'state_admin' || option.role === 'admin' || user.role === 'state_admin') {
+        onNavigate('admin-dashboard');
+      } else if (option.loginType === 'vendor_atacado') {
+        onNavigate('wholesale');
+      } else if (option.role === 'vendor') {
+        onNavigate('shop-management');
+      } else {
+        onNavigate('profile');
+      }
+    } else {
+      if (onGoogleLogin) {
+        try {
+          await onGoogleLogin(option.role as any, option.loginType);
+        } catch (err) {
+          console.error('Google login error with role selection:', err);
+        }
+      } else {
+        onNavigate('profile');
+      }
+    }
+  };
+
   return (
     <>
       {/* Top Bar Bar Layout (64px, White, 16px Rounded, Soft Shadow, Material Design 3) */}
-      <div className="fixed top-4 left-4 right-4 z-50 max-w-7xl mx-auto pointer-events-none">
+      <div className="fixed top-4 left-4 right-4 z-50 max-w-7xl mx-auto pointer-events-none font-sans">
         <div className="w-full bg-white/95 backdrop-blur-md h-16 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-slate-100 flex items-center justify-between px-4 pointer-events-auto transition-all duration-300">
           
           {/* Esquerda: Hambúrguer + Logo + Informações */}
@@ -91,7 +144,7 @@ export const AndroidTopAppBar: React.FC<AndroidTopAppBarProps> = ({
           </div>
 
           {/* Direita: Avatar do Usuário */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 relative">
             {/* Quick action buttons for registered users in header on larger devices */}
             {user && (
               <div className="hidden md:flex items-center gap-1 bg-slate-50 p-1 rounded-xl border border-slate-100/50 mr-2">
@@ -115,7 +168,7 @@ export const AndroidTopAppBar: React.FC<AndroidTopAppBarProps> = ({
             {user ? (
               <button 
                 id="header_avatar_btn"
-                onClick={() => onNavigate('profile')} 
+                onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)} 
                 className="flex items-center gap-2.5 p-1 pr-3 hover:bg-slate-50 rounded-xl transition-all active:scale-95 border border-transparent hover:border-slate-100"
               >
                 <SafeImage 
@@ -123,15 +176,15 @@ export const AndroidTopAppBar: React.FC<AndroidTopAppBarProps> = ({
                   className="w-10 h-10 rounded-full object-cover border-2 border-emerald-500 shadow-sm" 
                   alt={user.displayName || 'Usuário'} 
                 />
-                <div className="hidden lg:flex flex-col items-start leading-tight">
-                  <span className="text-[8px] font-black uppercase tracking-widest text-emerald-600">Conectado</span>
-                  <span className="text-xs font-black text-slate-700">{user.displayName?.split(' ')[0] || 'Perfil'}</span>
+                <div className="hidden lg:flex flex-col items-start leading-tight text-left">
+                  <span className="text-[8px] font-black uppercase tracking-widest text-emerald-600 font-sans">Conectado</span>
+                  <span className="text-xs font-black text-slate-700 font-sans">{user.displayName?.split(' ')[0] || 'Perfil'}</span>
                 </div>
               </button>
             ) : (
               <button 
                 id="header_guest_login_btn"
-                onClick={() => onNavigate('profile')}
+                onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
                 className="flex items-center gap-2 h-10 px-3 hover:bg-slate-50 rounded-xl text-slate-600 hover:text-brand-600 border border-slate-100 font-bold text-xs font-sans transition-all"
               >
                 <div className="w-7 h-7 bg-slate-100 rounded-full flex items-center justify-center text-slate-500">
@@ -140,6 +193,124 @@ export const AndroidTopAppBar: React.FC<AndroidTopAppBarProps> = ({
                 <span>Entrar</span>
               </button>
             )}
+
+            {/* Menu Dropdown de Seleção de Cadastro (Acoplado à Barra de Navegação) */}
+            <AnimatePresence>
+              {isProfileMenuOpen && (
+                <>
+                  {/* Backdrop invisível para fechar o menu ao clicar fora */}
+                  <div 
+                    onClick={() => setIsProfileMenuOpen(false)}
+                    className="fixed inset-0 z-[9950] bg-transparent"
+                  />
+
+                  {/* Dropdown Card Flutuante */}
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.95, y: -10 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.95, y: -10 }}
+                    transition={{ type: 'spring', damping: 22, stiffness: 210 }}
+                    className="absolute right-0 top-14 z-[9960] w-[320px] sm:w-[440px] max-w-[calc(100vw-32px)] bg-white rounded-2xl shadow-[0_16px_40px_rgba(0,0,0,0.12)] border border-slate-100 overflow-hidden font-sans flex flex-col"
+                  >
+                    {/* Header do Menu */}
+                    <div className="p-4 border-b border-slate-50 flex items-center justify-between bg-slate-50/50">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-600 flex items-center justify-center">
+                          <Smartphone size={16} />
+                        </div>
+                        <div>
+                          <h3 className="font-extrabold text-slate-900 text-xs tracking-tight font-sans">Tipo de Cadastro</h3>
+                          <p className="text-[9px] text-slate-400 font-medium">Selecione para prosseguir ou logar</p>
+                        </div>
+                      </div>
+                      <button 
+                        onClick={() => setIsProfileMenuOpen(false)}
+                        className="w-8 h-8 rounded-lg hover:bg-slate-100 text-slate-400 hover:text-slate-700 flex items-center justify-center transition-all"
+                      >
+                        <X size={14} />
+                      </button>
+                    </div>
+
+                    {/* Opções de Cadastro */}
+                    <div className="p-3 overflow-y-auto max-h-[320px] flex flex-col gap-2">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        {registerOptions.map((option) => {
+                          const IconComponent = option.icon;
+                          const isSelected = selectedOption === option.id;
+                          
+                          return (
+                            <button
+                              key={option.id}
+                              onClick={() => handleOptionSelect(option.id)}
+                              className={cn(
+                                "p-2.5 rounded-xl border text-left transition-all duration-200 flex flex-col gap-1.5 relative overflow-hidden active:scale-98 select-none group",
+                                isSelected 
+                                  ? option.activeBg + " shadow-sm ring-1 ring-offset-1 ring-emerald-500/10" 
+                                  : option.color + " border-slate-100 text-slate-700 hover:bg-slate-50"
+                              )}
+                            >
+                              {isSelected && (
+                                <div className="absolute top-2 right-2 w-4 h-4 rounded-full bg-white/20 text-white flex items-center justify-center">
+                                  <Check size={10} strokeWidth={3} />
+                                </div>
+                              )}
+
+                              <div className="flex items-center gap-1.5">
+                                <span className={cn(
+                                  "w-6 h-6 rounded-lg flex items-center justify-center transition-transform group-hover:scale-105",
+                                  isSelected ? "bg-white/20 text-white" : option.textCol + " bg-white border border-slate-100"
+                                )}>
+                                  <IconComponent size={12} />
+                                </span>
+                                <span className={cn("font-black text-[11px] tracking-tight", isSelected ? "text-white" : "text-slate-800")}>
+                                  {option.label}
+                                </span>
+                              </div>
+                              <p className={cn("text-[8.5px] font-medium leading-tight", isSelected ? "text-white/85" : "text-slate-400")}>
+                                {option.description}
+                              </p>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    {/* Footer / Botão de Ação */}
+                    <div className="p-4 border-t border-slate-50 bg-slate-50/50 flex flex-col gap-2">
+                      <button
+                        onClick={handleProceedAccess}
+                        disabled={!selectedOption}
+                        className={cn(
+                          "w-full h-10 rounded-xl font-black text-[10px] uppercase tracking-wider transition-all duration-200 flex items-center justify-center gap-1.5 shadow-xs",
+                          selectedOption 
+                            ? "bg-emerald-600 text-white hover:bg-emerald-700 cursor-pointer" 
+                            : "bg-slate-100 text-slate-450 border border-slate-200 cursor-not-allowed"
+                        )}
+                      >
+                        {selectedOption ? (
+                          <>
+                            <span>Acessar</span>
+                            <ChevronRight size={14} />
+                          </>
+                        ) : (
+                          <>
+                            <Lock size={12} className="opacity-60" />
+                            <span>Selecione uma Opção</span>
+                          </>
+                        )}
+                      </button>
+                      <p className="text-[8px] text-center font-bold text-slate-450 tracking-wide uppercase">
+                        {selectedOption 
+                          ? `Selecionado: ${registerOptions.find(o => o.id === selectedOption)?.label}`
+                          : "Escolha uma categoria acima para prosseguir"
+                        }
+                      </p>
+                    </div>
+
+                  </motion.div>
+                </>
+              )}
+            </AnimatePresence>
           </div>
 
         </div>
@@ -164,7 +335,7 @@ export const AndroidTopAppBar: React.FC<AndroidTopAppBarProps> = ({
               animate={{ x: 0 }}
               exit={{ x: '-100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 220 }}
-              className="fixed top-0 left-0 bottom-0 max-w-[320px] w-4/5 bg-white z-[9999] shadow-2xl flex flex-col rounded-r-3xl border-r border-slate-100 overflow-hidden"
+              className="fixed top-0 left-0 bottom-0 max-w-[320px] w-4/5 bg-white z-[9999] shadow-2xl flex flex-col rounded-r-3xl border-r border-slate-100 overflow-hidden font-sans"
             >
               {/* Topo do Drawer: Logo, Fechar e Status da Conta */}
               <div className="p-6 bg-gradient-to-br from-slate-55 to-slate-100 border-b border-slate-100 flex flex-col gap-4">
@@ -199,10 +370,14 @@ export const AndroidTopAppBar: React.FC<AndroidTopAppBarProps> = ({
                 ) : (
                   <div className="bg-emerald-50 border border-emerald-100 p-4 rounded-2xl flex flex-col gap-2.5">
                     <p className="text-[11px] text-emerald-800 font-medium leading-relaxed leading-snug">
-                      Faça login rápido ou cadastre-se para comprar de produtores e usar todos os recursos!
+                      Selecione um tipo de cadastro e faça login para acessar todos os recursos!
                     </p>
                     <button 
-                      onClick={(e) => handleLinkClick(e, 'profile')}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setIsDrawerOpen(false);
+                        setIsProfileMenuOpen(true);
+                      }}
                       className="w-full h-9 bg-emerald-600 text-white font-black text-[10px] uppercase tracking-widest rounded-xl hover:bg-emerald-700 transition-all flex items-center justify-center gap-1.5"
                     >
                       <User size={13} />
@@ -217,7 +392,7 @@ export const AndroidTopAppBar: React.FC<AndroidTopAppBarProps> = ({
                 
                 {/* Seção 1: Navegação Principal (Para TODOS os Usuários) */}
                 <div className="flex flex-col gap-2">
-                  <h3 className="px-3.5 text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 mb-2">
+                  <h3 className="px-3.5 text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 mb-2 font-sans">
                     Menu Principal
                   </h3>
                   
@@ -246,7 +421,7 @@ export const AndroidTopAppBar: React.FC<AndroidTopAppBarProps> = ({
 
                 {/* Seção 2: Recursos Autenticados (Apenas usuários ativos / cadastrados, mas mostramos de forma inteligente) */}
                 <div className="flex flex-col gap-2">
-                  <h3 className="px-3.5 text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 mb-2">
+                  <h3 className="px-3.5 text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 mb-2 font-sans">
                     Serviços & Recursos
                   </h3>
 
@@ -347,11 +522,11 @@ export const AndroidTopAppBar: React.FC<AndroidTopAppBarProps> = ({
                 )}
 
                 <div className="flex flex-col items-center gap-1">
-                  <div className="flex items-center gap-1 text-[9px] font-bold text-slate-400 tracking-wider">
+                  <div className="flex items-center gap-1 text-[9px] font-bold text-slate-400 tracking-wider font-sans">
                     <Smartphone size={10} />
                     <span>ANDROID MD3 DESIGN v1.2</span>
                   </div>
-                  <p className="text-[7.5px] font-medium text-slate-400 uppercase tracking-widest">
+                  <p className="text-[7.5px] font-medium text-slate-400 uppercase tracking-widest font-sans">
                     Feira Livre Digital © 2026
                   </p>
                 </div>
@@ -361,6 +536,8 @@ export const AndroidTopAppBar: React.FC<AndroidTopAppBarProps> = ({
           </>
         )}
       </AnimatePresence>
+
+
     </>
   );
 };

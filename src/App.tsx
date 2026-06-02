@@ -13511,6 +13511,7 @@ const renderScreen = () => {
         onLogout={handleLogout}
         newAdminNotificationsCount={newAdminNotificationsCount}
         newOrdersCount={newOrdersCount}
+        onGoogleLogin={handleGoogleLogin}
       />
 
       {/* Main Content Area */}
