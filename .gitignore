@@ -24,7 +24,6 @@ pnpm-debug.log*
 lerna-debug.log*
 
 # Configurações do Firebase locais do ambiente do Applet (Evita upload de credenciais sensíveis)
-firebase-applet-config.json
 
 # Editores de Código / IDEs
 .vscode/

@@ -120,9 +120,6 @@ const WholesaleScreen = ({
 }: Props) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedState, setSelectedState] = useState('all');
-  const [categorySearchQuery, setCategorySearchQuery] = useState('');
-  const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
-  const [dropdownSearch, setDropdownSearch] = useState('');
   const [shops, setShops] = useState<Shop[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
@@ -170,9 +167,7 @@ const WholesaleScreen = ({
 
     const matchesSearch = shopMatches || productMatches;
     const matchesState = selectedState === 'all' || shop.state === selectedState;
-    const matchesCategory = selectedCategory === 'all' || 
-      products.some(p => p.shopId === shop.id && p.category === selectedCategory);
-    return matchesSearch && matchesState && matchesCategory;
+    return matchesSearch && matchesState;
   });
 
   const filteredProducts = products.filter(p => {
@@ -183,9 +178,8 @@ const WholesaleScreen = ({
                          (p.description || '').toLowerCase().includes((searchTerm || '').toLowerCase()) ||
                          (shop.name || '').toLowerCase().includes((searchTerm || '').toLowerCase());
     const matchesState = selectedState === 'all' || shop.state === selectedState;
-    const matchesCategory = selectedCategory === 'all' || p.category === selectedCategory;
     
-    return matchesSearch && matchesState && matchesCategory;
+    return matchesSearch && matchesState;
   });
 
   return (
@@ -220,7 +214,7 @@ const WholesaleScreen = ({
                 className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-100 rounded-xl text-sm font-medium outline-none focus:ring-1 focus:ring-brand-500 transition-all placeholder:text-slate-400"
               />
             </div>
-            <div className="flex flex-col sm:flex-row gap-3 min-w-[300px]">
+            <div className="flex flex-col sm:flex-row gap-3 min-w-[150px]">
               <div className="relative flex-1 min-w-[120px]">
                 <MapPin size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
                 <select 
@@ -233,209 +227,11 @@ const WholesaleScreen = ({
                 </select>
                 <ChevronDown size={14} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
               </div>
-
-              {/* Categorias Search Combobox Dropdown */}
-              <div className="relative flex-1 min-w-[140px]">
-                <button
-                  type="button"
-                  onClick={() => setIsCategoryDropdownOpen(!isCategoryDropdownOpen)}
-                  className="w-full flex items-center justify-between gap-1.5 px-4 py-2.5 bg-brand-500 border border-brand-400 rounded-xl font-black text-[9px] uppercase tracking-widest text-white outline-none hover:bg-brand-600 transition-all cursor-pointer shadow-md shadow-brand-500/10 h-full"
-                >
-                  <span className="truncate">
-                    {selectedCategory === 'all' 
-                      ? 'Categorias' 
-                      : (PRODUCT_CATEGORIES.find(c => c.id === selectedCategory)?.name || 'Categorias')}
-                  </span>
-                  <ChevronDown size={14} className={cn("transition-transform flex-shrink-0", isCategoryDropdownOpen && "rotate-180")} />
-                </button>
-
-                {isCategoryDropdownOpen && (
-                  <>
-                    <div className="fixed inset-0 z-40" onClick={() => { setIsCategoryDropdownOpen(false); setDropdownSearch(''); }} />
-                    
-                    <div className="absolute right-0 mt-2 w-72 max-h-96 bg-white border border-slate-100 rounded-2xl shadow-xl z-50 overflow-hidden flex flex-col">
-                      <div className="p-3 border-b border-slate-50 relative">
-                        <Search size={14} className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-400" />
-                        <input
-                          type="text"
-                          placeholder="Pesquisar categoria..."
-                          value={dropdownSearch}
-                          onChange={(e) => setDropdownSearch(e.target.value)}
-                          className="w-full pl-9 pr-8 py-2.5 bg-slate-50 border border-slate-100 rounded-xl text-xs font-bold text-slate-800 outline-none focus:border-brand-500 focus:bg-white transition-all placeholder:text-slate-400 font-sans"
-                          autoFocus
-                        />
-                        {dropdownSearch && (
-                          <button
-                            type="button"
-                            onClick={() => setDropdownSearch('')}
-                            className="absolute right-6 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 text-[10px] font-bold"
-                          >
-                            ✕
-                          </button>
-                        )}
-                      </div>
-
-                      <div className="overflow-y-auto max-h-[250px] p-2 flex flex-col gap-1 no-scrollbar">
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setSelectedCategory('all');
-                            setIsCategoryDropdownOpen(false);
-                            setDropdownSearch('');
-                          }}
-                          className={cn(
-                            "w-full text-left p-2.5 rounded-xl text-xs font-bold flex items-center gap-2 transition-all border",
-                            selectedCategory === 'all' 
-                              ? "bg-brand-50 border-brand-100 text-brand-600" 
-                              : "bg-white border-transparent text-slate-600 hover:bg-slate-50"
-                          )}
-                        >
-                          <span>🔍</span>
-                          <span className="truncate font-sans font-black uppercase text-[10px] tracking-wider">Todas</span>
-                        </button>
-
-                        {PRODUCT_CATEGORIES.filter(c => 
-                          c.id !== 'all' && 
-                          c.name.toLowerCase().includes(dropdownSearch.toLowerCase())
-                        ).map((cat) => {
-                          const isSelected = selectedCategory === cat.id;
-                          return (
-                            <button
-                              key={cat.id}
-                              type="button"
-                              onClick={() => {
-                                setSelectedCategory(cat.id);
-                                setIsCategoryDropdownOpen(false);
-                                setDropdownSearch('');
-                              }}
-                              className={cn(
-                                "w-full text-left p-2.5 rounded-xl text-xs font-bold flex items-center gap-2 transition-all border",
-                                isSelected 
-                                  ? "bg-brand-50 border-brand-100 text-brand-600" 
-                                  : "bg-white border-transparent text-slate-600 hover:bg-slate-50"
-                              )}
-                            >
-                              <span className="text-sm">{cat.icon}</span>
-                              <span className="truncate font-sans font-black uppercase text-[10px] tracking-wider">{cat.name}</span>
-                            </button>
-                          );
-                        })}
-
-                        {PRODUCT_CATEGORIES.filter(c => 
-                          c.id !== 'all' && 
-                          c.name.toLowerCase().includes(dropdownSearch.toLowerCase())
-                        ).length === 0 && (
-                          <div className="p-4 text-center text-slate-400 text-xs italic font-sans">
-                            Nenhuma categoria encontrada
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </>
-                )}
-              </div>
             </div>
           </div>
         </div>
 
-        {/* Menu Topbar Nav (Touch scrolling horizontal list for mobile/tablet) */}
-        <div className="lg:hidden mb-10 -mt-6">
-          <div className="flex items-center justify-between gap-4 mb-2 px-1">
-            <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest font-sans">Categorias de Atacado</p>
-          </div>
-          <div className="flex gap-2 overflow-x-auto no-scrollbar py-1">
-            <button
-              onClick={() => setSelectedCategory('all')}
-              className={cn(
-                "px-4.5 py-2.5 rounded-full text-xs font-bold transition-all duration-200 whitespace-nowrap flex items-center gap-1.5 shadow-[0_2px_8px_rgba(0,0,0,0.02)] select-none border",
-                selectedCategory === 'all' 
-                  ? "bg-brand-600 border-brand-600 text-white shadow-md shadow-brand-500/10" 
-                  : "bg-white border-slate-100 text-slate-600 hover:border-slate-200"
-              )}
-            >
-              <span>🔍</span>
-              <span>Todos</span>
-            </button>
-            {PRODUCT_CATEGORIES.filter(c => c.id !== 'all' && c.name.toLowerCase().includes(categorySearchQuery.toLowerCase())).map((cat) => {
-              const isSelected = selectedCategory === cat.id;
-              return (
-                <button
-                  key={cat.id}
-                  onClick={() => setSelectedCategory(cat.id)}
-                  className={cn(
-                    "px-4.5 py-2.5 rounded-full text-xs font-bold transition-all duration-200 whitespace-nowrap flex items-center gap-1.5 shadow-[0_2px_8px_rgba(0,0,0,0.02)] select-none border",
-                    isSelected 
-                      ? "bg-brand-600 border-brand-600 text-white shadow-md shadow-brand-500/10" 
-                      : "bg-white border-slate-100 text-slate-600 hover:border-slate-200"
-                  )}
-                >
-                  <span className="text-sm">{cat.icon}</span>
-                  <span>{cat.name}</span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Gráfico Layout Columnas (Desk: Sidebar Coluna + Main Content Grid) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-20">
-          
-          {/* Coluna Categoria (Desktop Sidebar) */}
-          <div className="hidden lg:block lg:col-span-3 bg-white rounded-[32px] p-5 border border-slate-100 shadow-sm self-start h-fit max-h-[82vh] overflow-y-auto no-scrollbar">
-            <div className="flex items-center gap-2 mb-4 pb-3 border-b border-slate-50">
-              <div className="w-8 h-8 rounded-lg bg-brand-500/10 text-brand-600 flex items-center justify-center">
-                <Store size={15} />
-              </div>
-              <h3 className="font-black text-[9px] uppercase tracking-wider text-slate-800">Categorias</h3>
-            </div>
-            
-            <div className="flex flex-col gap-1.5">
-              <button
-                onClick={() => setSelectedCategory('all')}
-                className={cn(
-                  "w-full text-left p-3 rounded-2xl text-[10.5px] font-bold tracking-tight transition-all flex items-center justify-between select-none border group",
-                  selectedCategory === 'all' 
-                    ? "bg-brand-600 border-brand-600 text-white shadow-md shadow-brand-500/10 pr-4" 
-                    : "bg-white border-transparent text-slate-600 hover:bg-slate-50"
-                )}
-              >
-                <div className="flex items-center gap-2.5 truncate">
-                  <span className="text-base flex-shrink-0">🔍</span>
-                  <span className="truncate">Todos</span>
-                </div>
-                {selectedCategory === 'all' && (
-                  <span className="w-1.5 h-1.5 rounded-full bg-white flex-shrink-0 animate-pulse" />
-                )}
-              </button>
-              
-              {PRODUCT_CATEGORIES.filter(c => c.id !== 'all' && c.name.toLowerCase().includes(categorySearchQuery.toLowerCase())).map((cat) => {
-                const isSelected = selectedCategory === cat.id;
-                return (
-                  <button
-                    key={cat.id}
-                    onClick={() => setSelectedCategory(cat.id)}
-                    className={cn(
-                      "w-full text-left p-2.5 rounded-2xl text-[10.5px] font-bold tracking-tight transition-all flex items-center justify-between select-none border group",
-                      isSelected 
-                        ? "bg-brand-600 border-brand-600 text-white shadow-md shadow-brand-500/10 pr-4" 
-                        : "bg-white border-transparent text-slate-600 hover:bg-slate-50 hover:text-slate-900"
-                    )}
-                  >
-                    <div className="flex items-center gap-2.5 truncate">
-                      <span className="text-base flex-shrink-0">{cat.icon}</span>
-                      <span className="truncate">{cat.name}</span>
-                    </div>
-                    {isSelected && (
-                      <span className="w-1.5 h-1.5 rounded-full bg-white flex-shrink-0 animate-pulse" />
-                    )}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Coluna Main Content (9 spans) */}
-          <div className="lg:col-span-9 flex flex-col gap-6">
+        <div className="flex flex-col gap-6 mb-20">
 
             <div className="flex gap-3 -mt-2 font-sans">
               <button 
@@ -576,7 +372,6 @@ const WholesaleScreen = ({
               </div>
             )}
 
-          </div>
         </div>
       </PageContainer>
     </div>
